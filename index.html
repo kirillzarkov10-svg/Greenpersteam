@@ -9,360 +9,215 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: all 0.25s ease;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #1b2838;
-            background-image: radial-gradient(rgba(27, 40, 56, 0.9), rgba(10, 14, 22, 0.98)), url('https://store.cloudflare.steamstatic.com/public/images/v6/home/background_main_capsule_2024.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             color: #fff;
+            padding: 20px;
             display: flex;
             flex-direction: column;
+            align-items: center;
             min-height: 100vh;
         }
         header {
-            background-color: #171a21;
-            padding: 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(26, 159, 255, 0.3);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            position: relative;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 460px;
+            background: #171a21;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #1a9fff;
         }
         header h1 {
-            font-size: 26px;
+            font-size: 24px;
             color: #fff;
-            letter-spacing: 2px;
-            font-weight: 700;
-            text-shadow: 0 0 15px rgba(26, 159, 255, 0.4);
         }
         header span {
             color: #1a9fff;
         }
-        
-        .status-badge {
-            position: absolute;
-            top: 22px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            font-size: 13px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 8px;
-            background-color: #00ff88;
-            box-shadow: 0 0 10px #00ff88;
-        }
-
-        .main-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            gap: 30px;
-        }
-
         .container {
             background: #171a21;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            padding: 30px;
+            border-radius: 12px;
             width: 100%;
             max-width: 460px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
         }
         h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
             text-align: center;
-            color: #fff;
-            margin-bottom: 6px;
-            font-size: 24px;
-            font-weight: 600;
         }
         .subtitle {
-            text-align: center;
             color: #66c0f4;
-            font-size: 14px;
-            margin-bottom: 25px;
-            font-weight: 500;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background: rgba(26, 159, 255, 0.1);
+            border-left: 4px solid #1a9fff;
+            padding: 10px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            color: #c7d5e0;
         }
         .form-group {
-            margin-bottom: 20px;
-            position: relative;
+            margin-bottom: 15px;
         }
         .label-flex {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        label {
-            color: #8f98a0;
+            margin-bottom: 5px;
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #8f98a0;
         }
         .help-link {
-            font-size: 12px;
             color: #66c0f4;
             text-decoration: underline;
             cursor: pointer;
         }
-        .help-link:hover {
-            color: #1a9fff;
-        }
-        .input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-        .input-icon {
-            position: absolute;
-            left: 14px;
-            color: #66c0f4;
-            width: 18px;
-            height: 18px;
-            pointer-events: none;
-        }
         input {
             width: 100%;
-            padding: 14px 14px 14px 45px;
-            background: rgba(42, 71, 94, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            padding: 12px;
+            background: #2a475e;
+            border: 1px solid #1a9fff;
+            border-radius: 6px;
             color: #fff;
             font-size: 16px;
         }
-        input:focus {
-            outline: none;
-            border-color: #1a9fff;
-            background: rgba(42, 71, 94, 0.45);
-            box-shadow: 0 0 15px rgba(26, 159, 255, 0.2);
-        }
-        
         .presets-wrapper {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 5px;
+            margin-top: 5px;
         }
         .preset-btn {
             flex: 1;
             padding: 8px;
-            background: rgba(42, 71, 94, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
-            color: #c7d5e0;
-            font-size: 13px;
-            font-weight: 600;
+            background: #171a21;
+            border: 1px solid #2a475e;
+            border-radius: 4px;
+            color: #66c0f4;
+            font-size: 12px;
+            font-weight: bold;
             cursor: pointer;
             text-align: center;
         }
         .preset-btn:hover {
-            background: rgba(26, 159, 255, 0.2);
-            border-color: #1a9fff;
+            background: #2a475e;
             color: #fff;
         }
-
         .promo-group {
             display: flex;
-            gap: 10px;
-            width: 100%;
-        }
-        .promo-group .input-wrapper {
-            flex: 1;
+            gap: 5px;
         }
         .promo-btn {
-            width: auto;
-            margin-top: 0;
-            padding: 0 22px;
+            padding: 0 15px;
             background: #2a475e;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            font-size: 14px;
+            border: 1px solid #fff;
+            border-radius: 6px;
             color: #fff;
-            font-weight: 500;
             cursor: pointer;
         }
-        .promo-btn:hover {
-            background: #1a9fff;
-            border-color: #1a9fff;
-            box-shadow: 0 0 10px rgba(26, 159, 255, 0.4);
-        }
         .promo-status {
-            font-size: 13px;
-            margin-top: 6px;
+            font-size: 12px;
+            margin-top: 5px;
             display: none;
-            font-weight: 500;
-        }
-
-        .info-box {
-            background: rgba(26, 159, 255, 0.1);
-            border-left: 4px solid #1a9fff;
-            padding: 14px;
-            border-radius: 4px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: #c7d5e0;
-            line-height: 1.5;
         }
         .result {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 8px;
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            border-radius: 6px;
             margin-top: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
         }
         .result-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-size: 14px;
             color: #8f98a0;
         }
         .result-row.total {
             margin-bottom: 0;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 20px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 18px;
             color: #fff;
-            font-weight: 700;
+            font-weight: bold;
         }
-        .total span span {
+        .total span {
             color: #00ff88;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
         }
         .submit-btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(90deg, #00ff88 0%, #00bfff 100%);
+            padding: 15px;
+            background: #00ff88;
             border: none;
-            border-radius: 8px;
-            color: #0a0e16;
+            border-radius: 6px;
+            color: #000;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 25px;
+            margin-top: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
         }
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(0, 255, 136, 0.4);
-            opacity: 0.95;
+            background: #00cc6a;
         }
         .error-msg {
             color: #ff4d4d;
             font-size: 12px;
-            margin-top: 6px;
+            margin-top: 5px;
             display: none;
-            font-weight: 500;
         }
-
         .steps-container {
             width: 100%;
             max-width: 460px;
             background: #171a21;
-            border-radius: 16px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .steps-title {
             text-align: center;
-            font-size: 18px;
+            font-size: 16px;
             color: #66c0f4;
-            margin-bottom: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
         .step-item {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-        .step-item:last-child {
-            margin-bottom: 0;
-        }
-        .step-num {
-            background: #1a9fff;
-            color: #fff;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            flex-shrink: 0;
-            box-shadow: 0 0 10px rgba(26, 159, 255, 0.5);
-        }
-        .step-text h4 {
-            font-size: 15px;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-        .step-text p {
+            margin-bottom: 12px;
             font-size: 13px;
-            color: #8f98a0;
-            line-height: 1.4;
         }
-
+        .step-item strong {
+            color: #1a9fff;
+        }
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8);
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .modal.active {
-            opacity: 1;
-            pointer-events: auto;
         }
         .modal-content {
             background: #171a21;
-            border: 1px solid #2a475e;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 400px;
+            border: 1px solid #1a9fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 360px;
             width: 90%;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         .modal-close {
             position: absolute;
-            top: 15px; right: 15px;
-            font-size: 20px; color: #8f98a0;
+            top: 10px; right: 10px;
+            font-size: 20px; color: #fff;
             cursor: pointer;
-        }
-        .modal-close:hover { color: #fff; }
-        .modal h3 { color: #66c0f4; margin-bottom: 15px; font-size: 18px; }
-        .modal p { font-size: 14px; color: #c7d5e0; line-height: 1.5; margin-bottom: 12px; }
-        .modal strong { color: #fff; background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; }
-
-        footer {
-            background-color: #0a0e16;
-            padding: 20px;
-            text-align: center;
-            color: #565d63;
-            font-size: 13px;
-            border-top: 1px solid rgba(255,255,255,0.05);
         }
     </style>
 </head>
@@ -370,142 +225,100 @@
 
 <header>
     <h1>GREENPER <span>TEAM</span></h1>
-    <div class="status-badge">
-        <div class="status-dot"></div>
-        <span>В сети</span>
-    </div>
 </header>
 
-<div class="main-wrapper">
-    <div class="container">
-        <h2>Пополнение баланса</h2>
-        <p class="subtitle">Мгновенный перевод на аккаунты РФ</p>
-        
-        <div class="info-box">
-            Внимание: Доступно только для регионов <strong>Россия (РФ)</strong>. Минимальный платеж — <strong>100 руб.</strong>
+<div class="container">
+    <h2>Пополнение баланса</h2>
+    <p class="subtitle">Мгновенный перевод на аккаунты РФ</p>
+    
+    <div class="info-box">
+        Минимальный платеж — 100 руб. Вводите Логин, а не Ник.
+    </div>
+    
+    <div class="form-group">
+        <div class="label-flex">
+            <label>Логин Steam:</label>
+            <span class="help-link" onclick="toggleModal(true)">Где логин?</span>
         </div>
-        
-        <div class="form-group">
-            <div class="label-flex">
-                <label for="steamLogin">Логин Steam:</label>
-                <span class="help-link" onclick="toggleModal(true)">Где найти логин?</span>
-            </div>
-            <div class="input-wrapper">
-                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <input type="text" id="steamLogin" placeholder="Например: gaben123" required>
-            </div>
-            <div class="error-msg" id="loginError">Пожалуйста, укажите верный логин</div>
-        </div>
-
-        <div class="form-group">
-            <label for="amount">Сумма зачисления (руб):</label>
-            <div class="input-wrapper">
-                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="12" y1="10" x2="12" y2="14"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                <input type="number" id="amount" placeholder="Минимум 100" min="100" oninput="calculatePrice()" required>
-            </div>
-            <div class="presets-wrapper">
-                <div class="preset-btn" onclick="setPresetAmount(100)">100 ₽</div>
-                <div class="preset-btn" onclick="setPresetAmount(300)">300 ₽</div>
-                <div class="preset-btn" onclick="setPresetAmount(500)">500 ₽</div>
-                <div class="preset-btn" onclick="setPresetAmount(1000)">1000 ₽</div>
-            </div>
-            <div class="error-msg" id="amountError">Сумма должна быть не менее 100 рублей</div>
-        </div>
-
-        <div class="form-group">
-            <label for="promoInput">Промокод:</label>
-            <div class="promo-group">
-                <div class="input-wrapper">
-                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg>
-                    <input type="text" id="promoInput" placeholder="Есть купон?">
-                </div>
-                <button type="button" class="promo-btn" onclick="checkPromo()">Применить</button>
-            </div>
-            <div class="promo-status" id="promoStatusMessage"></div>
-        </div>
-
-        <div class="result">
-            <div class="result-row">
-                <span>Регион:</span>
-                <span style="color: #66c0f4; font-weight: 600;">Россия (РФ)</span>
-            </div>
-            <div class="result-row">
-                <span>Будет зачислено:</span>
-                <span id="steamAmountDisplay">0 руб.</span>
-            </div>
-            <div class="result-row total">
-                <span>К оплате:</span>
-                <span><span id="totalPrice">0</span> руб.</span>
-            </div>
-        </div>
-
-        <button class="submit-btn" onclick="redirectToTelegram()">Оплатить в Telegram</button>
+        <input type="text" id="steamLogin" placeholder="Введите логин">
+        <div class="error-msg" id="loginError">Укажите логин Steam</div>
     </div>
 
-    <div class="steps-container">
-        <div class="steps-title">Как это работает?</div>
-        <div class="step-item">
-            <div class="step-num">1</div>
-            <div class="step-text">
-                <h4>Заполните форму</h4>
-                <p>Укажите ваш уникальный логин Steam (не никнейм) и желаемую сумму пополнения.</p>
-            </div>
+    <div class="form-group">
+        <div class="label-flex">
+            <label>Сумма зачисления (руб):</label>
         </div>
-        <div class="step-item">
-            <div class="step-num">2</div>
-            <div class="step-text">
-                <h4>Перейдите в Telegram</h4>
-                <p>Сайт автоматически сформирует заявку и откроет личный диалог с нашим оператором.</p>
-            </div>
+        <input type="number" id="amount" placeholder="Минимум 100" oninput="calculatePrice()">
+        <div class="presets-wrapper">
+            <button class="preset-btn" onclick="setPresetAmount(100)">100 ₽</button>
+            <button class="preset-btn" onclick="setPresetAmount(300)">300 ₽</button>
+            <button class="preset-btn" onclick="setPresetAmount(500)">500 ₽</button>
+            <button class="preset-btn" onclick="setPresetAmount(1000)">1000 ₽</button>
         </div>
-        <div class="step-item">
-            <div class="step-num">3</div>
-            <div class="step-text">
-                <h4>Оплатите и получите баланс</h4>
-                <p>Переведите рубли по выданным реквизитам СБП и скиньте чек. Деньги придут на аккаунт в течение 5 минут!</p>
-            </div>
+        <div class="error-msg" id="amountError">Сумма должна быть от 100 рублей</div>
+    </div>
+
+    <div class="form-group">
+        <div class="label-flex">
+            <label>Промокод:</label>
+        </div>
+        <div class="promo-group">
+            <input type="text" id="promoInput" placeholder="Промокод">
+            <button class="promo-btn" onclick="checkPromo()">ОК</button>
+        </div>
+        <div class="promo-status" id="promoStatusMessage"></div>
+    </div>
+
+    <div class="result">
+        <div class="result-row">
+            <span>Регион:</span>
+            <span style="color: #66c0f4;">Россия (РФ)</span>
+        </div>
+        <div class="result-row">
+            <span>Будет зачислено:</span>
+            <span id="steamAmountDisplay" style="color: #fff;">0 руб.</span>
+        </div>
+        <div class="result-row total">
+            <span>К оплате:</span>
+            <span><span id="totalPrice">0</span> руб.</span>
         </div>
     </div>
+
+    <button class="submit-btn" onclick="redirectToTelegram()">Оплатить в Telegram</button>
+</div>
+
+<div class="steps-container">
+    <div class="steps-title">Как это работает?</div>
+    <div class="step-item"><strong>1.</strong> Заполните логин и сумму пополнения.</div>
+    <div class="step-item"><strong>2.</strong> Нажмите кнопку оплаты — откроется чат Telegram.</div>
+    <div class="step-item"><strong>3.</strong> Оператор выдаст карту для перевода СБП, после оплаты баланс придет за 5 минут.</div>
 </div>
 
 <div class="modal" id="helpModal" onclick="toggleModal(false)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="toggleModal(false)">&times;</span>
-        <h3>Где найти логин Steam?</h3>
-        <p>⚠️ <strong>Важно:</strong> Логин — это то имя, которое вы вводите при входе в Стим, а не ваш ник в играх или профиле.</p>
-        <p>1. Откройте приложение Steam на ПК или телефоне.</p>
-        <p>2. Посмотрите в <strong>правый верхний угол</strong> экрана.</p>
-        <p>3. Имя, которое написано рядом с вашим аватаром маленькими буквами — это и есть ваш <strong>логин</strong>.</p>
+        <h3 style="color: #66c0f4; margin-bottom: 10px;">Где найти логин?</h3>
+        <p style="font-size: 14px; line-height: 1.4;">Логин — это имя для входа в Steam. Его видно в верхнем правом углу программы Steam рядом с балансом аккаунта.</p>
     </div>
 </div>
 
-<footer>
-    &copy; 2026 GreenPer Team. Создано для игроков.
-</footer>
-
 <script>
     const TELEGRAM_TARGET = "Quac23h"; 
-
     const PROVIDER_RATE = 22 / 20; 
     let currentMargin = 1.02; 
     let activePromo = "Нет";  
 
     const PROMO_CODES = {
-        "GREENPER100": { margin: 1.00, text: "Промокод успешно применен! Комиссия сервиса 0%" },
-        "START2026": { margin: 1.01, text: "Промокод применен! Комиссия снижена до 1%" }
+        "GREENPER100": { margin: 1.00, text: "Комиссия сервиса 0%" },
+        "START2026": { margin: 1.01, text: "Комиссия снижена до 1%" }
     };
 
-    const amountInput = document.getElementById('amount');
-    const loginInput = document.getElementById('steamLogin');
-    const totalPriceSpan = document.getElementById('totalPrice');
-    const steamAmountDisplay = document.getElementById('steamAmountDisplay');
-    const promoInput = document.getElementById('promoInput');
-    const promoStatusMessage = document.getElementById('promoStatusMessage');
-    
-    const loginError = document.getElementById('loginError');
-    const amountError = document.getElementById('amountError');
-
     function calculatePrice() {
+        const amountInput = document.getElementById('amount');
+        const steamAmountDisplay = document.getElementById('steamAmountDisplay');
+        const totalPriceSpan = document.getElementById('totalPrice');
+        const amountError = document.getElementById('amountError');
+
         const steamAmount = parseFloat(amountInput.value) || 0;
         
         if (steamAmount >= 100) {
@@ -525,49 +338,48 @@
     }
 
     function setPresetAmount(val) {
-        amountInput.value = val;
+        document.getElementById('amount').value = val;
         calculatePrice();
     }
 
     function toggleModal(show) {
         const modal = document.getElementById('helpModal');
-        if (show) {
-            modal.classList.add('active');
-        } else {
-            modal.classList.remove('active');
-        }
+        modal.style.display = show ? 'flex' : 'none';
     }
 
     function checkPromo() {
+        const promoInput = document.getElementById('promoInput');
+        const promoStatusMessage = document.getElementById('promoStatusMessage');
         const enteredCode = promoInput.value.trim().toUpperCase();
         
         if (!enteredCode) {
             promoStatusMessage.style.display = "block";
             promoStatusMessage.style.color = "#ff4d4d";
-            promoStatusMessage.textContent = "Введите промокод!";
+            promoStatusMessage.textContent = "Введите код!";
             return;
         }
 
         if (PROMO_CODES[enteredCode]) {
             currentMargin = PROMO_CODES[enteredCode].margin;
             activePromo = enteredCode;
-            
             promoStatusMessage.style.display = "block";
             promoStatusMessage.style.color = "#00ff88";
             promoStatusMessage.textContent = PROMO_CODES[enteredCode].text;
-            
             calculatePrice();
         } else {
             promoStatusMessage.style.display = "block";
             promoStatusMessage.style.color = "#ff4d4d";
-            promoStatusMessage.textContent = "Код не найден или устарел.";
+            promoStatusMessage.textContent = "Неверный код.";
         }
     }
 
     function redirectToTelegram() {
-        const login = loginInput.value.trim();
-        const amount = parseFloat(amountInput.value) || 0;
-        const total = totalPriceSpan.textContent;
+        const login = document.getElementById('steamLogin').value.trim();
+        const amount = parseFloat(document.getElementById('amount').value) || 0;
+        const total = document.getElementById('totalPrice').textContent;
+        
+        const loginError = document.getElementById('loginError');
+        const amountError = document.getElementById('amountError');
         
         let hasError = false;
 
@@ -587,12 +399,12 @@
 
         if (hasError) return;
 
-        const messageText = `Привет! Хочу пополнить Steam через GreenPer Team.\n` +
-                            `Логин: ${login}\n` +
-                            `Регион: Россия (РФ)\n` +
-                            `Сумма на баланс Steam: ${amount} руб.\n` +
-                            `Промокод: ${activePromo}\n` +
-                            `К оплате: ${total} руб.\n` +
-                            `Жду карту для оплаты!`;
+        const messageText = `Привет! Хочу пополнить Steam.\nЛогин: ${login}\nСумма: ${amount} руб.\nПромокод: ${activePromo}\nК оплате: ${total} руб.`;
+        const encodedText = encodeURIComponent(messageText);
+        window.open(`https://telegram.me/${TELEGRAM_TARGET}?text=${encodedText}`, '_blank');
+    }
 
-        const encoded
+    calculatePrice();
+</script>
+</body>
+</html>
