@@ -95,7 +95,7 @@
             line-height: 1.4;
         }
         
-        .form-group { margin-bottom: 18px; }
+        .form-group { margin-bottom: 18px; position: relative; }
         .label-flex {
             display: flex;
             justify-content: space-between;
@@ -113,11 +113,11 @@
             border-bottom: 1px dashed #66c0f4;
         }
         
-        .input-wrapper { position: relative; display: flex; align-items: center; }
-        .input-prefix { position: absolute; left: 14px; color: #56697a; font-size: 15px; font-weight: bold; }
+        .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
+        .input-prefix { position: absolute; left: 14px; color: #56697a; font-size: 15px; font-weight: bold; pointer-events: none;}
         input {
             width: 100%;
-            padding: 12px 12px 12px 35px;
+            padding: 12px 35px 12px 35px;
             background: #202732;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
@@ -127,6 +127,13 @@
         }
         input:focus { border-color: #1a9fff; background: #242e3d; }
         
+        /* Кнопка очистки поля */
+        .clear-btn {
+            position: absolute; right: 12px; color: #56697a; cursor: pointer;
+            font-size: 16px; user-select: none; display: none;
+        }
+        .clear-btn:hover { color: #fff; }
+
         /* Двухсторонний калькулятор */
         .calc-row { display: flex; gap: 10px; }
         .calc-row .form-group { flex: 1; margin-bottom: 0; }
@@ -139,7 +146,7 @@
         }
         .preset-btn:hover { background: rgba(102, 192, 244, 0.3); color: #fff; }
 
-        .promo-group { display: flex; gap: 8px; }
+        .promo-group { display: flex; gap: 8px; width: 100%; }
         .promo-group input { padding-left: 12px; }
         .promo-btn {
             padding: 0 15px; background: #2a475e; border-radius: 8px;
@@ -149,8 +156,10 @@
         .promo-status { font-size: 12px; margin-top: 5px; display: none; }
         .error-msg { color: #ff4d4d; font-size: 12px; margin-top: 5px; display: none; }
         
+        /* Блок итогов и Экономии */
         .result { background: rgba(0, 0, 0, 0.25); padding: 15px; border-radius: 8px; margin-top: 15px; }
         .result-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; color: #8f98a0; }
+        .result-row.saving-row { display: none; color: #00ff88; font-weight: 600; }
         .result-row.total {
             margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.08);
             font-size: 18px; color: #fff; font-weight: 800;
@@ -165,20 +174,18 @@
         }
         .submit-btn:active { transform: scale(0.98); }
         
-        /* Живая лента заказов */
-        .live-orders {
-            width: 100%; max-width: 460px; background: rgba(23, 26, 33, 0.4);
-            border-radius: 12px; padding: 12px 15px; border: 1px solid rgba(255, 255, 255, 0.03);
-            margin-bottom: 20px; overflow: hidden; height: 45px; position: relative;
+        /* Блок наших преимуществ */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+            width: 100%; max-width: 460px; margin-bottom: 20px;
         }
-        .order-item {
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 12px; color: #8f98a0; position: absolute; width: calc(100% - 30px);
-            opacity: 0; transform: translateY(20px); transition: all 0.5s ease;
+        .feature-card {
+            background: rgba(23, 26, 33, 0.5); border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 12px; padding: 12px 8px; text-align: center;
         }
-        .order-item.active { opacity: 1; transform: translateY(0); }
-        .order-item .user { color: #fff; font-weight: 600; }
-        .order-item .status { color: #00ff88; font-weight: bold; }
+        .feature-icon { font-size: 20px; margin-bottom: 4px; }
+        .feature-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+        .feature-desc { font-size: 10px; color: #8f98a0; line-height: 1.2; }
 
         /* FAQ блок */
         .faq-container {
@@ -218,10 +225,21 @@
     </div>
 </header>
 
-<div class="live-orders">
-    <div class="order-item active" id="orderItem">
-        <span><span class="user">Дмитрий Ф.</span> получил <strong style="color:#fff">350 ₽</strong></span>
-        <span class="status">● Успешно</span>
+<div class="features-grid">
+    <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-title">Без пароля</div>
+        <div class="feature-desc">Нужен только логин</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">За 5 минут</div>
+        <div class="feature-desc">Быстрое начисление</div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">💎</div>
+        <div class="feature-title">Выгодно</div>
+        <div class="feature-desc">Низкая наценка</div>
     </div>
 </div>
 
@@ -240,7 +258,8 @@
         </div>
         <div class="input-wrapper">
             <span class="input-prefix">👤</span>
-            <input type="text" id="steamLogin" placeholder="Например: gaben123">
+            <input type="text" id="steamLogin" placeholder="Например: gaben123" oninput="toggleClearBtn('steamLogin', 'clearLogin')">
+            <span class="clear-btn" id="clearLogin" onclick="clearField('steamLogin', 'clearLogin')">✕</span>
         </div>
         <div class="error-msg" id="loginError">Укажите логин Steam</div>
     </div>
@@ -288,6 +307,10 @@
             <span>Придет в Steam:</span>
             <span id="steamAmountDisplay" style="color: #fff; font-weight: 600;">0 руб.</span>
         </div>
+        <div class="result-row saving-row" id="savingRow">
+            <span>Ваша экономия по купону:</span>
+            <span id="savingDisplay">0 руб.</span>
+        </div>
         <div class="result-row total">
             <span>Итого к оплате:</span>
             <span><span id="totalPrice">0</span> руб.</span>
@@ -324,6 +347,7 @@
 <script>
     const TELEGRAM_TARGET = "Quac23h"; 
     const PROVIDER_RATE = 22 / 20; 
+    let defaultMargin = 1.02;
     let currentMargin = 1.02; 
     let activePromo = "Нет";  
 
@@ -337,6 +361,19 @@
     const totalPriceSpan = document.getElementById('totalPrice');
     const steamAmountDisplay = document.getElementById('steamAmountDisplay');
     const amountError = document.getElementById('amountError');
+    const savingRow = document.getElementById('savingRow');
+    const savingDisplay = document.getElementById('savingDisplay');
+
+    // Кнопки быстрой очистки полей
+    function toggleClearBtn(inputId, btnId) {
+        const input = document.getElementById(inputId);
+        const btn = document.getElementById(btnId);
+        btn.style.display = input.value.length > 0 ? 'block' : 'none';
+    }
+    function clearField(inputId, btnId) {
+        document.getElementById(inputId).value = '';
+        document.getElementById(btnId).style.display = 'none';
+    }
 
     // Расчет ЕСЛИ вводят сумму ПОЛУЧЕНИЯ в Steam
     function calcFromSteam() {
@@ -345,13 +382,24 @@
         if (steamAmount >= 100) {
             amountError.style.display = 'none';
             const finalPrice = Math.ceil((steamAmount * PROVIDER_RATE) * currentMargin);
+            const standardPrice = Math.ceil((steamAmount * PROVIDER_RATE) * defaultMargin);
+            
             payInput.value = finalPrice;
             totalPriceSpan.textContent = finalPrice;
             steamAmountDisplay.textContent = steamAmount + ' руб.';
+            
+            // Расчет экономии
+            if (activePromo !== "Нет" && standardPrice > finalPrice) {
+                savingRow.style.display = 'flex';
+                savingDisplay.textContent = (standardPrice - finalPrice) + ' руб.';
+            } else {
+                savingRow.style.display = 'none';
+            }
         } else {
             payInput.value = '';
             totalPriceSpan.textContent = '0';
             steamAmountDisplay.textContent = '0 руб.';
+            savingRow.style.display = 'none';
             amountError.style.display = amountInput.value !== '' ? 'block' : 'none';
         }
     }
@@ -366,10 +414,19 @@
             amountInput.value = estimatedSteam;
             totalPriceSpan.textContent = payAmount;
             steamAmountDisplay.textContent = estimatedSteam + ' руб.';
+            
+            const standardPrice = Math.ceil((estimatedSteam * PROVIDER_RATE) * defaultMargin);
+            if (activePromo !== "Нет" && standardPrice > payAmount) {
+                savingRow.style.display = 'flex';
+                savingDisplay.textContent = (standardPrice - payAmount) + ' руб.';
+            } else {
+                savingRow.style.display = 'none';
+            }
         } else {
             amountInput.value = '';
             totalPriceSpan.textContent = '0';
             steamAmountDisplay.textContent = '0 руб.';
+            savingRow.style.display = 'none';
             amountError.style.display = payInput.value !== '' ? 'block' : 'none';
         }
     }
@@ -428,24 +485,4 @@
         if (amount < 100) { amountError.style.display = 'block'; return; }
 
         const messageText = `Привет! Хочу пополнить Steam.\nЛогин: ${login}\nСумма: ${amount} руб.\nПромокод: ${activePromo}\nК оплате: ${total} руб.`;
-        window.location.href = `https://telegram.me/${TELEGRAM_TARGET}?text=${encodeURIComponent(messageText)}`;
-    }
-
-    // Имитация живых покупок
-    const sampleNames = ["Иван М.", "Кирилл К.", "Slayer99", "Артем_Х", "Дмитрий П.", "GamerRu", "Ольга С."];
-    const sampleAmounts = [150, 300, 500, 1000, 250, 400, 1200];
-    
-    setInterval(() => {
-        const orderContainer = document.getElementById('orderItem');
-        orderContainer.style.opacity = 0;
-        
-        setTimeout(() => {
-            const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
-            const randomAmount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
-            orderContainer.innerHTML = `<span><span class="user">${randomName}</span> пополнил на <strong style="color:#fff">${randomAmount} ₽</strong></span><span class="status">● Успешно</span>`;
-            orderContainer.style.opacity = 1;
-        }, 500);
-    }, 5000);
-</script>
-</body>
-</html>
+       
