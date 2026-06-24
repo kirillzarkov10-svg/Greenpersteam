@@ -7,18 +7,19 @@
     <style>
         /* Полное обнуление дефолтных стилей и рамок */
         html, body {
-            background-color: #08090f;
+            background-color: #06070d;
             margin: 0;
             padding: 0;
             border: none;
             outline: none;
+            overflow-x: hidden;
         }
 
         .gp-wrapper {
-            background-color: #08090f;
+            background-color: #06070d;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(154, 77, 255, 0.18) 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, rgba(0, 191, 255, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 50% 0%, rgba(154, 77, 255, 0.2) 0%, transparent 55%),
+                radial-gradient(circle at 100% 100%, rgba(0, 191, 255, 0.1) 0%, transparent 40%);
             color: #fff;
             padding: 25px 15px;
             display: flex;
@@ -44,14 +45,16 @@
             border: none !important;
         }
 
-        /* ХЕДЕР С НЕОНОВЫМ АКЦЕНТОМ */
+        /* ХЕДЕР С ТАКТИЛЬНЫМ ИМПУЛЬСОМ */
         .gp-header {
             display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 460px;
-            background: #111422; padding: 16px 20px; border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(154, 77, 255, 0.05); margin-bottom: 20px;
+            background: #0f1220; padding: 16px 20px; border-radius: 16px; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(154, 77, 255, 0.05); margin-bottom: 20px;
+            transition: transform 0.2s; user-select: none;
         }
+        .gp-header:active { transform: scale(0.98); }
         .gp-header h1 { font-size: 19px; font-weight: 900; letter-spacing: 2.5px; color: #fff; }
-        .gp-header span { color: #9a4dff; text-shadow: 0 0 10px rgba(154, 77, 255, 0.5); }
+        .gp-header span { color: #9a4dff; text-shadow: 0 0 12px rgba(154, 77, 255, 0.6); }
         
         .gp-status-online {
             display: flex; align-items: center; font-size: 11px; color: #8fa0b0;
@@ -61,115 +64,86 @@
             width: 8px; height: 8px; background: #00ff9d; border-radius: 50%; margin-right: 8px; animation: gp-pulse 2s infinite;
         }
         @keyframes gp-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.5); }
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.6); }
             70% { box-shadow: 0 0 0 8px rgba(0, 255, 157, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
         }
 
-        /* НОВЫЕ КИБЕРПАНК ТАБЫ */
+        /* КИБЕРПАНК ТАБЫ */
         .gp-tabs {
             display: flex; width: 100%; max-width: 460px; margin-bottom: 20px;
-            background: #111422; padding: 5px; border-radius: 14px;
+            background: #0f1220; padding: 5px; border-radius: 14px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
         }
         .gp-tab-btn {
             flex: 1; padding: 12px; border-radius: 10px;
-            color: #727a93; font-size: 14px; font-weight: 800; text-align: center; cursor: pointer;
+            color: #6a738d; font-size: 14px; font-weight: 800; text-align: center; cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 0.5px;
         }
         .gp-tab-btn.active {
             background: linear-gradient(135deg, #9a4dff 0%, #772fe0 100%); color: #fff;
-            box-shadow: 0 4px 20px rgba(154, 77, 255, 0.45);
+            box-shadow: 0 4px 20px rgba(154, 77, 255, 0.5);
         }
 
-        /* ГЛАВНЫЙ КОНТЕЙНЕР (GLASSMORPHIC & NEON) */
+        /* ГЛАВНЫЙ КОНТЕЙНЕР */
         .gp-container {
-            background: #121524; padding: 25px 22px; border-radius: 20px; width: 100%; max-width: 460px;
+            background: #101326; padding: 25px 22px; border-radius: 20px; width: 100%; max-width: 460px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7); 
-            margin-bottom: 20px;
-            position: relative;
-            transition: all 0.4s ease;
+            margin-bottom: 20px; position: relative; transition: all 0.4s ease;
         }
         .gp-container.key-active {
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(154, 77, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(154, 77, 255, 0.22);
         }
         .gp-container h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; text-align: center; letter-spacing: 0.5px; }
         .gp-subtitle { color: #00bfff; font-size: 13px; text-align: center; margin-bottom: 22px; font-weight: 500; }
         
-        /* ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ И ОБЗОР SAINTS ROW */
+        /* АВТОНОМНЫЙ ИГРОВОЙ ЭКРАН (БЕЗ КАРТИНОК ИЗ ИНТЕРНЕТА) */
         .gp-game-preview {
-            display: none;
-            margin-bottom: 22px;
+            display: none; margin-bottom: 22px;
         }
         .gp-tags-row {
             display: flex; gap: 8px; margin-bottom: 14px; justify-content: center;
         }
         .gp-tag {
-            font-size: 11px; font-weight: 900; padding: 5px 10px; border-radius: 6px; background: rgba(255,255,255,0.06); color: #a0a7bc; letter-spacing: 0.5px;
+            font-size: 11px; font-weight: 900; padding: 5px 10px; border-radius: 6px; background: rgba(255,255,255,0.06); color: #a0a7bc;
         }
-        .gp-tag.purple { background: rgba(154, 77, 255, 0.2); color: #d0b3ff; box-shadow: 0 0 10px rgba(154, 77, 255, 0.1); }
+        .gp-tag.purple { background: rgba(154, 77, 255, 0.25); color: #d0b3ff; box-shadow: 0 0 10px rgba(154, 77, 255, 0.15); }
 
-        .gp-gallery {
-            position: relative;
-            width: 100%;
-            height: 220px;
-            border-radius: 14px;
-            overflow: hidden;
-            background: #08090f;
-            margin-bottom: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        /* ИГРОВАЯ CSS-ГРАФИКА */
+        .gp-art-screen {
+            width: 100%; height: 180px; background: #070912; border-radius: 14px; position: relative;
+            overflow: hidden; margin-bottom: 16px; border: 1px solid rgba(154, 77, 255, 0.15);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
         }
-        .gp-gallery::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 50%;
-            background: linear-gradient(transparent, rgba(18, 21, 36, 0.98));
-            z-index: 2;
+        /* Неоновый город на фоне */
+        .gp-art-city {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 60px;
+            background: repeating-linear-gradient(90deg, #131224 0px, #131224 15px, transparent 15px, transparent 23px);
+            opacity: 0.7; z-index: 1;
         }
-        .gp-gallery-slide {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-            animation: gpFade 0.5s ease-in-out;
+        .gp-art-city::before {
+            content: ''; position: absolute; bottom: 30px; left: 0; width: 100%; height: 40px;
+            background: repeating-linear-gradient(90deg, transparent 0px, transparent 8px, #1c1836 8px, #1c1836 28px);
         }
-        @keyframes gpFade {
-            from { opacity: 0.4; transform: scale(1.02); } to { opacity: 1; transform: scale(1); }
+        /* Фирменный знак Святых в центре */
+        .gp-art-logo {
+            position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%);
+            width: 60px; height: 60px; background: #9a4dff; clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+            filter: drop-shadow(0 0 15px #9a4dff); z-index: 2; animation: gpFloat 4s ease-in-out infinite;
         }
-        .gp-gallery-slide.active {
-            display: block;
+        /* Сетка киберпанка */
+        .gp-art-grid {
+            position: absolute; bottom: 0; width: 100%; height: 40px; background: linear-gradient(rgba(154, 77, 255, 0), rgba(154, 77, 255, 0.15));
+            border-top: 1px solid rgba(154, 77, 255, 0.3); z-index: 3;
         }
-        .gp-gallery-nav {
-            position: absolute;
-            bottom: 14px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
+        @keyframes gpFloat {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0px) rotate(0deg); }
+            50% { transform: translate(-50%, -50%) translateY(-10px) rotate(5deg); }
         }
-        .gp-gallery-dot {
-            width: 20px;
-            height: 5px;
-            background: rgba(255,255,255,0.25);
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .gp-gallery-dot.active {
-            background: #9a4dff;
-            box-shadow: 0 0 12px #9a4dff;
-            width: 35px;
-        }
-        
+
         .gp-game-desc {
-            font-size: 13.5px;
-            line-height: 1.6;
-            color: #b2bacf;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(154, 77, 255, 0.1);
+            font-size: 13.5px; line-height: 1.6; color: #b2bacf; background: rgba(0, 0, 0, 0.35);
+            padding: 16px; border-radius: 12px; border: 1px solid rgba(154, 77, 255, 0.1);
         }
 
         /* ИНФО-БОКС */
@@ -178,7 +152,7 @@
             margin-bottom: 22px; color: #c0cbdf; border-radius: 0 10px 10px 0; line-height: 1.5;
         }
         
-        /* ПОЛЯ ВВОДА */
+        /* ФОРМЫ И ПОЛЯ */
         .gp-form-group { margin-bottom: 20px; position: relative; }
         .gp-label-flex {
             display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 11px;
@@ -190,17 +164,18 @@
         .gp-input-prefix { position: absolute; left: 16px; color: #4e5569; font-size: 16px; font-weight: bold; pointer-events: none; z-index: 2; }
         
         .gp-input {
-            width: 100%; padding: 14px 40px 14px 42px; background: #1a1e33;
+            width: 100%; padding: 14px 40px 14px 42px; background: #171b30;
             border-radius: 10px; color: #fff; font-size: 15px; font-weight: 500; position: relative; z-index: 1; 
-            transition: all 0.25s ease;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-            -webkit-appearance: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); -webkit-appearance: none;
         }
-        .gp-input:focus { background: #202540; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2), 0 0 0 1px rgba(154, 77, 255, 0.3); }
+        .gp-input:focus { 
+            background: #1d223d; 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 0 15px rgba(0, 191, 255, 0.15);
+            padding-left: 46px;
+        }
         
-        .gp-clear-btn {
-            position: absolute; right: 14px; color: #4e5569; cursor: pointer; font-size: 16px; display: none; z-index: 5; padding: 5px;
-        }
+        .gp-clear-btn { position: absolute; right: 14px; color: #4e5569; cursor: pointer; font-size: 16px; display: none; z-index: 5; padding: 5px; }
 
         .gp-calc-row { display: flex; gap: 12px; }
         .gp-calc-row .gp-form-group { flex: 1; margin-bottom: 0; }
@@ -208,54 +183,52 @@
         /* ПРЕСЕТЫ */
         .gp-presets-wrapper { display: flex; gap: 8px; margin-top: 10px; }
         .gp-preset-btn {
-            flex: 1; padding: 11px 2px; background: rgba(26, 30, 51, 0.6);
+            flex: 1; padding: 11px 2px; background: rgba(23, 27, 48, 0.7);
             border-radius: 8px; color: #00bfff; font-size: 13px; font-weight: 800; text-align: center; cursor: pointer; z-index: 2; position: relative;
             transition: all 0.2s ease;
         }
-        .gp-preset-btn:hover { background: #00bfff; color: #08090f; box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3); }
+        .gp-preset-btn:hover { background: #00bfff; color: #06070d; box-shadow: 0 4px 15px rgba(0, 191, 255, 0.35); transform: translateY(-1px); }
+        .gp-preset-btn:active { transform: translateY(0); }
 
         /* ПРОМОКОД */
         .gp-promo-group { display: flex; gap: 10px; width: 100%; }
         .gp-promo-group .gp-input { padding-left: 14px; }
         .gp-promo-btn {
-            padding: 0 20px; background: #222947; border-radius: 10px; color: #fff; font-weight: 700; font-size: 13px;
+            padding: 0 20px; background: #202744; border-radius: 10px; color: #fff; font-weight: 700; font-size: 13px;
             cursor: pointer; display: flex; align-items: center; z-index: 2; position: relative; transition: background 0.2s;
             text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .gp-promo-btn:hover { background: #2c355c; }
+        .gp-promo-btn:hover { background: #293258; }
         .gp-promo-status, .gp-error-msg { font-size: 12px; margin-top: 6px; display: none; font-weight: 500; }
         .gp-error-msg { color: #ff4a4a; }
         
         /* ИТОГОВЫЙ БЛОК */
-        .gp-result { background: rgba(0, 0, 0, 0.4); padding: 18px; border-radius: 12px; margin-top: 18px; border: 1px solid rgba(255,255,255,0.02); }
+        .gp-result { background: rgba(0, 0, 0, 0.45); padding: 18px; border-radius: 12px; margin-top: 18px; border: 1px solid rgba(255,255,255,0.01); }
         .gp-result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13.5px; color: #727a93; font-weight: 500; }
         .gp-result-row.gp-saving-row { display: none; color: #00ff9d; font-weight: 700; }
         .gp-result-row.gp-total {
             margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.06); font-size: 19px; color: #fff; font-weight: 900;
         }
-        .gp-total span { color: #00ff9d; text-shadow: 0 0 10px rgba(0, 255, 157, 0.3); }
+        /* Стилизация для эффекта смены цифр */
+        .gp-counter-anim { transition: all 0.1s ease; }
+        .gp-total span { color: #00ff9d; text-shadow: 0 0 10px rgba(0, 255, 157, 0.35); }
         
         /* ЧЕКБОКС */
-        .gp-agree-group {
-            display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer; user-select: none;
-        }
+        .gp-agree-group { display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer; user-select: none; }
         .gp-checkbox-custom {
-            width: 18px; height: 18px; background: #1a1e33; border-radius: 5px;
-            flex-shrink: 0; margin-top: 1px; position: relative; transition: all 0.2s;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+            width: 18px; height: 18px; background: #171b30; border-radius: 5px; flex-shrink: 0; margin-top: 1px; position: relative; transition: all 0.2s;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
         }
         .gp-agree-group input { display: none; }
         .gp-agree-group input:checked + .gp-checkbox-custom {
-            background: linear-gradient(135deg, #9a4dff 0%, #772fe0 100%);
-            box-shadow: 0 0 10px rgba(154, 77, 255, 0.4);
+            background: linear-gradient(135deg, #9a4dff 0%, #772fe0 100%); box-shadow: 0 0 10px rgba(154, 77, 255, 0.4);
         }
         .gp-agree-group input:checked + .gp-checkbox-custom::after {
-            content: "✓"; position: absolute; color: #fff; font-size: 12px; font-weight: 900;
-            left: 4.5px; top: 0px;
+            content: "✓"; position: absolute; color: #fff; font-size: 12px; font-weight: 900; left: 4.5px; top: 0px;
         }
         .gp-agree-text { font-size: 12.5px; color: #727a93; line-height: 1.5; font-weight: 500; }
 
-        /* НЕОНОВАЯ КНОПКА ОТПРАВКИ */
+        /* КНОПКА ОТПРАВКИ */
         .gp-submit-btn {
             width: 100%; padding: 16px; background: linear-gradient(90deg, #9a4dff 0%, #00bfff 100%); border-radius: 10px; color: #05060a;
             font-size: 15px; font-weight: 900; cursor: pointer; margin-top: 18px; text-transform: uppercase; text-align: center;
@@ -267,14 +240,24 @@
         .gp-submit-btn.active:active { transform: scale(0.98); }
         
         /* FAQ */
-        .gp-faq-container {
-            width: 100%; max-width: 460px; background: #121524; border-radius: 16px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 30px;
-        }
+        .gp-faq-container { width: 100%; max-width: 460px; background: #101326; border-radius: 16px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 30px; }
         .gp-faq-title { font-size: 13px; color: #00bfff; font-weight: 800; text-transform: uppercase; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
         .gp-faq-item { border-bottom: 1px solid rgba(255,255,255,0.03); padding: 12px 0; }
         .gp-faq-item:last-child { border-bottom: none; }
-        .gp-faq-q { font-size: 13.5px; font-weight: 700; color: #fff; cursor: pointer; display: flex; justify-content: space-between; color: #e1e4ed; }
+        .gp-faq-q { font-size: 13.5px; font-weight: 700; color: #e1e4ed; cursor: pointer; display: flex; justify-content: space-between; }
         .gp-faq-a { font-size: 12.5px; color: #727a93; margin-top: 8px; display: none; line-height: 1.5; }
+
+        /* ЭФФЕКТ ВСПЫШКИ-ПАСХАЛКИ */
+        .gp-flash-wave {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            width: 200vw; height: 200vw; background: radial-gradient(circle, rgba(154, 77, 255, 0.2) 0%, transparent 60%);
+            pointer-events: none; z-index: 99999; border-radius: 50%;
+        }
+        .gp-flash-wave.run { animation: gpFlash 0.6s ease-out; }
+        @keyframes gpFlash {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
 
         /* МОДАЛКА */
         .gp-modal {
@@ -282,9 +265,7 @@
             justify-content: center; align-items: center; z-index: 99999; padding: 15px; opacity: 0; visibility: hidden; transition: opacity 0.2s;
         }
         .gp-modal.active { display: flex; opacity: 1; visibility: visible; }
-        .gp-modal-content {
-            background: #121524; padding: 22px; border-radius: 16px; max-width: 360px; width: 100%; position: relative; box-shadow: 0 15px 50px rgba(0,0,0,0.8);
-        }
+        .gp-modal-content { background: #101326; padding: 22px; border-radius: 16px; max-width: 360px; width: 100%; position: relative; box-shadow: 0 15px 50px rgba(0,0,0,0.8); }
         .gp-modal-close { position: absolute; top: 12px; right: 14px; font-size: 22px; color: #4e5569; cursor: pointer; padding: 5px; }
         .gp-modal h3 { color: #00bfff; margin-bottom: 12px; font-size: 17px; font-weight: 800; }
         .gp-modal p { font-size: 13.5px; color: #b2bacf; line-height: 1.5; }
@@ -294,8 +275,11 @@
 </head>
 <body>
 
+<div class="gp-flash-wave" id="gp_flash"></div>
+
 <div class="gp-wrapper">
-    <header class="gp-header">
+    <!-- Клик по хедеру запускает неоновую волну по экрану -->
+    <header class="gp-header" onclick="window.gp_triggerSecretWave()">
         <h1>GREENPER <span>TEAM</span></h1>
         <div class="gp-status-online">
             <div class="gp-status-dot"></div>
@@ -303,7 +287,7 @@
         </div>
     </header>
 
-    <!-- ТАБЫ С ОБНОВЛЕННЫМ ЦВЕТОМ СВЯТЫХ -->
+    <!-- ТАБЫ -->
     <div class="gp-tabs">
         <div class="gp-tab-btn active" id="gp_tab_refill" onclick="window.gp_switchTab('refill')">Пополнение</div>
         <div class="gp-tab-btn" id="gp_tab_key" onclick="window.gp_switchTab('key')">Saints Row 3</div>
@@ -313,26 +297,22 @@
         <h2 id="gp_main_title">Пополнение баланса</h2>
         <p class="gp-subtitle" id="gp_main_subtitle">Моментальный перевод на аккаунты РФ</p>
         
-        <!-- ОПИСАНИЕ И АКТУАЛЬНЫЕ СКРИНШОТЫ SAINTS ROW: THE THIRD -->
+        <!-- АВТОНОМНЫЙ ПРЕВЬЮ ЭКРАН (БЕЗ ВНЕШНИХ ИЗОБРАЖЕНИЙ) -->
         <div class="gp-game-preview" id="gp_gamePreview">
             <div class="gp-tags-row">
                 <span class="gp-tag purple">KEY</span>
                 <span class="gp-tag">STEAM</span>
                 <span class="gp-tag">GLOBAL</span>
             </div>
-            <div class="gp-gallery">
-                <!-- Оригинальные высококачественные кадры Saints Row The Third прямо из Steam -->
-                <img src="https://images.squarespace-cdn.com/content/v1/5df9d243bf7e2126be1be0fb/1590161474246-U2XSMW494Y7I9HTA78A0/SR3R_Fighter_Jet_01_1920x1080.jpg" class="gp-gallery-slide active" alt="Saints Row 3 Самолет">
-                <img src="https://images.squarespace-cdn.com/content/v1/5df9d243bf7e2126be1be0fb/1590161461971-SDRLUM4A1S6Z8R0YFFR2/SR3R_Tank_01_1920x1080.jpg" class="gp-gallery-slide" alt="Saints Row 3 Танк">
-                <img src="https://images.squarespace-cdn.com/content/v1/5df9d243bf7e2126be1be0fb/1590161453303-THT1528A6VHYU09M7ZIA/SR3R_Genki_01_1920x1080.jpg" class="gp-gallery-slide" alt="Saints Row 3 Безумие">
-                <div class="gp-gallery-nav">
-                    <div class="gp-gallery-dot active" onclick="window.gp_setSlide(0)"></div>
-                    <div class="gp-gallery-dot" onclick="window.gp_setSlide(1)"></div>
-                    <div class="gp-gallery-dot" onclick="window.gp_setSlide(2)"></div>
-                </div>
+            
+            <div class="gp-art-screen">
+                <div class="gp-art-logo"></div>
+                <div class="gp-art-city"></div>
+                <div class="gp-art-grid"></div>
             </div>
+
             <div class="gp-game-desc">
-                Добро пожаловать в Стилпорт! Возглавьте банду «Святых с Третьей улицы» на пике их славы. Бросьте вызов международному криминальному синдикату, используйте самый безумный арсенал оружия в истории видеоигр и устройте тотальный хаос в одиночку или в кооперативе. Приготовьтесь к самому безбашенному экшену!
+                Добро пожаловать в Стилпорт! Возглавьте банду «Святых с Третьей улицы» на пике их славы. Бросьте вызов международному криминальному синдикату, используйте самый безумный арсенал оружия в истории видеоигр и устройте тотальный хаос в одиночку или в кооперативе. Приготовьтеся к самому безбашенному экшену!
             </div>
         </div>
 
@@ -399,7 +379,7 @@
             </div>
             <div class="gp-result-row" id="gp_row_receive">
                 <span>Придет в Steam:</span>
-                <span id="gp_steamAmountDisplay" style="color: #fff; font-weight: 700;">0 руб.</span>
+                <span id="gp_steamAmountDisplay" class="gp-counter-anim" style="color: #fff; font-weight: 700;">0 руб.</span>
             </div>
             <div class="gp-result-row gp-saving-row" id="gp_savingRow">
                 <span>Ваша экономия по купону:</span>
@@ -407,7 +387,7 @@
             </div>
             <div class="gp-result-row gp-total">
                 <span>Итого к оплате:</span>
-                <span><span id="gp_totalPrice">0</span> руб.</span>
+                <span><span id="gp_totalPrice" class="gp-counter-anim">0</span> руб.</span>
             </div>
         </div>
 
@@ -456,7 +436,6 @@
         let defaultMargin = 1.02;
         let currentMargin = 1.02; 
         let activePromo = "Нет";  
-        let galleryInterval = null;
 
         const PROMO_CODES = {
             "GREENPER100": { margin: 1.00, text: "Комиссия сервиса 0%" },
@@ -472,28 +451,36 @@
             }
         });
 
-        window.gp_setSlide = function(index) {
-            const slides = document.querySelectorAll('.gp-gallery-slide');
-            const dots = document.querySelectorAll('.gp-gallery-dot');
-            
-            slides.forEach(s => s.classList.remove('active'));
-            dots.forEach(d => d.classList.remove('active'));
-            
-            if (slides[index]) slides[index].classList.add('active');
-            if (dots[index]) dots[index].classList.add('active');
+        // ПАСХАЛКА: ВОЛНА СВЕЧЕНИЯ ПРИ КЛИКЕ НА ЛОГОТИП
+        window.gp_triggerSecretWave = function() {
+            const flash = document.getElementById('gp_flash');
+            flash.classList.remove('run');
+            void flash.offsetWidth; // сброс анимации
+            flash.classList.add('run');
         };
 
-        function startGalleryAutoPlay() {
-            let currentSlide = 0;
-            if (galleryInterval) clearInterval(galleryInterval);
-            galleryInterval = setInterval(() => {
-                currentSlide = (currentSlide + 1) % 3;
-                window.gp_setSlide(currentSlide);
-            }, 4000);
-        }
-
-        function stopGalleryAutoPlay() {
-            if (galleryInterval) clearInterval(galleryInterval);
+        // ФИШКА: АНИМИРОВАННЫЙ СЧЕТЧИК ЗНАЧЕНИЙ ЦЕНЫ
+        function animateValue(elementId, start, end, duration, suffix = "") {
+            const obj = document.getElementById(elementId);
+            if (!obj) return;
+            if (start === end) {
+                obj.textContent = end + suffix;
+                return;
+            }
+            const range = end - start;
+            let current = start;
+            const increment = end > start ? Math.ceil(range / 10) : Math.floor(range / 10);
+            const stepTime = Math.abs(Math.floor(duration / 10));
+            
+            const timer = setInterval(function() {
+                current += increment;
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    clearInterval(timer);
+                    obj.textContent = end + suffix;
+                } else {
+                    obj.textContent = current + suffix;
+                }
+            }, stepTime);
         }
 
         window.gp_switchTab = function(mode) {
@@ -530,7 +517,6 @@
                 infoBox.innerHTML = "Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).";
                 agreeLabelText.textContent = "Я проверил логин и согласен с условиями предоставления услуг";
                 
-                stopGalleryAutoPlay();
                 window.gp_calcFromSteam();
             } else {
                 tabRefill.classList.remove('active');
@@ -548,10 +534,8 @@
                 infoBox.innerHTML = "Вы приобретаете глобальный ключ <strong>Saints Row: The Third</strong>. После оплаты в Telegram оператор мгновенно отправит вам код.";
                 agreeLabelText.textContent = "Я согласен с условиями покупки цифровых товаров";
                 
-                window.gp_setSlide(0);
-                startGalleryAutoPlay();
-                
-                document.getElementById('gp_totalPrice').textContent = KEY_PRICE;
+                const oldPrice = parseInt(document.getElementById('gp_totalPrice').textContent) || 0;
+                animateValue('gp_totalPrice', oldPrice, KEY_PRICE, 200);
                 document.getElementById('gp_savingRow').style.display = 'none';
             }
             window.gp_validateFormState();
@@ -568,6 +552,7 @@
             const savingDisplay = document.getElementById('gp_savingDisplay');
 
             const steamAmount = parseFloat(amountInput.value) || 0;
+            const oldPrice = parseInt(totalPriceSpan.textContent) || 0;
             
             if (steamAmount >= 100) {
                 amountError.style.display = 'none';
@@ -575,7 +560,7 @@
                 const standardPrice = Math.ceil((steamAmount * PROVIDER_RATE) * defaultMargin);
                 
                 payInput.value = finalPrice;
-                totalPriceSpan.textContent = finalPrice;
+                animateValue('gp_totalPrice', oldPrice, finalPrice, 150);
                 steamAmountDisplay.textContent = steamAmount + ' руб.';
                 
                 if (activePromo !== "Нет" && standardPrice > finalPrice) {
@@ -606,11 +591,12 @@
 
             const payAmount = parseFloat(payInput.value) || 0;
             const estimatedSteam = Math.floor((payAmount / currentMargin) / PROVIDER_RATE);
+            const oldPrice = parseInt(totalPriceSpan.textContent) || 0;
             
             if (estimatedSteam >= 100) {
                 amountError.style.display = 'none';
                 amountInput.value = estimatedSteam;
-                totalPriceSpan.textContent = payAmount;
+                animateValue('gp_totalPrice', oldPrice, payAmount, 150);
                 steamAmountDisplay.textContent = estimatedSteam + ' руб.';
                 
                 const standardPrice = Math.ceil((estimatedSteam * PROVIDER_RATE) * defaultMargin);
