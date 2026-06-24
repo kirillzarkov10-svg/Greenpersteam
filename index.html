@@ -2,222 +2,380 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Пополнение Steam | GreenPer Team</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1b2838;
+            background-color: #0b111c;
+            background-image: radial-gradient(circle at top, #1b2838 0%, #0a0e17 70%);
             color: #fff;
-            padding: 20px;
+            padding: 20px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
+        
+        /* Хедер */
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             width: 100%;
             max-width: 460px;
-            background: #171a21;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #1a9fff;
+            background: rgba(23, 26, 33, 0.6);
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(26, 159, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
         header h1 {
-            font-size: 24px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 2px;
             color: #fff;
+            text-shadow: 0 0 15px rgba(26, 159, 255, 0.4);
         }
         header span {
             color: #1a9fff;
         }
+        
+        /* Основной контейнер */
         .container {
             background: #171a21;
-            padding: 30px;
-            border-radius: 12px;
+            padding: 30px 25px;
+            border-radius: 16px;
             width: 100%;
             max-width: 460px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(26, 159, 255, 0.05);
+            margin-bottom: 25px;
         }
         h2 {
-            font-size: 20px;
-            margin-bottom: 5px;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
             text-align: center;
+            letter-spacing: 0.5px;
         }
         .subtitle {
             color: #66c0f4;
             font-size: 13px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 500;
         }
+        
+        /* Инфо-бокс */
         .info-box {
-            background: rgba(26, 159, 255, 0.1);
+            background: rgba(26, 159, 255, 0.08);
             border-left: 4px solid #1a9fff;
-            padding: 10px;
+            padding: 12px 15px;
             font-size: 13px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #c7d5e0;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.5;
         }
+        
+        /* Формы и инпуты */
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 22px;
         }
         .label-flex {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 5px;
-            font-size: 13px;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 600;
             color: #8f98a0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .help-link {
             color: #66c0f4;
-            text-decoration: underline;
+            text-decoration: none;
+            border-bottom: 1px dashed #66c0f4;
             cursor: pointer;
+            text-transform: none;
+            font-weight: normal;
+        }
+        .help-link:hover {
+            color: #1a9fff;
+            border-color: #1a9fff;
+        }
+        
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .input-prefix {
+            position: absolute;
+            left: 15px;
+            color: #56697a;
+            font-size: 16px;
+            font-weight: bold;
+            user-select: none;
         }
         input {
             width: 100%;
-            padding: 12px;
-            background: #2a475e;
-            border: 1px solid #1a9fff;
-            border-radius: 6px;
+            padding: 14px 15px 14px 38px;
+            background: #202732;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             color: #fff;
             font-size: 16px;
+            outline: none;
+            transition: all 0.2s ease;
+            -webkit-appearance: none;
         }
+        input:focus {
+            border-color: #1a9fff;
+            background: #242e3d;
+            box-shadow: 0 0 12px rgba(26, 159, 255, 0.2);
+        }
+        input::placeholder {
+            color: #56697a;
+        }
+        
+        /* Быстрые кнопки (Пресеты) */
         .presets-wrapper {
             display: flex;
-            gap: 5px;
-            margin-top: 5px;
+            gap: 8px;
+            margin-top: 10px;
         }
         .preset-btn {
             flex: 1;
-            padding: 8px;
-            background: #171a21;
-            border: 1px solid #2a475e;
-            border-radius: 4px;
+            padding: 11px 5px;
+            background: rgba(42, 71, 94, 0.2);
+            border: 1px solid rgba(102, 192, 244, 0.2);
+            border-radius: 8px;
             color: #66c0f4;
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 13px;
+            font-weight: 700;
             cursor: pointer;
             text-align: center;
+            user-select: none;
+            transition: all 0.15s ease;
         }
         .preset-btn:hover {
-            background: #2a475e;
+            background: rgba(102, 192, 244, 0.3);
             color: #fff;
+            border-color: #66c0f4;
         }
+        .preset-btn:active {
+            transform: scale(0.96);
+        }
+        
+        /* Промокод группа */
         .promo-group {
             display: flex;
-            gap: 5px;
+            gap: 8px;
+        }
+        .promo-group input {
+            padding-left: 15px; /* У промокода нет префикса */
         }
         .promo-btn {
-            padding: 0 15px;
+            padding: 0 20px;
             background: #2a475e;
-            border: 1px solid #fff;
-            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
             color: #fff;
+            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .promo-btn:hover {
+            background: #385e7d;
+        }
+        .promo-btn:active {
+            transform: scale(0.96);
         }
         .promo-status {
-            font-size: 12px;
-            margin-top: 5px;
+            font-size: 13px;
+            margin-top: 6px;
             display: none;
+            font-weight: 500;
         }
+        
+        /* Ошибки валидации */
+        .error-msg {
+            color: #ff4d4d;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+            font-weight: 500;
+        }
+        
+        /* Чек / Результаты */
         .result {
-            background: rgba(0,0,0,0.4);
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
         .result-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 14px;
             color: #8f98a0;
         }
-        .result-row.total {
+        .result-row:last-child {
             margin-bottom: 0;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            font-size: 18px;
+        }
+        .result-row.total {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 19px;
             color: #fff;
-            font-weight: bold;
+            font-weight: 800;
         }
-        .total span {
+        .total span span {
             color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
         }
+        
+        /* Главная кнопка отправки */
         .submit-btn {
             width: 100%;
-            padding: 15px;
-            background: #00ff88;
-            border: none;
-            border-radius: 6px;
-            color: #000;
+            padding: 16px;
+            background: linear-gradient(90deg, #00ff88 0%, #00bfff 100%);
+            border-radius: 10px;
+            color: #0a0e17;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 25px;
             text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 0.5px;
+            user-select: none;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15);
+            transition: all 0.2s ease;
         }
         .submit-btn:hover {
-            background: #00cc6a;
+            opacity: 0.95;
+            box-shadow: 0 6px 24px rgba(0, 255, 136, 0.3);
         }
-        .error-msg {
-            color: #ff4d4d;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
+        .submit-btn:active {
+            transform: scale(0.98);
         }
+        
+        /* Инструкция (Как это работает) */
         .steps-container {
             width: 100%;
             max-width: 460px;
-            background: #171a21;
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(23, 26, 33, 0.5);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            margin-bottom: 25px;
         }
         .steps-title {
             text-align: center;
-            font-size: 16px;
+            font-size: 15px;
             color: #66c0f4;
-            margin-bottom: 15px;
-            font-weight: bold;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .step-item {
-            margin-bottom: 12px;
-            font-size: 13px;
+            display: flex;
+            gap: 15px;
+            margin-bottom: 16px;
         }
-        .step-item strong {
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+        .step-badge {
+            background: rgba(26, 159, 255, 0.15);
             color: #1a9fff;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            flex-shrink: 0;
+            border: 1px solid rgba(26, 159, 255, 0.3);
         }
+        .step-text {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #8f98a0;
+        }
+        .step-text strong {
+            color: #fff;
+        }
+        
+        /* Модальное окно под мобилки */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(5, 8, 13, 0.85);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            padding: 15px;
         }
         .modal-content {
             background: #171a21;
-            border: 1px solid #1a9fff;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 360px;
-            width: 90%;
+            border: 1px solid rgba(26, 159, 255, 0.3);
+            padding: 25px;
+            border-radius: 16px;
+            max-width: 380px;
+            width: 100%;
             position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
         }
         .modal-close {
             position: absolute;
-            top: 10px; right: 10px;
-            font-size: 20px; color: #fff;
+            top: 12px; right: 15px;
+            font-size: 26px; color: #56697a;
             cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            color: #fff;
+        }
+        .modal h3 {
+            color: #66c0f4;
+            margin-bottom: 12px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .modal p {
+            font-size: 14px;
+            color: #c7d5e0;
+            line-height: 1.5;
+        }
+        
+        footer {
+            color: #485461;
+            font-size: 12px;
+            margin-top: auto;
+            padding-top: 15px;
         }
     </style>
 </head>
@@ -232,7 +390,7 @@
     <p class="subtitle">Мгновенный перевод на аккаунты РФ</p>
     
     <div class="info-box">
-        Минимальный платеж — 100 руб. Вводите Логин, а не Ник.
+        Минимальный платеж — 100 руб. Вводите Логин (аккаунт), а не игровой Никнейм.
     </div>
     
     <div class="form-group">
@@ -240,20 +398,26 @@
             <label>Логин Steam:</label>
             <span class="help-link" onclick="toggleModal(true)">Где логин?</span>
         </div>
-        <input type="text" id="steamLogin" placeholder="Введите логин">
-        <div class="error-msg" id="loginError">Укажите логин Steam</div>
+        <div class="input-wrapper">
+            <span class="input-prefix">👤</span>
+            <input type="text" id="steamLogin" placeholder="Например: gaben123">
+        </div>
+        <div class="error-msg" id="loginError">Укажите ваш логин Steam</div>
     </div>
 
     <div class="form-group">
         <div class="label-flex">
             <label>Сумма зачисления (руб):</label>
         </div>
-        <input type="number" id="amount" placeholder="Минимум 100" oninput="calculatePrice()">
+        <div class="input-wrapper">
+            <span class="input-prefix">₽</span>
+            <input type="number" id="amount" placeholder="Минимум 100" inputmode="numeric" oninput="calculatePrice()" onkeyup="calculatePrice()" onchange="calculatePrice()">
+        </div>
         <div class="presets-wrapper">
-            <button class="preset-btn" onclick="setPresetAmount(100)">100 ₽</button>
-            <button class="preset-btn" onclick="setPresetAmount(300)">300 ₽</button>
-            <button class="preset-btn" onclick="setPresetAmount(500)">500 ₽</button>
-            <button class="preset-btn" onclick="setPresetAmount(1000)">1000 ₽</button>
+            <div class="preset-btn" onclick="setPresetAmount(100)">100 ₽</div>
+            <div class="preset-btn" onclick="setPresetAmount(300)">300 ₽</div>
+            <div class="preset-btn" onclick="setPresetAmount(500)">500 ₽</div>
+            <div class="preset-btn" onclick="setPresetAmount(1000)">1000 ₽</div>
         </div>
         <div class="error-msg" id="amountError">Сумма должна быть от 100 рублей</div>
     </div>
@@ -263,20 +427,20 @@
             <label>Промокод:</label>
         </div>
         <div class="promo-group">
-            <input type="text" id="promoInput" placeholder="Промокод">
-            <button class="promo-btn" onclick="checkPromo()">ОК</button>
+            <input type="text" id="promoInput" placeholder="Есть купон?">
+            <div class="promo-btn" onclick="checkPromo()">ОК</div>
         </div>
         <div class="promo-status" id="promoStatusMessage"></div>
     </div>
 
     <div class="result">
         <div class="result-row">
-            <span>Регион:</span>
-            <span style="color: #66c0f4;">Россия (РФ)</span>
+            <span>Регион аккаунта:</span>
+            <span style="color: #66c0f4; font-weight: 600;">Россия (РФ)</span>
         </div>
         <div class="result-row">
-            <span>Будет зачислено:</span>
-            <span id="steamAmountDisplay" style="color: #fff;">0 руб.</span>
+            <span>Будет зачислено в Steam:</span>
+            <span id="steamAmountDisplay" style="color: #fff; font-weight: 600;">0 руб.</span>
         </div>
         <div class="result-row total">
             <span>К оплате:</span>
@@ -284,23 +448,36 @@
         </div>
     </div>
 
-    <button class="submit-btn" onclick="redirectToTelegram()">Оплатить в Telegram</button>
+    <div class="submit-btn" onclick="redirectToTelegram()">Оплатить в Telegram</div>
 </div>
 
 <div class="steps-container">
     <div class="steps-title">Как это работает?</div>
-    <div class="step-item"><strong>1.</strong> Заполните логин и сумму пополнения.</div>
-    <div class="step-item"><strong>2.</strong> Нажмите кнопку оплаты — откроется чат Telegram.</div>
-    <div class="step-item"><strong>3.</strong> Оператор выдаст карту для перевода СБП, после оплаты баланс придет за 5 минут.</div>
+    <div class="step-item">
+        <div class="step-badge">1</div>
+        <div class="step-text">Укажите ваш верный <strong>логин</strong> Стим и нужную сумму пополнения.</div>
+    </div>
+    <div class="step-item">
+        <div class="step-badge">2</div>
+        <div class="step-text">Нажмите кнопку оплаты. Сайт мгновенно создаст заявку и перенаправит вас в <strong>чат с оператором</strong>.</div>
+    </div>
+    <div class="step-item">
+        <div class="step-badge">3</div>
+        <div class="step-text">Оператор скинет реквизиты СБП. После оплаты чек отправляется в чат, и баланс начисляется за <strong>5 минут</strong>.</div>
+    </div>
 </div>
 
 <div class="modal" id="helpModal" onclick="toggleModal(false)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="toggleModal(false)">&times;</span>
-        <h3 style="color: #66c0f4; margin-bottom: 10px;">Где найти логин?</h3>
-        <p style="font-size: 14px; line-height: 1.4;">Логин — это имя для входа в Steam. Его видно в верхнем правом углу программы Steam рядом с балансом аккаунта.</p>
+        <h3>Где найти логин?</h3>
+        <p><strong>Логин</strong> — это то имя, которое вы вводите при авторизации (входе) в аккаунт Steam. Ваш игровой никнейм указывать нельзя! <br><br>Логин пишется в самом верхнем правом углу компьютерной программы Steam или мобильного приложения рядом с текущим балансом кошелька.</p>
     </div>
 </div>
+
+<footer>
+    &copy; 2026 GreenPer Team.
+</footer>
 
 <script>
     const TELEGRAM_TARGET = "Quac23h"; 
@@ -401,7 +578,8 @@
 
         const messageText = `Привет! Хочу пополнить Steam.\nЛогин: ${login}\nСумма: ${amount} руб.\nПромокод: ${activePromo}\nК оплате: ${total} руб.`;
         const encodedText = encodeURIComponent(messageText);
-        window.open(`https://telegram.me/${TELEGRAM_TARGET}?text=${encodedText}`, '_blank');
+        
+        window.location.href = `https://telegram.me/${TELEGRAM_TARGET}?text=${encodedText}`;
     }
 
     calculatePrice();
