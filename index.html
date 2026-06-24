@@ -323,7 +323,7 @@
         </div>
 
         <div class="gp-info-box" id="gp_info_box_text">
-            Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
+            Лимиты зачисления — от 100 до 300 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
         </div>
 
         <!-- СПОСОБЫ ОПЛАТЫ -->
@@ -331,11 +331,11 @@
         <div class="gp-methods-grid">
             <div class="gp-method-card active" id="gp_m_sbp" onclick="window.gp_setMethod('sbp')">
                 <span class="gp-m-name">📲 СБП</span>
-                <span class="gp-m-fee">+8.5% комиссия</span>
+                <span class="gp-m-fee">+10.5% комиссия</span>
             </div>
             <div class="gp-method-card" id="gp_m_crypto" onclick="window.gp_setMethod('crypto')">
                 <span class="gp-m-name">🪙 Крипта</span>
-                <span class="gp-m-fee">+5% комиссия</span>
+                <span class="gp-m-fee">+7% комиссия</span>
             </div>
         </div>
         
@@ -374,11 +374,11 @@
             
             <div class="gp-presets-wrapper">
                 <div class="gp-preset-btn" onclick="window.gp_setPreset(100)">100 ₽</div>
+                <div class="gp-preset-btn" onclick="window.gp_setPreset(150)">150 ₽</div>
+                <div class="gp-preset-btn" onclick="window.gp_setPreset(200)">200 ₽</div>
                 <div class="gp-preset-btn" onclick="window.gp_setPreset(300)">300 ₽</div>
-                <div class="gp-preset-btn" onclick="window.gp_setPreset(500)">500 ₽</div>
-                <div class="gp-preset-btn" onclick="window.gp_setPreset(1000)">1000 ₽</div>
             </div>
-            <div class="gp-error-msg" id="gp_amountError">Минимальная сумма зачисления — 100 рублей</div>
+            <div class="gp-error-msg" id="gp_amountError">Сумма зачисления должна быть от 100 до 300 рублей</div>
         </div>
 
         <!-- ПРОМОКОД -->
@@ -475,11 +475,11 @@
 
 <script>
     (function() {
-        // Тарифные сетки банка
+        // Тарифные сетки: Шлюз (8.5%/5%) + Сервис (2%) = 10.5% / 7%
         let currentPaymentMethod = 'sbp';
         const FEES = {
-            'sbp': 1.085,    // 8.5% СБП
-            'crypto': 1.05   // 5% Крипта
+            'sbp': 1.105,    // 10.5% СБП
+            'crypto': 1.07   // 7% Крипта
         };
         
         const KEY_BASE_PRICE = 163; 
@@ -549,7 +549,7 @@
                 
                 mainTitle.textContent = "Пополнение баланса";
                 mainSubtitle.textContent = "Моментальный перевод через платежный шлюз";
-                infoBox.innerHTML = "Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).";
+                infoBox.innerHTML = "Лимиты зачисления — от 100 до 300 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).";
                 
                 window.gp_calcFromSteam();
             } else {
@@ -566,6 +566,7 @@
                 mainTitle.textContent = "Saints Row: The Third";
                 mainSubtitle.textContent = "Лицензионный ключ активации для Steam";
                 infoBox.innerHTML = "Вы приобретаете глобальный ключ <strong>Saints Row: The Third</strong>. После успешной авторизации платежа шлюзом, код отобразится на экране.";
+                window.gp_updateKeyPrice();
             }
             window.gp_validateFormState();
         };
@@ -589,7 +590,7 @@
 
             const steamAmount = parseFloat(amountInput.value) || 0;
             
-            if (steamAmount >= 100) {
+            if (steamAmount >= 100 && steamAmount <= 300) {
                 amountError.style.display = 'none';
                 
                 const rateWithFee = FEES[currentPaymentMethod];
@@ -630,7 +631,7 @@
             const rateWithFee = FEES[currentPaymentMethod] - currentPromoDiscount;
             const estimatedSteam = Math.floor(payAmount / rateWithFee);
             
-            if (estimatedSteam >= 100) {
+            if (estimatedSteam >= 100 && estimatedSteam <= 300) {
                 amountError.style.display = 'none';
                 amountInput.value = estimatedSteam;
                 totalPriceSpan.textContent = payAmount;
@@ -698,7 +699,7 @@
                 const login = document.getElementById('gp_steamLogin').value.trim();
                 const amount = parseFloat(document.getElementById('gp_amount').value) || 0;
                 
-                if (isChecked && login && amount >= 100) {
+                if (isChecked && login && amount >= 100 && amount <= 300) {
                     submitBtn.classList.add('active');
                 } else {
                     submitBtn.classList.remove('active');
@@ -731,7 +732,7 @@
             if (currentMode === 'refill') {
                 const login = document.getElementById('gp_steamLogin').value.trim();
                 const amount = document.getElementById('gp_amount').value;
-                if (!login || amount < 100) return;
+                if (!login || amount < 100 || amount > 300) return;
                 
                 localStorage.setItem("gp_saved_steam_login", login);
                 
