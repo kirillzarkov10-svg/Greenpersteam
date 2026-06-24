@@ -293,7 +293,6 @@
         <h1>GREENPER <span>TEAM</span></h1>
     </header>
 
-    <!-- ТАБЫ -->
     <div class="gp-tabs">
         <div class="gp-tab-btn active" id="gp_tab_refill" onclick="window.gp_switchTab('refill')">Пополнение</div>
         <div class="gp-tab-btn" id="gp_tab_key" onclick="window.gp_switchTab('key')">Saints Row 3</div>
@@ -303,7 +302,6 @@
         <h2 id="gp_main_title">Пополнение баланса</h2>
         <p class="gp-subtitle" id="gp_main_subtitle">Моментальный перевод через платежный шлюз</p>
         
-        <!-- АВТОНОМНЫЙ ПРЕВЬЮ ЭКРАН -->
         <div class="gp-game-preview" id="gp_gamePreview">
             <div class="gp-tags-row">
                 <span class="gp-tag purple">KEY</span>
@@ -326,20 +324,18 @@
             Лимиты зачисления — от 100 до 300 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
         </div>
 
-        <!-- СПОСОБЫ ОПЛАТЫ -->
         <div class="gp-method-title">Способ оплаты:</div>
         <div class="gp-methods-grid">
             <div class="gp-method-card active" id="gp_m_sbp" onclick="window.gp_setMethod('sbp')">
                 <span class="gp-m-name">📲 СБП</span>
-                <span class="gp-m-fee">+10.5% комиссия</span>
+                <span class="gp-m-fee">Итого комиссия: 10.5%</span>
             </div>
             <div class="gp-method-card" id="gp_m_crypto" onclick="window.gp_setMethod('crypto')">
                 <span class="gp-m-name">🪙 Крипта</span>
-                <span class="gp-m-fee">+7% комиссия</span>
+                <span class="gp-m-fee">Итого комиссия: 7%</span>
             </div>
         </div>
         
-        <!-- ЛОГИН STEAM -->
         <div class="gp-form-group" id="gp_login_group">
             <div class="gp-label-flex">
                 <label>Логин Steam:</label>
@@ -353,7 +349,6 @@
             <div class="gp-error-msg" id="gp_loginError">Укажите логин Steam</div>
         </div>
 
-        <!-- КАЛЬКУЛЯТОР -->
         <div id="gp_calc_section">
             <div class="gp-calc-row">
                 <div class="gp-form-group">
@@ -381,7 +376,6 @@
             <div class="gp-error-msg" id="gp_amountError">Сумма зачисления должна быть от 100 до 300 рублей</div>
         </div>
 
-        <!-- ПРОМОКОД -->
         <div class="gp-form-group" style="margin-top: 15px;">
             <div class="gp-label-flex"><label>Промокод:</label></div>
             <div class="gp-promo-group">
@@ -391,7 +385,6 @@
             <div class="gp-promo-status" id="gp_promoStatusMessage"></div>
         </div>
 
-        <!-- ТАРИФЫ И ИТОГИ -->
         <div class="gp-result">
             <div class="gp-result-row" id="gp_row_region">
                 <span>Регион пополнения:</span>
@@ -401,6 +394,16 @@
                 <span>Придет в Steam:</span>
                 <span id="gp_steamAmountDisplay" style="color: #fff; font-weight: 700;">0 руб.</span>
             </div>
+            
+            <div class="gp-result-row" id="gp_row_gate_fee" style="display: flex;">
+                <span>Комиссия шлюза:</span>
+                <span id="gp_gateFeeDisplay" style="color: #a0a7bc;">8.5%</span>
+            </div>
+            <div class="gp-result-row" id="gp_row_service_fee" style="display: flex;">
+                <span>Комиссия сервиса:</span>
+                <span style="color: #a0a7bc;">2.0%</span>
+            </div>
+
             <div class="gp-result-row gp-saving-row" id="gp_savingRow">
                 <span>Скидка по промокоду:</span>
                 <span id="gp_savingDisplay">0 руб.</span>
@@ -411,7 +414,6 @@
             </div>
         </div>
 
-        <!-- ГАЛОЧКА СОГЛАСИЯ С СЫЛКАМИ НА ДОКУМЕНТЫ -->
         <label class="gp-agree-group">
             <input type="checkbox" id="gp_agreeCheck" onchange="window.gp_validateFormState()">
             <div class="gp-checkbox-custom"></div>
@@ -423,7 +425,6 @@
         <div class="gp-submit-btn" id="gp_submitBtn" onclick="window.gp_submitForm()">Перейти к оплате</div>
     </div>
 
-    <!-- ТЕХПОДДЕРЖКА ДЛЯ СВЯЗИ -->
     <div class="gp-support-block">
         <div class="gp-support-title">Служба поддержки пользователей</div>
         <div class="gp-support-grid">
@@ -441,7 +442,6 @@
         </div>
     </div>
 
-    <!-- FAQ -->
     <div class="gp-faq-container">
         <div class="gp-faq-title">Частые вопросы</div>
         <div class="gp-faq-item">
@@ -454,7 +454,6 @@
         </div>
     </div>
 
-    <!-- ДОКУМЕНТАЦИЯ ДЛЯ ВЕРИФИКАЦИИ БАНКОМ -->
     <div class="gp-legal-links">
         <a href="https://telegra.ph/Politika-konfidencialnosti-06-21-31" target="_blank">Политика конфиденциальности</a>
         <a href="https://telegra.ph/Polzovatelskoe-soglashenie-04-01-19" target="_blank">Пользовательское соглашение</a>
@@ -475,11 +474,16 @@
 
 <script>
     (function() {
-        // Тарифные сетки: Шлюз (8.5%/5%) + Сервис (2%) = 10.5% / 7%
         let currentPaymentMethod = 'sbp';
+        
+        // Раздельные структуры данных для комиссий
+        const GATE_FEES = { 'sbp': 0.085, 'crypto': 0.05 }; // 8.5% и 5%
+        const SERVICE_FEE = 0.02;                           // 固定 2%
+        
+        // Общий множитель для расчетов (1 + шлюз + сервис)
         const FEES = {
-            'sbp': 1.105,    // 10.5% СБП
-            'crypto': 1.07   // 7% Крипта
+            'sbp': 1 + GATE_FEES['sbp'] + SERVICE_FEE,      // 1.105
+            'crypto': 1 + GATE_FEES['crypto'] + SERVICE_FEE  // 1.07
         };
         
         const KEY_BASE_PRICE = 163; 
@@ -513,6 +517,10 @@
             document.getElementById('gp_m_sbp').classList.toggle('active', method === 'sbp');
             document.getElementById('gp_m_crypto').classList.toggle('active', method === 'crypto');
             
+            // Динамически меняем текст процента шлюза в таблице результатов
+            const gateFeePercent = (GATE_FEES[method] * 100).toFixed(1) + '%';
+            document.getElementById('gp_gateFeeDisplay').textContent = gateFeePercent;
+
             if(currentMode === 'refill') {
                 window.gp_calcFromSteam();
             } else {
@@ -529,6 +537,8 @@
             const calcSection = document.getElementById('gp_calc_section');
             const rowRegion = document.getElementById('gp_row_region');
             const rowReceive = document.getElementById('gp_row_receive');
+            const rowGate = document.getElementById('gp_row_gate_fee');
+            const rowService = document.getElementById('gp_row_service_fee');
             const mainTitle = document.getElementById('gp_main_title');
             const mainSubtitle = document.getElementById('gp_main_subtitle');
             const infoBox = document.getElementById('gp_info_box_text');
@@ -545,6 +555,8 @@
                 calcSection.style.display = 'block';
                 rowRegion.style.display = 'flex';
                 rowReceive.style.display = 'flex';
+                rowGate.style.display = 'flex';
+                rowService.style.display = 'flex';
                 gamePreview.style.display = 'none';
                 
                 mainTitle.textContent = "Пополнение баланса";
@@ -561,6 +573,8 @@
                 calcSection.style.display = 'none';
                 rowRegion.style.display = 'none';
                 rowReceive.style.display = 'none';
+                rowGate.style.display = 'none';
+                rowService.style.display = 'none';
                 gamePreview.style.display = 'block';
                 
                 mainTitle.textContent = "Saints Row: The Third";
