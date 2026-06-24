@@ -47,27 +47,14 @@
 
         /* ХЕДЕР С ТАКТИЛЬНЫМ ИМПУЛЬСОМ */
         .gp-header {
-            display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 460px;
+            display: flex; justify-content: center; align-items: center; width: 100%; max-width: 460px;
             background: #0f1220; padding: 16px 20px; border-radius: 16px; cursor: pointer;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(154, 77, 255, 0.05); margin-bottom: 20px;
             transition: transform 0.2s; user-select: none;
         }
         .gp-header:active { transform: scale(0.98); }
-        .gp-header h1 { font-size: 19px; font-weight: 900; letter-spacing: 2.5px; color: #fff; }
+        .gp-header h1 { font-size: 19px; font-weight: 900; letter-spacing: 2.5px; color: #fff; text-align: center; }
         .gp-header span { color: #9a4dff; text-shadow: 0 0 12px rgba(154, 77, 255, 0.6); }
-        
-        .gp-status-online {
-            display: flex; align-items: center; font-size: 11px; color: #8fa0b0;
-            background: rgba(0, 0, 0, 0.5); padding: 6px 14px; border-radius: 20px; font-weight: 600;
-        }
-        .gp-status-dot {
-            width: 8px; height: 8px; background: #00ff9d; border-radius: 50%; margin-right: 8px; animation: gp-pulse 2s infinite;
-        }
-        @keyframes gp-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.6); }
-            70% { box-shadow: 0 0 0 8px rgba(0, 255, 157, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
-        }
 
         /* ТАБЫ */
         .gp-tabs {
@@ -142,7 +129,7 @@
             margin-bottom: 22px; color: #c0cbdf; border-radius: 0 10px 10px 0; line-height: 1.5;
         }
         
-        /* ВЫБОР МЕТОДА ОПЛАТЫ (ТРЕБОВАНИЕ БАНКА) */
+        /* ВЫБОР МЕТОДА ОПЛАТЫ */
         .gp-method-title {
             font-size: 11px; font-weight: 700; color: #727a93; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
         }
@@ -232,6 +219,8 @@
             content: "✓"; position: absolute; color: #fff; font-size: 12px; font-weight: 900; left: 4.5px; top: 0px;
         }
         .gp-agree-text { font-size: 12.5px; color: #727a93; line-height: 1.5; font-weight: 500; }
+        .gp-agree-text a { color: #00bfff; text-decoration: none; border-bottom: 1px dashed rgba(0, 191, 255, 0.4); padding-bottom: 1px; }
+        .gp-agree-text a:hover { color: #9a4dff; border-color: #9a4dff; }
 
         /* КНОПКА ОТПРАВКИ */
         .gp-submit-btn {
@@ -244,7 +233,7 @@
         .gp-submit-btn.active:hover { box-shadow: 0 0 25px rgba(154, 77, 255, 0.5), 0 0 10px rgba(0, 191, 255, 0.3); }
         .gp-submit-btn.active:active { transform: scale(0.98); }
         
-        /* ПОДДЕРЖКА (ТРЕБОВАНИЕ БАНКА) */
+        /* ПОДДЕРЖКА */
         .gp-support-block {
             width: 100%; max-width: 460px; background: #101326; border-radius: 16px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 15px;
         }
@@ -261,7 +250,7 @@
         .gp-faq-q { font-size: 13.5px; font-weight: 700; color: #e1e4ed; cursor: pointer; display: flex; justify-content: space-between; }
         .gp-faq-a { font-size: 12.5px; color: #727a93; margin-top: 8px; display: none; line-height: 1.5; }
 
-        /* ЮРИДИЧЕСКИЙ ФУТЕР ДЛЯ БАНКА (ТРЕБОВАНИЕ БАНКА) */
+        /* ЮРИДИЧЕСКИЙ ФУТЕР ДЛЯ БАНКА */
         .gp-legal-links {
             display: flex; gap: 15px; justify-content: center; margin-bottom: 15px; width: 100%; max-width: 460px;
         }
@@ -302,10 +291,6 @@
 <div class="gp-wrapper">
     <header class="gp-header" onclick="window.gp_triggerSecretWave()">
         <h1>GREENPER <span>TEAM</span></h1>
-        <div class="gp-status-online">
-            <div class="gp-status-dot"></div>
-            <span>Шлюз СБП активен</span>
-        </div>
     </header>
 
     <!-- ТАБЫ -->
@@ -341,7 +326,7 @@
             Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
         </div>
 
-        <!-- СПОСОБЫ ОПЛАТЫ (ТРЕБОВАНИЕ БАНКА) -->
+        <!-- СПОСОБЫ ОПЛАТЫ -->
         <div class="gp-method-title">Способ оплаты:</div>
         <div class="gp-methods-grid">
             <div class="gp-method-card active" id="gp_m_sbp" onclick="window.gp_setMethod('sbp')">
@@ -406,7 +391,7 @@
             <div class="gp-promo-status" id="gp_promoStatusMessage"></div>
         </div>
 
-        <!-- ТАРИФЫ И ИТОГИ (ТРЕБОВАНИЕ БАНКА) -->
+        <!-- ТАРИФЫ И ИТОГИ -->
         <div class="gp-result">
             <div class="gp-result-row" id="gp_row_region">
                 <span>Регион пополнения:</span>
@@ -426,17 +411,19 @@
             </div>
         </div>
 
-        <!-- ГАЛОЧКА СОГЛАСИЯ -->
+        <!-- ГАЛОЧКА СОГЛАСИЯ С СЫЛКАМИ НА ДОКУМЕНТЫ -->
         <label class="gp-agree-group">
             <input type="checkbox" id="gp_agreeCheck" onchange="window.gp_validateFormState()">
             <div class="gp-checkbox-custom"></div>
-            <span class="gp-agree-text" id="gp_agree_label_text">Я проверил логин и согласен с условиями предоставления услуг</span>
+            <span class="gp-agree-text" id="gp_agree_label_text">
+                Я подтверждаю <a href="https://telegra.ph/Politika-konfidencialnosti-06-21-31" target="_blank" onclick="event.stopPropagation()">политику конфиденциальности</a> и <a href="https://telegra.ph/Polzovatelskoe-soglashenie-04-01-19" target="_blank" onclick="event.stopPropagation()">пользовательское соглашение</a>
+            </span>
         </label>
 
         <div class="gp-submit-btn" id="gp_submitBtn" onclick="window.gp_submitForm()">Перейти к оплате</div>
     </div>
 
-    <!-- ТЕХПОДДЕРЖКА ДЛЯ СВЯЗИ (ТРЕБОВАНИЕ БАНКА) -->
+    <!-- ТЕХПОДДЕРЖКА ДЛЯ СВЯЗИ -->
     <div class="gp-support-block">
         <div class="gp-support-title">Служба поддержки пользователей</div>
         <div class="gp-support-grid">
@@ -446,7 +433,7 @@
             </div>
             <div class="gp-support-row">
                 <span>Электронная почта:</span>
-                <a href="mailto:support@greenper.team">support@greenper.team</a>
+                <a href="mailto:greenpersupport@gmail.com">greenpersupport@gmail.com</a>
             </div>
             <div class="gp-support-row" style="font-size: 11px; color: #5c647a; justify-content: center; text-align: center;">
                 Время работы поддержки: Ежедневно с 10:00 до 22:00 по МСК
@@ -467,7 +454,7 @@
         </div>
     </div>
 
-    <!-- ДОКУМЕНТАЦИЯ ДЛЯ ВЕРИФИКАЦИИ БАНКОМ (ТРЕБОВАНИЕ БАНКА) -->
+    <!-- ДОКУМЕНТАЦИЯ ДЛЯ ВЕРИФИКАЦИИ БАНКОМ -->
     <div class="gp-legal-links">
         <a href="https://telegra.ph/Politika-konfidencialnosti-06-21-31" target="_blank">Политика конфиденциальности</a>
         <a href="https://telegra.ph/Polzovatelskoe-soglashenie-04-01-19" target="_blank">Пользовательское соглашение</a>
@@ -518,7 +505,7 @@
             const flash = document.getElementById('gp_flash');
             flash.classList.remove('run');
             void flash.offsetWidth;
-            flash.add('run');
+            flash.classList.add('run');
         };
 
         window.gp_setMethod = function(method) {
@@ -545,7 +532,6 @@
             const mainTitle = document.getElementById('gp_main_title');
             const mainSubtitle = document.getElementById('gp_main_subtitle');
             const infoBox = document.getElementById('gp_info_box_text');
-            const agreeLabelText = document.getElementById('gp_agree_label_text');
             const gamePreview = document.getElementById('gp_gamePreview');
 
             document.getElementById('gp_agreeCheck').checked = false;
@@ -564,7 +550,6 @@
                 mainTitle.textContent = "Пополнение баланса";
                 mainSubtitle.textContent = "Моментальный перевод через платежный шлюз";
                 infoBox.innerHTML = "Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).";
-                agreeLabelText.textContent = "Я проверил логин и согласен с условиями предоставления услуг";
                 
                 window.gp_calcFromSteam();
             } else {
@@ -581,9 +566,6 @@
                 mainTitle.textContent = "Saints Row: The Third";
                 mainSubtitle.textContent = "Лицензионный ключ активации для Steam";
                 infoBox.innerHTML = "Вы приобретаете глобальный ключ <strong>Saints Row: The Third</strong>. После успешной авторизации платежа шлюзом, код отобразится на экране.";
-                agreeLabelText.textContent = "Я согласен с условиями покупки цифровых товаров";
-                
-                window.gp_updateKeyPrice();
             }
             window.gp_validateFormState();
         };
@@ -610,7 +592,6 @@
             if (steamAmount >= 100) {
                 amountError.style.display = 'none';
                 
-                // Рассчитываем итоговую стоимость на основе выбранного тарифа банка
                 const rateWithFee = FEES[currentPaymentMethod];
                 const standardPrice = Math.ceil(steamAmount * rateWithFee);
                 const finalPrice = Math.ceil(steamAmount * (rateWithFee - currentPromoDiscount));
