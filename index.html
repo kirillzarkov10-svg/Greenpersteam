@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Пополнение Steam & Ключи | GreenPer Team</title>
     <style>
+        /* Обнуление дефолтных рамок браузера */
+        html, body {
+            background-color: #0b111c;
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
+
         .gp-wrapper {
             background-color: #0b111c;
             background-image: radial-gradient(circle at top, #1b2838 0%, #0a0e17 70%);
@@ -19,51 +28,120 @@
             z-index: 1;
         }
         
-        .gp-wrapper * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        .gp-wrapper * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        /* Убираем рамки фокуса для всех интерактивных элементов */
+        *:focus {
+            outline: none !important;
+            border: none !important;
+        }
 
         .gp-header {
             display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 460px;
-            background: rgba(23, 26, 33, 0.8); padding: 15px 20px; border-radius: 14px;
-            border: none; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); margin-bottom: 15px;
+            background: rgba(23, 26, 33, 0.9); padding: 15px 20px; border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); margin-bottom: 15px;
         }
         .gp-header h1 { font-size: 18px; font-weight: 800; letter-spacing: 2px; color: #fff; }
         .gp-header span { color: #1a9fff; }
         
         .gp-status-online {
             display: flex; align-items: center; font-size: 12px; color: #8f98a0;
-            background: rgba(0, 0, 0, 0.4); padding: 6px 12px; border-radius: 20px; border: none;
+            background: rgba(0, 0, 0, 0.4); padding: 6px 12px; border-radius: 20px;
         }
         .gp-status-dot {
             width: 8px; height: 8px; background: #00ff88; border-radius: 50%; margin-right: 6px; animation: gp-pulse 2s infinite;
         }
         @keyframes gp-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.5); }
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
             70% { box-shadow: 0 0 0 6px rgba(0, 255, 136, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
         }
 
-        /* ТАБЫ (ПЕРЕКЛЮЧАТЕЛИ) */
+        /* СТИЛЬНЫЙ БЕСШОВНЫЙ ПЕРЕКЛЮЧАТЕЛЬ ТАБОВ */
         .gp-tabs {
-            display: flex; gap: 10px; width: 100%; max-width: 460px; margin-bottom: 15px;
+            display: flex; width: 100%; max-width: 460px; margin-bottom: 15px;
+            background: rgba(23, 26, 33, 0.9); padding: 4px; border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative;
         }
         .gp-tab-btn {
-            flex: 1; padding: 12px; background: rgba(23, 26, 33, 0.7); border-radius: 10px;
+            flex: 1; padding: 10px; border-radius: 9px;
             color: #8f98a0; font-size: 14px; font-weight: 700; text-align: center; cursor: pointer;
-            transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.25s ease; z-index: 2; position: relative;
         }
         .gp-tab-btn.active {
             background: #1a9fff; color: #fff;
+            box-shadow: 0 4px 15px rgba(26, 159, 255, 0.3);
         }
 
         .gp-container {
             background: #171a21; padding: 25px 20px; border-radius: 16px; width: 100%; max-width: 460px;
-            border: none; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); margin-bottom: 20px;
         }
         .gp-container h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; text-align: center; }
         .gp-subtitle { color: #66c0f4; font-size: 13px; text-align: center; margin-bottom: 20px; }
         
+        /* БЛОК С ОБЗОРOМ ИГРЫ (ДЛЯ ТАБА КЛЮЧЕЙ) */
+        .gp-game-preview {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .gp-gallery {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #0b111c;
+            margin-bottom: 12px;
+        }
+        .gp-gallery-slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        .gp-gallery-slide.active {
+            display: block;
+        }
+        .gp-gallery-nav {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 10;
+        }
+        .gp-gallery-dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .gp-gallery-dot.active {
+            background: #1a9fff;
+            box-shadow: 0 0 8px #1a9fff;
+        }
+        .gp-game-desc {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #acb2b8;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+        }
+
         .gp-info-box {
-            background: rgba(26, 159, 255, 0.08); border-left: 4px solid #1a9fff; padding: 12px; font-size: 13px;
+            background: rgba(26, 159, 255, 0.06); border-left: 4px solid #1a9fff; padding: 12px; font-size: 13px;
             margin-bottom: 20px; color: #c7d5e0; border-radius: 0 8px 8px 0; line-height: 1.4;
         }
         
@@ -76,11 +154,13 @@
         
         .gp-input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
         .gp-input-prefix { position: absolute; left: 14px; color: #56697a; font-size: 15px; font-weight: bold; pointer-events: none; z-index: 2; }
+        
         .gp-input {
-            width: 100%; padding: 12px 35px 12px 35px; background: #202732; border: none;
-            border-radius: 8px; color: #fff; font-size: 15px; outline: none; position: relative; z-index: 1; transition: background 0.2s;
+            width: 100%; padding: 12px 35px 12px 35px; background: #202732;
+            border-radius: 8px; color: #fff; font-size: 15px; position: relative; z-index: 1; transition: background 0.2s;
+            box-shadow: none; -webkit-appearance: none;
         }
-        .gp-input:focus { background: #2a3342; }
+        .gp-input:focus { background: #262e3b; }
         
         .gp-clear-btn {
             position: absolute; right: 12px; color: #56697a; cursor: pointer; font-size: 16px; display: none; z-index: 5; padding: 5px;
@@ -114,25 +194,35 @@
         }
         .gp-total span { color: #00ff88; }
         
-        /* ЧЕКБОКС СОГЛАСИЯ */
+        /* ЧЕКБОКС СОГЛАСИЯ БЕЗ ДЕФОЛТНЫХ РАМОК */
         .gp-agree-group {
-            display: flex; align-items: flex-start; gap: 8px; margin-top: 15px; cursor: pointer; user-select: none;
+            display: flex; align-items: flex-start; gap: 10px; margin-top: 18px; cursor: pointer; user-select: none;
         }
-        .gp-agree-group input {
-            margin-top: 3px; cursor: pointer; width: 14px; height: 14px; accent-color: #1a9fff;
+        .gp-checkbox-custom {
+            width: 16px; height: 16px; background: #202732; border-radius: 4px;
+            flex-shrink: 0; margin-top: 2px; position: relative; transition: all 0.2s;
         }
-        .gp-agree-text { font-size: 12px; color: #8f98a0; line-height: 1.3; }
+        .gp-agree-group input { display: none; }
+        .gp-agree-group input:checked + .gp-checkbox-custom {
+            background: #1a9fff;
+        }
+        .gp-agree-group input:checked + .gp-checkbox-custom::after {
+            content: "✓"; position: absolute; color: #fff; font-size: 11px; font-weight: bold;
+            left: 4px; top: 0px;
+        }
+        .gp-agree-text { font-size: 12px; color: #8f98a0; line-height: 1.4; }
 
         .gp-submit-btn {
             width: 100%; padding: 15px; background: linear-gradient(90deg, #00ff88 0%, #00bfff 100%); border-radius: 8px; color: #0a0e17;
             font-size: 15px; font-weight: 800; cursor: pointer; margin-top: 15px; text-transform: uppercase; text-align: center;
-            z-index: 2; position: relative; transition: all 0.2s; opacity: 0.5; pointer-events: none;
+            z-index: 2; position: relative; transition: all 0.2s; opacity: 0.4; pointer-events: none;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.1);
         }
         .gp-submit-btn.active { opacity: 1; pointer-events: auto; }
         .gp-submit-btn.active:active { transform: scale(0.98); }
         
         .gp-faq-container {
-            width: 100%; max-width: 460px; background: #171a21; border-radius: 14px; padding: 15px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.4); margin-bottom: 25px;
+            width: 100%; max-width: 460px; background: #171a21; border-radius: 14px; padding: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); margin-bottom: 25px;
         }
         .gp-faq-title { font-size: 14px; color: #66c0f4; font-weight: 700; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
         .gp-faq-item { border-bottom: 1px solid rgba(255,255,255,0.03); padding: 10px 0; }
@@ -166,21 +256,39 @@
         </div>
     </header>
 
-    <!-- ТАБЫ ДЛЯ ВЫБОРА РЕЖИМА -->
+    <!-- ТАБЫ -->
     <div class="gp-tabs">
         <div class="gp-tab-btn active" id="gp_tab_refill" onclick="window.gp_switchTab('refill')">Пополнение</div>
-        <div class="gp-tab-btn" id="gp_tab_key" onclick="window.gp_switchTab('key')">Купить ключ</div>
+        <div class="gp-tab-btn" id="gp_tab_key" onclick="window.gp_switchTab('key')">Saints Row 3</div>
     </div>
 
     <div class="gp-container">
         <h2 id="gp_main_title">Пополнение баланса</h2>
         <p class="gp-subtitle" id="gp_main_subtitle">Моментальный перевод на аккаунты РФ</p>
         
+        <!-- БЛОК ОПИСАНИЯ И СКРИНШОТОВ SAINTS ROW 3 -->
+        <div class="gp-game-preview" id="gp_gamePreview">
+            <div class="gp-gallery">
+                <!-- Кастомные плейсхолдеры для скриншотов из игры, заменяемые на реальные URL -->
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500&auto=format&fit=crop" class="gp-gallery-slide active" alt="Saints Row Screenshot 1">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=500&auto=format&fit=crop" class="gp-gallery-slide" alt="Saints Row Screenshot 2">
+                <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=500&auto=format&fit=crop" class="gp-gallery-slide" alt="Saints Row Screenshot 3">
+                <div class="gp-gallery-nav">
+                    <div class="gp-gallery-dot active" onclick="window.gp_setSlide(0)"></div>
+                    <div class="gp-gallery-dot" onclick="window.gp_setSlide(1)"></div>
+                    <div class="gp-gallery-dot" onclick="window.gp_setSlide(2)"></div>
+                </div>
+            </div>
+            <div class="gp-game-desc">
+                Добро пожаловать в Стилпорт — город греха, разврата и бесконечного безумия. Возглавьте банду «Святых с Третьей улицы» в борьбе против Синдиката. Полная кастомизация, тонны безбашенного оружия и кооперативный режим ждут вас!
+            </div>
+        </div>
+
         <div class="gp-info-box" id="gp_info_box_text">
             Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
         </div>
         
-        <!-- БЛОК ЛОГИНА (СКРЫВАЕТСЯ ПРИ ПОКУПКЕ КЛЮЧА) -->
+        <!-- ЛОГИН STEAM -->
         <div class="gp-form-group" id="gp_login_group">
             <div class="gp-label-flex">
                 <label>Логин Steam:</label>
@@ -194,7 +302,7 @@
             <div class="gp-error-msg" id="gp_loginError">Укажите логин Steam</div>
         </div>
 
-        <!-- БЛОК С КАЛЬКУЛЯТОРОМ (СКРЫВАЕТСЯ ПРИ ПОКУПКЕ КЛЮЧА) -->
+        <!-- КАЛЬКУЛЯТОР -->
         <div id="gp_calc_section">
             <div class="gp-calc-row">
                 <div class="gp-form-group">
@@ -222,6 +330,7 @@
             <div class="gp-error-msg" id="gp_amountError">Минимальная сумма зачисления — 100 рублей</div>
         </div>
 
+        <!-- ПРОМОКОД -->
         <div class="gp-form-group" style="margin-top: 15px;">
             <div class="gp-label-flex"><label>Промокод:</label></div>
             <div class="gp-promo-group">
@@ -251,8 +360,9 @@
         </div>
 
         <!-- ГАЛОЧКА СОГЛАСИЯ -->
-        <label class="gp-agree-group" onclick="window.gp_toggleAgree()">
-            <input type="checkbox" id="gp_agreeCheck" onclick="event.stopPropagation(); window.gp_validateFormState()">
+        <label class="gp-agree-group">
+            <input type="checkbox" id="gp_agreeCheck" onchange="window.gp_validateFormState()">
+            <div class="gp-checkbox-custom"></div>
             <span class="gp-agree-text" id="gp_agree_label_text">Я проверил логин и согласен с условиями предоставления услуг</span>
         </label>
 
@@ -288,19 +398,19 @@
     (function() {
         const TELEGRAM_TARGET = "Quac23h"; 
         const PROVIDER_RATE = 22 / 20; 
-        const KEY_PRICE = 163; // 159 + 2% наценка (округлили)
+        const KEY_PRICE = 163; 
         
-        let currentMode = 'refill'; // 'refill' или 'key'
+        let currentMode = 'refill'; 
         let defaultMargin = 1.02;
         let currentMargin = 1.02; 
         let activePromo = "Нет";  
+        let galleryInterval = null;
 
         const PROMO_CODES = {
             "GREENPER100": { margin: 1.00, text: "Комиссия сервиса 0%" },
             "START2026": { margin: 1.01, text: "Комиссия снижена до 1%" }
         };
 
-        // Загрузка сохраненного логина из LocalStorage при запуске страницы
         document.addEventListener("DOMContentLoaded", () => {
             const savedLogin = localStorage.getItem("gp_saved_steam_login");
             if (savedLogin) {
@@ -310,7 +420,30 @@
             }
         });
 
-        // Переключение между вкладками Пополнение / Ключи
+        // Кастомное переключение слайдов галереи
+        window.gp_setSlide = function(index) {
+            const slides = document.querySelectorAll('.gp-gallery-slide');
+            const dots = document.querySelectorAll('.gp-gallery-dot');
+            
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            
+            if (slides[index]) slides[index].classList.add('active');
+            if (dots[index]) dots[index].classList.add('active');
+        };
+
+        function startGalleryAutoPlay() {
+            let currentSlide = 0;
+            galleryInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % 3;
+                window.gp_setSlide(currentSlide);
+            }, 4000);
+        }
+
+        function stopGalleryAutoPlay() {
+            if (galleryInterval) clearInterval(galleryInterval);
+        }
+
         window.gp_switchTab = function(mode) {
             currentMode = mode;
             
@@ -324,8 +457,8 @@
             const mainSubtitle = document.getElementById('gp_main_subtitle');
             const infoBox = document.getElementById('gp_info_box_text');
             const agreeLabelText = document.getElementById('gp_agree_label_text');
+            const gamePreview = document.getElementById('gp_gamePreview');
 
-            // Сбрасываем чекбокс при переключении
             document.getElementById('gp_agreeCheck').checked = false;
 
             if (mode === 'refill') {
@@ -336,12 +469,14 @@
                 calcSection.style.display = 'block';
                 rowRegion.style.display = 'flex';
                 rowReceive.style.display = 'flex';
+                gamePreview.style.display = 'none';
                 
                 mainTitle.textContent = "Пополнение баланса";
                 mainSubtitle.textContent = "Моментальный перевод на аккаунты РФ";
                 infoBox.innerHTML = "Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).";
                 agreeLabelText.textContent = "Я проверил логин и согласен с условиями предоставления услуг";
                 
+                stopGalleryAutoPlay();
                 window.gp_calcFromSteam();
             } else {
                 tabRefill.classList.remove('active');
@@ -351,13 +486,16 @@
                 calcSection.style.display = 'none';
                 rowRegion.style.display = 'none';
                 rowReceive.style.display = 'none';
+                gamePreview.style.display = 'block';
                 
-                mainTitle.textContent = "Покупка игр и ключей";
+                mainTitle.textContent = "Покупка Saints Row 3";
                 mainSubtitle.textContent = "Лицензионный ключ активации для Steam";
                 infoBox.innerHTML = "Вы приобретаете глобальный ключ <strong>Saints Row 3</strong>. После оплаты в Telegram оператор отправит вам код.";
-                agreeLabelText.textContent = "Я согласен с условиями покупки и возврата цифровых товаров";
+                agreeLabelText.textContent = "Я согласен с условиями покупки цифровых товаров";
                 
-                // Для ключа цена фиксированная
+                window.gp_setSlide(0);
+                startGalleryAutoPlay();
+                
                 document.getElementById('gp_totalPrice').textContent = KEY_PRICE;
                 document.getElementById('gp_savingRow').style.display = 'none';
             }
@@ -444,10 +582,8 @@
 
         window.gp_checkLogin = function() {
             const loginInput = document.getElementById('gp_steamLogin');
-            const loginVal = loginInput.value;
-            document.getElementById('gp_clearLogin').style.display = loginVal.length > 0 ? 'block' : 'none';
+            document.getElementById('gp_clearLogin').style.display = loginInput.value.length > 0 ? 'block' : 'none';
             document.getElementById('gp_loginError').style.display = 'none';
-            loginInput.style.boxShadow = 'none';
             window.gp_validateFormState();
         };
 
@@ -476,14 +612,6 @@
             }
         };
 
-        // Логика клика по тексту чекбокса
-        window.gp_toggleAgree = function() {
-            const chk = document.getElementById('gp_agreeCheck');
-            chk.checked = !chk.checked;
-            window.gp_validateFormState();
-        };
-
-        // Функция валидации формы (включает/выключает кнопку оплаты)
         window.gp_validateFormState = function() {
             const isChecked = document.getElementById('gp_agreeCheck').checked;
             const submitBtn = document.getElementById('gp_submitBtn');
@@ -498,7 +626,6 @@
                     submitBtn.classList.remove('active');
                 }
             } else {
-                // Для покупки ключа нужен только нажатый чекбокс
                 if (isChecked) {
                     submitBtn.classList.add('active');
                 } else {
@@ -530,18 +657,14 @@
             let messageText = "";
 
             if (currentMode === 'refill') {
-                const loginInput = document.getElementById('gp_steamLogin');
-                const login = loginInput.value.trim();
+                const login = document.getElementById('gp_steamLogin').value.trim();
                 const amount = parseFloat(document.getElementById('gp_amount').value) || 0;
 
                 if (!login || amount < 100) return;
 
-                // Сохраняем логин в память браузера
                 localStorage.setItem("gp_saved_steam_login", login);
-
                 messageText = `Привет! Хочу пополнить Steam.\nЛогин: ${login}\nСумма: ${amount} руб.\nПромокод: ${activePromo}\nК оплате: ${total} руб.`;
             } else {
-                // Если покупают ключ
                 messageText = `Привет! Хочу купить ключ.\nТовар: Saints Row 3\nПромокод: ${activePromo}\nК оплате: ${total} руб.`;
             }
 
