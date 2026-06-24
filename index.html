@@ -7,19 +7,24 @@
     <style>
         /* Полное обнуление дефолтных стилей и рамок */
         html, body {
-            background-color: #06070d;
+            background-color: #05060a;
             margin: 0;
             padding: 0;
             border: none;
             outline: none;
             overflow-x: hidden;
+            transition: background-color 0.5s ease;
         }
 
+        /* ДИНАМИЧЕСКИЙ ФОН С УЗОРАМИ */
         .gp-wrapper {
-            background-color: #06070d;
+            background-color: #05060a;
+            /* Дефолтный зеленый паттерн (сетка) */
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(154, 77, 255, 0.2) 0%, transparent 55%),
-                radial-gradient(circle at 100% 100%, rgba(0, 191, 255, 0.1) 0%, transparent 40%);
+                radial-gradient(circle at 50% 0%, rgba(0, 255, 157, 0.15) 0%, transparent 55%),
+                linear-gradient(rgba(0, 255, 157, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 157, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 20px 20px, 20px 20px;
             color: #fff;
             padding: 25px 15px;
             display: flex;
@@ -29,6 +34,17 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             position: relative;
             z-index: 1;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Фиолетовый режим — узоры лилий Saints Row */
+        body.theme-saints .gp-wrapper {
+            background-color: #090612;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(154, 77, 255, 0.25) 0%, transparent 60%),
+                /* Код генерирует SVG-пакет узоров геральдической лилии банды Святых */
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5c1 6 3 10 7 13-3 1-6 0-7 3-1-3-4-2-7-3 4-3 6-7 7-13zm0 24c2 3 5 4 7 2-1 4-4 6-7 8-3-2-6-4-7-8 2 2 5 1 7-2zm-17-7c1 4 3 7 6 9-2 1-4 0-5 2 0-2-3-2-5-2 3-2 4-5 4-9zm34 0c1 4 2 7 4 9-2 0-5 0-5 2-1-2-4-1-5-2 2-2 4-5 6-9z' fill='%239a4dff' fill-opacity='0.04'/%3E%3C/svg%3E");
+            background-size: 100% 100%, 60px 60px;
         }
         
         .gp-wrapper * { 
@@ -40,49 +56,67 @@
             outline: none;
         }
 
-        *:focus {
-            outline: none !important;
-            border: none !important;
-        }
-
         /* ХЕДЕР */
         .gp-header {
             display: flex; justify-content: center; align-items: center; width: 100%; max-width: 460px;
-            background: #0f1220; padding: 16px 20px; border-radius: 16px; cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(154, 77, 255, 0.05); margin-bottom: 20px;
-            transition: transform 0.2s; user-select: none;
+            background: #0d111a; padding: 16px 20px; border-radius: 16px; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.5s; user-select: none;
+            border: 1px solid rgba(0, 255, 157, 0.1);
+        }
+        body.theme-saints .gp-header {
+            background: #140f24;
+            border-color: rgba(154, 77, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(154, 77, 255, 0.1);
         }
         .gp-header:active { transform: scale(0.98); }
-        .gp-header h1 { font-size: 19px; font-weight: 900; letter-spacing: 2.5px; color: #fff; text-align: center; }
-        .gp-header span { color: #9a4dff; text-shadow: 0 0 12px rgba(154, 77, 255, 0.6); }
+        .gp-header h1 { font-size: 19px; font-weight: 900; letter-spacing: 2.5px; color: #fff; text-align: center; transition: color 0.5s; }
+        .gp-header span { color: #00ff9d; text-shadow: 0 0 12px rgba(0, 255, 157, 0.6); transition: all 0.5s; }
+        body.theme-saints .gp-header span { color: #9a4dff; text-shadow: 0 0 12px rgba(154, 77, 255, 0.6); }
 
         /* ТАБЫ */
         .gp-tabs {
             display: flex; width: 100%; max-width: 460px; margin-bottom: 20px;
-            background: #0f1220; padding: 5px; border-radius: 14px;
+            background: #0d111a; padding: 5px; border-radius: 14px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transition: background 0.5s;
         }
+        body.theme-saints .gp-tabs { background: #140f24; }
+        
         .gp-tab-btn {
             flex: 1; padding: 12px; border-radius: 10px;
-            color: #6a738d; font-size: 14px; font-weight: 800; text-align: center; cursor: pointer;
+            color: #525a70; font-size: 14px; font-weight: 800; text-align: center; cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 0.5px;
         }
+        
+        /* Зеленый активный таб */
         .gp-tab-btn.active {
-            background: linear-gradient(135deg, #9a4dff 0%, #772fe0 100%); color: #fff;
+            background: linear-gradient(135deg, #00ff9d 0%, #00bfff 100%); color: #05060a;
+            box-shadow: 0 4px 20px rgba(0, 255, 157, 0.4);
+        }
+        /* Фиолетовый активный таб */
+        body.theme-saints .gp-tab-btn.active {
+            background: linear-gradient(135deg, #9a4dff 0%, #621bbf 100%); color: #fff;
             box-shadow: 0 4px 20px rgba(154, 77, 255, 0.5);
         }
 
-        /* ГЛАВНЫЙ КОНТЕЙНЕР */
+        /* ГЛАВНЫЙ КОНТЕЙНЕР С ДИНАМИЧЕСКИМ СВЕЧЕНИЕМ */
         .gp-container {
-            background: #101326; padding: 25px 22px; border-radius: 20px; width: 100%; max-width: 460px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7); 
-            margin-bottom: 20px; position: relative; transition: all 0.4s ease;
+            background: #0e1324; padding: 25px 22px; border-radius: 20px; width: 100%; max-width: 460px;
+            position: relative; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 255, 157, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 255, 157, 0.15);
         }
-        .gp-container.key-active {
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(154, 77, 255, 0.22);
+        /* Свечение Saints Row */
+        body.theme-saints .gp-container {
+            background: #120e26;
+            border-color: rgba(154, 77, 255, 0.25);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(154, 77, 255, 0.25);
         }
+        
         .gp-container h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; text-align: center; letter-spacing: 0.5px; }
-        .gp-subtitle { color: #00bfff; font-size: 13px; text-align: center; margin-bottom: 22px; font-weight: 500; }
+        .gp-subtitle { color: #00bfff; font-size: 13px; text-align: center; margin-bottom: 22px; font-weight: 500; transition: color 0.5s; }
+        body.theme-saints .gp-subtitle { color: #d0b3ff; }
         
         /* CSS-ГРАФИКА ТОВАРА */
         .gp-game-preview { display: none; margin-bottom: 22px; }
@@ -125,23 +159,28 @@
 
         /* ИНФО-БОКС */
         .gp-info-box {
-            background: rgba(0, 191, 255, 0.07); border-left: 4px solid #00bfff; padding: 14px; font-size: 13.5px;
-            margin-bottom: 22px; color: #c0cbdf; border-radius: 0 10px 10px 0; line-height: 1.5;
+            background: rgba(0, 255, 157, 0.05); border-left: 4px solid #00ff9d; padding: 14px; font-size: 13.5px;
+            margin-bottom: 22px; color: #c0cbdf; border-radius: 0 10px 10px 0; line-height: 1.5; transition: all 0.5s;
+        }
+        body.theme-saints .gp-info-box {
+            background: rgba(154, 77, 255, 0.07); border-left-color: #9a4dff;
         }
         
         /* ВЫБОР МЕТОДА ОПЛАТЫ */
         .gp-method-title {
             font-size: 11px; font-weight: 700; color: #727a93; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
         }
-        .gp-methods-grid {
-            display: flex; gap: 10px; margin-bottom: 20px;
-        }
+        .gp-methods-grid { display: flex; gap: 10px; margin-bottom: 20px; }
         .gp-method-card {
-            flex: 1; background: #171b30; border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 10px;
+            flex: 1; background: #13182e; border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 10px;
             cursor: pointer; text-align: center; transition: all 0.2s ease;
         }
+        body.theme-saints .gp-method-card { background: #191433; }
         .gp-method-card.active {
-            border-color: #00bfff; background: rgba(0, 191, 255, 0.05); box-shadow: 0 0 15px rgba(0, 191, 255, 0.1);
+            border-color: #00ff9d; background: rgba(0, 255, 157, 0.05); box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
+        }
+        body.theme-saints .gp-method-card.active {
+            border-color: #9a4dff; background: rgba(154, 77, 255, 0.05); box-shadow: 0 0 15px rgba(154, 77, 255, 0.1);
         }
         .gp-method-card .gp-m-name { font-size: 14px; font-weight: 800; color: #fff; display: block; margin-bottom: 2px;}
         .gp-method-card .gp-m-fee { font-size: 11px; color: #00ff9d; font-weight: 600; }
@@ -152,21 +191,26 @@
             display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 11px;
             font-weight: 700; color: #727a93; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .gp-help-link { color: #00bfff; cursor: pointer; text-transform: none; border-bottom: 1px dashed #00bfff; }
+        .gp-help-link { color: #00ff9d; cursor: pointer; text-transform: none; border-bottom: 1px dashed #00ff9d; transition: all 0.5s; }
+        body.theme-saints .gp-help-link { color: #9a4dff; border-bottom-color: #9a4dff; }
         
         .gp-input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
         .gp-input-prefix { position: absolute; left: 16px; color: #4e5569; font-size: 16px; font-weight: bold; pointer-events: none; z-index: 2; }
         
         .gp-input {
-            width: 100%; padding: 14px 40px 14px 42px; background: #171b30;
+            width: 100%; padding: 14px 40px 14px 42px; background: #13182e;
             border-radius: 10px; color: #fff; font-size: 15px; font-weight: 500; position: relative; z-index: 1; 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); -webkit-appearance: none;
         }
+        body.theme-saints .gp-input { background: #191433; }
         .gp-input:focus { 
-            background: #1d223d; 
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 0 15px rgba(0, 191, 255, 0.15);
-            padding-left: 46px;
+            background: #19203d; 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 0 15px rgba(0, 255, 157, 0.15);
+        }
+        body.theme-saints .gp-input:focus {
+            background: #221b47;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3), 0 0 15px rgba(154, 77, 255, 0.2);
         }
         
         .gp-clear-btn { position: absolute; right: 14px; color: #4e5569; cursor: pointer; font-size: 16px; display: none; z-index: 5; padding: 5px; }
@@ -177,98 +221,91 @@
         /* ПРЕСЕТЫ */
         .gp-presets-wrapper { display: flex; gap: 8px; margin-top: 10px; }
         .gp-preset-btn {
-            flex: 1; padding: 11px 2px; background: rgba(23, 27, 48, 0.7);
-            border-radius: 8px; color: #00bfff; font-size: 13px; font-weight: 800; text-align: center; cursor: pointer; z-index: 2; position: relative;
+            flex: 1; padding: 11px 2px; background: rgba(19, 24, 46, 0.7);
+            border-radius: 8px; color: #00ff9d; font-size: 13px; font-weight: 800; text-align: center; cursor: pointer; z-index: 2; position: relative;
             transition: all 0.2s ease;
         }
-        .gp-preset-btn:hover { background: #00bfff; color: #06070d; box-shadow: 0 4px 15px rgba(0, 191, 255, 0.35); transform: translateY(-1px); }
-        .gp-preset-btn:active { transform: translateY(0); }
+        body.theme-saints .gp-preset-btn { color: #b380ff; background: rgba(25, 20, 51, 0.7); }
+        .gp-preset-btn:hover { background: #00ff9d; color: #06070d; box-shadow: 0 4px 15px rgba(0, 255, 157, 0.35); transform: translateY(-1px); }
+        body.theme-saints .gp-preset-btn:hover { background: #9a4dff; color: #fff; box-shadow: 0 4px 15px rgba(154, 77, 255, 0.4); }
 
         /* ПРОМОКОД */
         .gp-promo-group { display: flex; gap: 10px; width: 100%; }
         .gp-promo-group .gp-input { padding-left: 14px; }
         .gp-promo-btn {
-            padding: 0 20px; background: #202744; border-radius: 10px; color: #fff; font-weight: 700; font-size: 13px;
+            padding: 0 20px; background: #1c2342; border-radius: 10px; color: #fff; font-weight: 700; font-size: 13px;
             cursor: pointer; display: flex; align-items: center; z-index: 2; position: relative; transition: background 0.2s;
             text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .gp-promo-btn:hover { background: #293258; }
+        body.theme-saints .gp-promo-btn { background: #251e4d; }
         .gp-promo-status, .gp-error-msg { font-size: 12px; margin-top: 6px; display: none; font-weight: 500; }
         .gp-error-msg { color: #ff4a4a; }
         
         /* ИТОГОВЫЙ БЛОК */
-        .gp-result { background: rgba(0, 0, 0, 0.45); padding: 18px; border-radius: 12px; margin-top: 18px; border: 1px solid rgba(255,255,255,0.01); }
+        .gp-result { background: rgba(0, 0, 0, 0.45); padding: 18px; border-radius: 12px; margin-top: 18px; }
         .gp-result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13.5px; color: #727a93; font-weight: 500; }
-        .gp-result-row.gp-saving-row { display: none; color: #00ff9d; font-weight: 700; }
         .gp-result-row.gp-total {
             margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.06); font-size: 19px; color: #fff; font-weight: 900;
         }
-        .gp-total span { color: #00ff9d; text-shadow: 0 0 10px rgba(0, 255, 157, 0.35); }
+        .gp-total span { color: #00ff9d; text-shadow: 0 0 10px rgba(0, 255, 157, 0.35); transition: color 0.5s; }
+        body.theme-saints .gp-total span { color: #a966ff; text-shadow: 0 0 10px rgba(154, 77, 255, 0.4); }
         
         /* ЧЕКБОКС */
         .gp-agree-group { display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; cursor: pointer; user-select: none; }
         .gp-checkbox-custom {
-            width: 18px; height: 18px; background: #171b30; border-radius: 5px; flex-shrink: 0; margin-top: 1px; position: relative; transition: all 0.2s;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+            width: 18px; height: 18px; background: #13182e; border-radius: 5px; flex-shrink: 0; margin-top: 1px; position: relative; transition: all 0.2s;
         }
+        body.theme-saints .gp-checkbox-custom { background: #191433; }
         .gp-agree-group input { display: none; }
         .gp-agree-group input:checked + .gp-checkbox-custom {
-            background: linear-gradient(135deg, #9a4dff 0%, #772fe0 100%); box-shadow: 0 0 10px rgba(154, 77, 255, 0.4);
+            background: linear-gradient(135deg, #00ff9d 0%, #00bfff 100%);
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.4);
+        }
+        body.theme-saints .gp-agree-group input:checked + .gp-checkbox-custom {
+            background: linear-gradient(135deg, #9a4dff 0%, #621bbf 100%);
+            box-shadow: 0 0 10px rgba(154, 77, 255, 0.4);
         }
         .gp-agree-group input:checked + .gp-checkbox-custom::after {
-            content: "✓"; position: absolute; color: #fff; font-size: 12px; font-weight: 900; left: 4.5px; top: 0px;
+            content: "✓"; position: absolute; color: #05060a; font-size: 12px; font-weight: 900; left: 4.5px; top: 0px;
         }
+        body.theme-saints .gp-agree-group input:checked + .gp-checkbox-custom::after { color: #fff; }
         .gp-agree-text { font-size: 12.5px; color: #727a93; line-height: 1.5; font-weight: 500; }
-        .gp-agree-text a { color: #00bfff; text-decoration: none; border-bottom: 1px dashed rgba(0, 191, 255, 0.4); padding-bottom: 1px; }
-        .gp-agree-text a:hover { color: #9a4dff; border-color: #9a4dff; }
+        .gp-agree-text a { color: #00ff9d; text-decoration: none; border-bottom: 1px dashed rgba(0, 255, 157, 0.4); transition: all 0.5s; }
+        body.theme-saints .gp-agree-text a { color: #9a4dff; border-bottom-color: rgba(154, 77, 255, 0.4); }
 
         /* КНОПКА ОТПРАВКИ */
         .gp-submit-btn {
-            width: 100%; padding: 16px; background: linear-gradient(90deg, #9a4dff 0%, #00bfff 100%); border-radius: 10px; color: #05060a;
+            width: 100%; padding: 16px; background: linear-gradient(90deg, #00ff9d 0%, #00bfff 100%); border-radius: 10px; color: #05060a;
             font-size: 15px; font-weight: 900; cursor: pointer; margin-top: 18px; text-transform: uppercase; text-align: center;
-            z-index: 2; position: relative; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0.3; pointer-events: none;
-            letter-spacing: 1px; box-shadow: 0 4px 20px rgba(154, 77, 255, 0.2);
+            z-index: 2; position: relative; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0.3; pointer-events: none;
+            letter-spacing: 1px; box-shadow: 0 4px 20px rgba(0, 255, 157, 0.2);
+        }
+        body.theme-saints .gp-submit-btn {
+            background: linear-gradient(90deg, #9a4dff 0%, #ca9eff 100%); color: #fff;
+            box-shadow: 0 4px 20px rgba(154, 77, 255, 0.2);
         }
         .gp-submit-btn.active { opacity: 1; pointer-events: auto; }
-        .gp-submit-btn.active:hover { box-shadow: 0 0 25px rgba(154, 77, 255, 0.5), 0 0 10px rgba(0, 191, 255, 0.3); }
-        .gp-submit-btn.active:active { transform: scale(0.98); }
+        .gp-submit-btn.active:hover { box-shadow: 0 0 25px rgba(0, 255, 157, 0.4); }
+        body.theme-saints .gp-submit-btn.active:hover { box-shadow: 0 0 25px rgba(154, 77, 255, 0.5); }
         
-        /* ПОДДЕРЖКА */
-        .gp-support-block {
-            width: 100%; max-width: 460px; background: #101326; border-radius: 16px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 15px;
+        /* ПОДДЕРЖКА И FAQ */
+        .gp-support-block, .gp-faq-container {
+            width: 100%; max-width: 460px; background: #0e1324; border-radius: 16px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 15px; transition: background 0.5s;
         }
-        .gp-support-title { font-size: 13px; color: #00bfff; font-weight: 800; text-transform: uppercase; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
+        body.theme-saints .gp-support-block, body.theme-saints .gp-faq-container { background: #120e26; }
+        .gp-support-title, .gp-faq-title { font-size: 13px; color: #00ff9d; font-weight: 800; text-transform: uppercase; text-align: center; margin-bottom: 12px; letter-spacing: 1px; transition: color 0.5s; }
+        body.theme-saints .gp-support-title, body.theme-saints .gp-faq-title { color: #9a4dff; }
         .gp-support-grid { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #b2bacf; }
         .gp-support-row { display: flex; justify-content: space-between; background: rgba(0,0,0,0.2); padding: 10px 14px; border-radius: 8px; }
-        .gp-support-row a { color: #9a4dff; text-decoration: none; font-weight: 700; }
+        .gp-support-row a { color: #00ff9d; text-decoration: none; font-weight: 700; transition: color 0.5s; }
+        body.theme-saints .gp-support-row a { color: #9a4dff; }
 
-        /* FAQ */
-        .gp-faq-container { width: 100%; max-width: 460px; background: #101326; border-radius: 16px; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 20px; }
-        .gp-faq-title { font-size: 13px; color: #00bfff; font-weight: 800; text-transform: uppercase; text-align: center; margin-bottom: 12px; letter-spacing: 1px; }
         .gp-faq-item { border-bottom: 1px solid rgba(255,255,255,0.03); padding: 12px 0; }
-        .gp-faq-item:last-child { border-bottom: none; }
         .gp-faq-q { font-size: 13.5px; font-weight: 700; color: #e1e4ed; cursor: pointer; display: flex; justify-content: space-between; }
         .gp-faq-a { font-size: 12.5px; color: #727a93; margin-top: 8px; display: none; line-height: 1.5; }
 
-        /* ЮРИДИЧЕСКИЙ ФУТЕР */
-        .gp-legal-links {
-            display: flex; gap: 15px; justify-content: center; margin-bottom: 15px; width: 100%; max-width: 460px;
-        }
-        .gp-legal-links a {
-            font-size: 12px; color: #727a93; text-decoration: none; border-bottom: 1px solid rgba(114, 122, 147, 0.3); padding-bottom: 2px; transition: color 0.2s;
-        }
-        .gp-legal-links a:hover { color: #00bfff; border-color: #00bfff; }
-
-        .gp-flash-wave {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
-            width: 200vw; height: 200vw; background: radial-gradient(circle, rgba(154, 77, 255, 0.2) 0%, transparent 60%);
-            pointer-events: none; z-index: 99999; border-radius: 50%;
-        }
-        .gp-flash-wave.run { animation: gpFlash 0.6s ease-out; }
-        @keyframes gpFlash {
-            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
-        }
+        .gp-legal-links a { font-size: 12px; color: #727a93; text-decoration: none; border-bottom: 1px solid rgba(114, 122, 147, 0.3); padding-bottom: 2px; margin: 0 7px; }
+        .gp-footer { color: #3d4459; font-size: 11px; font-weight: 600; margin-top: auto; padding-bottom: 25px; text-align: center; width: 100%; letter-spacing: 0.5px; }
 
         /* МОДАЛКА */
         .gp-modal {
@@ -276,20 +313,18 @@
             justify-content: center; align-items: center; z-index: 99999; padding: 15px; opacity: 0; visibility: hidden; transition: opacity 0.2s;
         }
         .gp-modal.active { display: flex; opacity: 1; visibility: visible; }
-        .gp-modal-content { background: #101326; padding: 22px; border-radius: 16px; max-width: 360px; width: 100%; position: relative; box-shadow: 0 15px 50px rgba(0,0,0,0.8); }
+        .gp-modal-content { background: #0e1324; padding: 22px; border-radius: 16px; max-width: 360px; width: 100%; position: relative; }
+        body.theme-saints .gp-modal-content { background: #120e26; }
         .gp-modal-close { position: absolute; top: 12px; right: 14px; font-size: 22px; color: #4e5569; cursor: pointer; padding: 5px; }
-        .gp-modal h3 { color: #00bfff; margin-bottom: 12px; font-size: 17px; font-weight: 800; }
+        .gp-modal h3 { color: #00ff9d; margin-bottom: 12px; font-size: 17px; font-weight: 800; }
+        body.theme-saints .gp-modal h3 { color: #9a4dff; }
         .gp-modal p { font-size: 13.5px; color: #b2bacf; line-height: 1.5; }
-        
-        .gp-footer { color: #3d4459; font-size: 11px; font-weight: 600; margin-top: auto; padding-bottom: 25px; text-align: center; width: 100%; letter-spacing: 0.5px; }
     </style>
 </head>
 <body>
 
-<div class="gp-flash-wave" id="gp_flash"></div>
-
 <div class="gp-wrapper">
-    <header class="gp-header" onclick="window.gp_triggerSecretWave()">
+    <header class="gp-header">
         <h1>GREENPER <span>TEAM</span></h1>
     </header>
 
@@ -316,7 +351,7 @@
             </div>
 
             <div class="gp-game-desc">
-                Добро пожаловать в Стилпорт! Возглавьте банду «Святых с Третьей улицы» на пике их славы. Бросьте вызов международному криминальному синдикату.
+                Добро пожаловать в Стилпорт! Возглавьте банду «Святых с Третьей улицы» на пике их славы. Бросьте вызов криминальному синдикату.
             </div>
         </div>
 
@@ -328,11 +363,11 @@
         <div class="gp-methods-grid">
             <div class="gp-method-card active" id="gp_m_sbp" onclick="window.gp_setMethod('sbp')">
                 <span class="gp-m-name">📲 СБП</span>
-                <span class="gp-m-fee">Комиссия: 16.7%</span>
+                <span class="gp-m-fee" id="gp_fee_sbp_text">Комиссия: 16.7%</span>
             </div>
             <div class="gp-method-card" id="gp_m_crypto" onclick="window.gp_setMethod('crypto')">
                 <span class="gp-m-name">🪙 Крипта</span>
-                <span class="gp-m-fee">Комиссия: 13.2%</span>
+                <span class="gp-m-fee" id="gp_fee_crypto_text">Комиссия: 13.2%</span>
             </div>
         </div>
         
@@ -404,10 +439,6 @@
                 <span style="color: #a0a7bc;">8.2%</span>
             </div>
 
-            <div class="gp-result-row gp-saving-row" id="gp_savingRow">
-                <span>Скидка по промокоду:</span>
-                <span id="gp_savingDisplay">0 руб.</span>
-            </div>
             <div class="gp-result-row gp-total">
                 <span>Итого к оплате:</span>
                 <span><span id="gp_totalPrice">0</span> руб.</span>
@@ -418,7 +449,7 @@
             <input type="checkbox" id="gp_agreeCheck" onchange="window.gp_validateFormState()">
             <div class="gp-checkbox-custom"></div>
             <span class="gp-agree-text" id="gp_agree_label_text">
-                Я подтверждаю <a href="https://telegra.ph/Politika-konfidencialnosti-06-21-31" target="_blank" onclick="event.stopPropagation()">политику конфиденциальности</a> и <a href="https://telegra.ph/Polzovatelskoe-soglashenie-04-01-19" target="_blank" onclick="event.stopPropagation()">пользовательское соглашение</a>
+                Я подтверждаю <a href="https://telegra.ph/Politika-konfidencialnosti-06-21-31" target="_blank" onclick="event.stopPropagation()">политику конфиденциальности</a>
             </span>
         </label>
 
@@ -432,16 +463,11 @@
                 <span>Телеграм для связи:</span>
                 <a href="https://t.me/GreenPerSupport_bot" target="_blank">@GreenPerSupport_bot</a>
             </div>
-            <div class="gp-support-row">
-                <span>Электронная почта:</span>
-                <a href="mailto:greenpersupport@gmail.com">greenpersupport@gmail.com</a>
-            </div>
         </div>
     </div>
 
     <div class="gp-legal-links">
         <a href="https://telegra.ph/Politika-konfidencialnosti-06-21-31" target="_blank">Политика конфиденциальности</a>
-        <a href="https://telegra.ph/Polzovatelskoe-soglashenie-04-01-19" target="_blank">Пользовательское соглашение</a>
     </div>
 
     <footer class="gp-footer">
@@ -452,7 +478,7 @@
         <div class="gp-modal-content" onclick="event.stopPropagation()">
             <span class="gp-modal-close" onclick="window.gp_closeModal()">&times;</span>
             <h3>Где найти логин?</h3>
-            <p><strong>Логин</strong> — это имя, которое вы вводите при входе в систему Steam. Игровой ник указывать нельзя!</p>
+            <p>Логин — это имя, которое вы вводите при входе в систему Steam.</p>
         </div>
     </div>
 </div>
@@ -460,51 +486,30 @@
 <script>
     (function() {
         let currentPaymentMethod = 'sbp';
-        
-        // Математика: 300 стим * (1 + 0.085 + 0.082) = 350.1 руб (округляется до 350)
         const GATE_FEES = { 'sbp': 0.085, 'crypto': 0.05 }; 
-        const SERVICE_FEE = 0.082; // 8.2% сервис
+        const SERVICE_FEE = 0.082; 
         
         const FEES = {
-            'sbp': 1 + GATE_FEES['sbp'] + SERVICE_FEE,      // 1.167
-            'crypto': 1 + GATE_FEES['crypto'] + SERVICE_FEE  // 1.132
+            'sbp': 1 + GATE_FEES['sbp'] + SERVICE_FEE,      
+            'crypto': 1 + GATE_FEES['crypto'] + SERVICE_FEE  
         };
         
         const KEY_BASE_PRICE = 163; 
         let currentMode = 'refill'; 
         let currentPromoDiscount = 0; 
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedLogin = localStorage.getItem("gp_saved_steam_login");
-            if (savedLogin) {
-                document.getElementById('gp_steamLogin').value = savedLogin;
-                window.gp_checkLogin();
-            }
-        });
-
-        window.gp_triggerSecretWave = function() {
-            const flash = document.getElementById('gp_flash');
-            flash.classList.remove('run');
-            void flash.offsetWidth;
-            flash.classList.add('run');
-        };
-
-        window.gp_setMethod = function(method) {
-            currentPaymentMethod = method;
-            document.getElementById('gp_m_sbp').classList.toggle('active', method === 'sbp');
-            document.getElementById('gp_m_crypto').classList.toggle('active', method === 'crypto');
-            
-            const gateFeePercent = (GATE_FEES[method] * 100).toFixed(1) + '%';
-            document.getElementById('gp_gateFeeDisplay').textContent = gateFeePercent;
-
-            if(currentMode === 'refill') { window.gp_calcFromSteam(); } else { window.gp_updateKeyPrice(); }
-        };
-
         window.gp_switchTab = function(mode) {
             currentMode = mode;
+            
+            // Переключаем класс темы на всем body
+            if (mode === 'key') {
+                document.body.classList.add('theme-saints');
+            } else {
+                document.body.classList.remove('theme-saints');
+            }
+
             document.getElementById('gp_tab_refill').classList.toggle('active', mode === 'refill');
             document.getElementById('gp_tab_key').classList.toggle('active', mode === 'key');
-            document.getElementById('gp_mainCard').classList.toggle('key-active', mode === 'key');
             
             document.getElementById('gp_login_group').style.display = mode === 'refill' ? 'block' : 'none';
             document.getElementById('gp_calc_section').style.display = mode === 'refill' ? 'block' : 'none';
@@ -519,6 +524,17 @@
                 window.gp_updateKeyPrice();
             }
             window.gp_validateFormState();
+        };
+
+        window.gp_setMethod = function(method) {
+            currentPaymentMethod = method;
+            document.getElementById('gp_m_sbp').classList.toggle('active', method === 'sbp');
+            document.getElementById('gp_m_crypto').classList.toggle('active', method === 'crypto');
+            
+            const gateFeePercent = (GATE_FEES[method] * 100).toFixed(1) + '%';
+            document.getElementById('gp_gateFeeDisplay').textContent = gateFeePercent;
+
+            if(currentMode === 'refill') { window.gp_calcFromSteam(); } else { window.gp_updateKeyPrice(); }
         };
 
         window.gp_updateKeyPrice = function() {
@@ -605,18 +621,13 @@
             }
         };
 
-        window.gp_toggleFaq = function(element) {
-            const answer = element.nextElementSibling;
-            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-        };
-
         window.gp_openModal = function() { document.getElementById('gp_helpModal').classList.add('active'); };
         window.gp_closeModal = function() { document.getElementById('gp_helpModal').classList.remove('active'); };
 
         window.gp_submitForm = function() {
             if (!document.getElementById('gp_agreeCheck').checked) return;
             const total = document.getElementById('gp_totalPrice').textContent;
-            alert(`Перенаправление на оплату СБП/Крипта. Сумма: ${total} руб.`);
+            alert(`Инициализация транзакции шлюза. Сумма: ${total} руб.`);
         };
     })();
 </script>
