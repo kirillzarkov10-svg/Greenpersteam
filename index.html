@@ -5,14 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Пополнение Steam | GreenPer Team</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-        body {
+        /* Изолированные стили только для нашего виджета */
+        .gp-wrapper {
             background-color: #0b111c;
             background-image: radial-gradient(circle at top, #1b2838 0%, #0a0e17 70%);
             color: #fff;
@@ -21,9 +15,19 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            position: relative;
+            z-index: 1;
         }
         
-        header {
+        .gp-wrapper * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .gp-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -36,450 +40,421 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
         }
-        header h1 {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #fff;
-        }
-        header span { color: #1a9fff; }
+        .gp-header h1 { font-size: 18px; font-weight: 800; letter-spacing: 2px; color: #fff; }
+        .gp-header span { color: #1a9fff; }
         
-        .status-online {
-            display: flex;
-            align-items: center;
-            font-size: 12px;
-            color: #8f98a0;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 6px 12px;
-            border-radius: 20px;
+        .gp-status-online {
+            display: flex; align-items: center; font-size: 12px; color: #8f98a0;
+            background: rgba(0, 0, 0, 0.3); padding: 6px 12px; border-radius: 20px;
             border: 1px solid rgba(0, 255, 136, 0.2);
         }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #00ff88;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse 2s infinite;
+        .gp-status-dot {
+            width: 8px; height: 8px; background: #00ff88; border-radius: 50%;
+            margin-right: 6px; animation: gp-pulse 2s infinite;
         }
-        @keyframes pulse {
+        @keyframes gp-pulse {
             0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
             70% { box-shadow: 0 0 0 6px rgba(0, 255, 136, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
         }
 
-        .features-grid {
+        .gp-features-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
             width: 100%; max-width: 460px; margin-bottom: 20px;
         }
-        .feature-card {
+        .gp-feature-card {
             background: rgba(23, 26, 33, 0.5); border: 1px solid rgba(255,255,255,0.03);
             border-radius: 12px; padding: 12px 8px; text-align: center;
         }
-        .feature-icon { font-size: 20px; margin-bottom: 4px; }
-        .feature-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
-        .feature-desc { font-size: 10px; color: #8f98a0; line-height: 1.2; }
+        .gp-feature-icon { font-size: 20px; margin-bottom: 4px; }
+        .gp-feature-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+        .gp-feature-desc { font-size: 10px; color: #8f98a0; line-height: 1.2; }
 
-        .container {
-            background: #171a21;
-            padding: 25px 20px;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 460px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
+        .gp-container {
+            background: #171a21; padding: 25px 20px; border-radius: 16px;
+            width: 100%; max-width: 460px; border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); margin-bottom: 20px;
         }
-        h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; text-align: center; }
-        .subtitle { color: #66c0f4; font-size: 13px; text-align: center; margin-bottom: 20px; }
+        .gp-container h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; text-align: center; }
+        .gp-subtitle { color: #66c0f4; font-size: 13px; text-align: center; margin-bottom: 20px; }
         
-        .info-box {
-            background: rgba(26, 159, 255, 0.08);
-            border-left: 4px solid #1a9fff;
-            padding: 12px;
-            font-size: 13px;
-            margin-bottom: 20px;
-            color: #c7d5e0;
-            border-radius: 0 8px 8px 0;
-            line-height: 1.4;
+        .gp-info-box {
+            background: rgba(26, 159, 255, 0.08); border-left: 4px solid #1a9fff;
+            padding: 12px; font-size: 13px; margin-bottom: 20px; color: #c7d5e0;
+            border-radius: 0 8px 8px 0; line-height: 1.4;
         }
         
-        .form-group { margin-bottom: 18px; position: relative; }
-        .label-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            color: #8f98a0;
-            text-transform: uppercase;
+        .gp-form-group { margin-bottom: 18px; position: relative; }
+        .gp-label-flex {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 6px; font-size: 11px; font-weight: 600; color: #8f98a0; text-transform: uppercase;
         }
-        .help-link {
-            color: #66c0f4;
-            cursor: pointer;
-            text-transform: none;
-            border-bottom: 1px dashed #66c0f4;
-        }
+        .gp-help-link { color: #66c0f4; cursor: pointer; text-transform: none; border-bottom: 1px dashed #66c0f4; }
         
-        .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-        .input-prefix { position: absolute; left: 14px; color: #56697a; font-size: 15px; font-weight: bold; pointer-events: none; }
-        input {
-            width: 100%;
-            padding: 12px 35px 12px 35px;
-            background: #202732;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 15px;
-            outline: none;
+        .gp-input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
+        .gp-input-prefix { position: absolute; left: 14px; color: #56697a; font-size: 15px; font-weight: bold; pointer-events: none; z-index: 2; }
+        .gp-input {
+            width: 100%; padding: 12px 35px 12px 35px; background: #202732;
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: #fff; font-size: 15px; outline: none; position: relative; z-index: 1;
         }
-        input:focus { border-color: #1a9fff; background: #242e3d; }
+        .gp-input:focus { border-color: #1a9fff; background: #242e3d; }
         
-        .clear-btn {
+        .gp-clear-btn {
             position: absolute; right: 12px; color: #56697a; cursor: pointer;
-            font-size: 16px; display: none; z-index: 5; padding: 5px; user-select: none;
+            font-size: 16px; display: none; z-index: 5; padding: 5px;
         }
-        .clear-btn:hover { color: #fff; }
+        .gp-clear-btn:hover { color: #fff; }
 
-        .calc-row { display: flex; gap: 10px; }
-        .calc-row .form-group { flex: 1; margin-bottom: 0; }
+        .gp-calc-row { display: flex; gap: 10px; }
+        .gp-calc-row .gp-form-group { flex: 1; margin-bottom: 0; }
         
-        .presets-wrapper { display: flex; gap: 6px; margin-top: 8px; }
-        .preset-btn {
+        .gp-presets-wrapper { display: flex; gap: 6px; margin-top: 8px; }
+        .gp-preset-btn {
             flex: 1; padding: 10px 2px; background: rgba(42, 71, 94, 0.2);
             border: 1px solid rgba(102, 192, 244, 0.2); border-radius: 6px;
-            color: #66c0f4; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer;
-            user-select: none;
+            color: #66c0f4; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer; z-index: 2; position: relative;
         }
-        .preset-btn:hover, .preset-btn:active { background: rgba(102, 192, 244, 0.3); color: #fff; }
+        .gp-preset-btn:hover, .gp-preset-btn:active { background: rgba(102, 192, 244, 0.3); color: #fff; }
 
-        .promo-group { display: flex; gap: 8px; width: 100%; }
-        .promo-group input { padding-left: 12px; }
-        .promo-btn {
+        .gp-promo-group { display: flex; gap: 8px; width: 100%; }
+        .gp-promo-group .gp-input { padding-left: 12px; }
+        .gp-promo-btn {
             padding: 0 15px; background: #2a475e; border-radius: 8px;
             color: #fff; font-weight: 600; font-size: 13px; cursor: pointer;
-            display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.1); user-select: none;
+            display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.1); z-index: 2; position: relative;
         }
-        .promo-status { font-size: 12px; margin-top: 5px; display: none; }
-        .error-msg { color: #ff4d4d; font-size: 12px; margin-top: 5px; display: none; }
+        .gp-promo-status { font-size: 12px; margin-top: 5px; display: none; }
+        .gp-error-msg { color: #ff4d4d; font-size: 12px; margin-top: 5px; display: none; }
         
-        .result { background: rgba(0, 0, 0, 0.25); padding: 15px; border-radius: 8px; margin-top: 15px; }
-        .result-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; color: #8f98a0; }
-        .result-row.saving-row { display: none; color: #00ff88; font-weight: 600; }
-        .result-row.total {
-            margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 18px; color: #fff; font-weight: 800;
+        .gp-result { background: rgba(0, 0, 0, 0.25); padding: 15px; border-radius: 8px; margin-top: 15px; }
+        .gp-result-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; color: #8f98a0; }
+        .gp-result-row.gp-saving-row { display: none; color: #00ff88; font-weight: 600; }
+        .gp-result-row.gp-total {
+            margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 18px; color: #fff; font-weight: 800;
         }
-        .total span { color: #00ff88; }
+        .gp-total span { color: #00ff88; }
         
-        .submit-btn {
+        .gp-submit-btn {
             width: 100%; padding: 15px; background: linear-gradient(90deg, #00ff88 0%, #00bfff 100%);
             border-radius: 8px; color: #0a0e17; font-size: 15px; font-weight: 800;
             cursor: pointer; margin-top: 15px; text-transform: uppercase; text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15); user-select: none;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15); z-index: 2; position: relative;
         }
-        .submit-btn:active { transform: scale(0.98); }
+        .gp-submit-btn:active { transform: scale(0.98); }
         
-        .faq-container {
-            width: 100%; max-width: 460px; background: #171a21;
-            border-radius: 14px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 25px;
+        .gp-faq-container {
+            width: 100%; max-width: 460px; background: #171a21; border-radius: 14px;
+            padding: 15px; border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 25px;
         }
-        .faq-title { font-size: 14px; color: #66c0f4; font-weight: 700; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
-        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 10px 0; }
-        .faq-item:last-child { border-bottom: none; }
-        .faq-q { font-size: 13px; font-weight: 600; color: #fff; cursor: pointer; display: flex; justify-content: space-between; user-select: none; }
-        .faq-a { font-size: 12px; color: #8f98a0; margin-top: 6px; display: none; line-height: 1.4; }
+        .gp-faq-title { font-size: 14px; color: #66c0f4; font-weight: 700; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
+        .gp-faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 10px 0; }
+        .gp-faq-item:last-child { border-bottom: none; }
+        .gp-faq-q { font-size: 13px; font-weight: 600; color: #fff; cursor: pointer; display: flex; justify-content: space-between; z-index: 2; position: relative; }
+        .gp-faq-a { font-size: 12px; color: #8f98a0; margin-top: 6px; display: none; line-height: 1.4; }
 
-        .modal {
+        /* Безопасное модальное окно */
+        .gp-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 8, 13, 0.85); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 15px;
+            background: rgba(5, 8, 13, 0.85); display: none; justify-content: center; align-items: center; z-index: 99999; padding: 15px;
+            opacity: 0; visibility: hidden; transition: opacity 0.2s; pointer-events: none;
         }
-        .modal-content {
+        .gp-modal.active { display: flex; opacity: 1; visibility: visible; pointer-events: auto; }
+        .gp-modal-content {
             background: #171a21; border: 1px solid rgba(26, 159, 255, 0.3);
             padding: 20px; border-radius: 12px; max-width: 360px; width: 100%; position: relative;
         }
-        .modal-close { position: absolute; top: 10px; right: 12px; font-size: 22px; color: #56697a; cursor: pointer; padding: 5px; user-select: none; }
-        .modal h3 { color: #66c0f4; margin-bottom: 10px; font-size: 16px; }
-        .modal p { font-size: 13px; color: #c7d5e0; line-height: 1.4; }
+        .gp-modal-close { position: absolute; top: 10px; right: 12px; font-size: 22px; color: #56697a; cursor: pointer; padding: 5px; }
+        .gp-modal h3 { color: #66c0f4; margin-bottom: 10px; font-size: 16px; }
+        .gp-modal p { font-size: 13px; color: #c7d5e0; line-height: 1.4; }
         
-        footer { color: #485461; font-size: 11px; margin-top: auto; }
+        .gp-footer { color: #485461; font-size: 11px; margin-top: auto; padding-bottom: 20px; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>GREENPER <span>TEAM</span></h1>
-    <div class="status-online">
-        <div class="status-dot"></div>
-        <span>Операторы online</span>
-    </div>
-</header>
-
-<div class="features-grid">
-    <div class="feature-card">
-        <div class="feature-icon">🛡️</div>
-        <div class="feature-title">Без пароля</div>
-        <div class="feature-desc">Нужен только логин</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <div class="feature-title">За 5 минут</div>
-        <div class="feature-desc">Быстрое начисление</div>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon">💎</div>
-        <div class="feature-title">Выгодно</div>
-        <div class="feature-desc">Низкая наценка</div>
-    </div>
-</div>
-
-<div class="container">
-    <h2>Пополнение баланса</h2>
-    <p class="subtitle">Моментальный перевод на аккаунты РФ</p>
-    
-    <div class="info-box">
-        Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
-    </div>
-    
-    <div class="form-group">
-        <div class="label-flex">
-            <label>Логин Steam:</label>
-            <span class="help-link" onclick="openModal()">Где логин?</span>
+<div class="gp-wrapper">
+    <header class="gp-header">
+        <h1>GREENPER <span>TEAM</span></h1>
+        <div class="gp-status-online">
+            <div class="gp-status-dot"></div>
+            <span>Операторы online</span>
         </div>
-        <div class="input-wrapper">
-            <span class="input-prefix">👤</span>
-            <input type="text" id="steamLogin" placeholder="Например: gaben123" oninput="checkLoginInput()">
-            <span class="clear-btn" id="clearLogin" onclick="clearLogin()">✕</span>
+    </header>
+
+    <div class="gp-features-grid">
+        <div class="gp-feature-card">
+            <div class="gp-feature-icon">🛡️</div>
+            <div class="gp-feature-title">Без пароля</div>
+            <div class="gp-feature-desc">Нужен только логин</div>
         </div>
-        <div class="error-msg" id="loginError">Укажите логин Steam</div>
+        <div class="gp-feature-card">
+            <div class="gp-feature-icon">⚡</div>
+            <div class="gp-feature-title">За 5 минут</div>
+            <div class="gp-feature-desc">Быстрое начисление</div>
+        </div>
+        <div class="gp-feature-card">
+            <div class="gp-feature-icon">💎</div>
+            <div class="gp-feature-title">Выгодно</div>
+            <div class="gp-feature-desc">Низкая наценка</div>
+        </div>
     </div>
 
-    <div class="calc-row">
-        <div class="form-group">
-            <div class="label-flex"><label>Получите (₽):</label></div>
-            <div class="input-wrapper">
-                <span class="input-prefix">➘</span>
-                <input type="number" id="amount" placeholder="Получу" inputmode="numeric" oninput="calcFromSteam()">
+    <div class="gp-container">
+        <h2>Пополнение баланса</h2>
+        <p class="gp-subtitle">Моментальный перевод на аккаунты РФ</p>
+        
+        <div class="gp-info-box">
+            Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
+        </div>
+        
+        <div class="gp-form-group">
+            <div class="gp-label-flex">
+                <label>Логин Steam:</label>
+                <span class="gp-help-link" onclick="window.gp_openModal()">Где логин?</span>
+            </div>
+            <div class="gp-input-wrapper">
+                <span class="gp-input-prefix">👤</span>
+                <input type="text" id="gp_steamLogin" class="gp-input" placeholder="Например: gaben123" oninput="window.gp_checkLogin()">
+                <span class="gp-clear-btn" id="gp_clearLogin" onclick="window.gp_clearLoginField()">✕</span>
+            </div>
+            <div class="gp-error-msg" id="gp_loginError">Укажите логин Steam</div>
+        </div>
+
+        <div class="gp-calc-row">
+            <div class="gp-form-group">
+                <div class="gp-label-flex"><label>Получите (₽):</label></div>
+                <div class="gp-input-wrapper">
+                    <span class="gp-input-prefix">➘</span>
+                    <input type="number" id="gp_amount" class="gp-input" placeholder="Получу" inputmode="numeric" oninput="window.gp_calcFromSteam()">
+                </div>
+            </div>
+            <div class="gp-form-group">
+                <div class="gp-label-flex"><label>Оплатите (₽):</label></div>
+                <div class="gp-input-wrapper">
+                    <span class="gp-input-prefix">➚</span>
+                    <input type="number" id="gp_payAmount" class="gp-input" placeholder="Оплачу" inputmode="numeric" oninput="window.gp_calcFromPay()">
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="label-flex"><label>Оплатите (₽):</label></div>
-            <div class="input-wrapper">
-                <span class="input-prefix">➚</span>
-                <input type="number" id="payAmount" placeholder="Оплачу" inputmode="numeric" oninput="calcFromPay()">
+        
+        <div class="gp-presets-wrapper">
+            <div class="gp-preset-btn" onclick="window.gp_setPreset(100)">100 ₽</div>
+            <div class="gp-preset-btn" onclick="window.gp_setPreset(300)">300 ₽</div>
+            <div class="gp-preset-btn" onclick="window.gp_setPreset(500)">500 ₽</div>
+            <div class="gp-preset-btn" onclick="window.gp_setPreset(1000)">1000 ₽</div>
+        </div>
+        <div class="gp-error-msg" id="gp_amountError">Минимальная сумма зачисления — 100 рублей</div>
+
+        <div class="gp-form-group" style="margin-top: 15px;">
+            <div class="gp-label-flex"><label>Промокод:</label></div>
+            <div class="gp-promo-group">
+                <input type="text" id="gp_promoInput" class="gp-input" placeholder="Купон">
+                <div class="gp-promo-btn" onclick="window.gp_checkPromo()">ОК</div>
+            </div>
+            <div class="gp-promo-status" id="gp_promoStatusMessage"></div>
+        </div>
+
+        <div class="gp-result">
+            <div class="gp-result-row">
+                <span>Регион пополнения:</span>
+                <span style="color: #66c0f4; font-weight: 600;">Россия (РФ)</span>
+            </div>
+            <div class="gp-result-row">
+                <span>Придет в Steam:</span>
+                <span id="gp_steamAmountDisplay" style="color: #fff; font-weight: 600;">0 руб.</span>
+            </div>
+            <div class="gp-result-row gp-saving-row" id="gp_savingRow">
+                <span>Ваша экономия по купону:</span>
+                <span id="gp_savingDisplay">0 руб.</span>
+            </div>
+            <div class="gp-result-row gp-total">
+                <span>Итого к оплате:</span>
+                <span><span id="gp_totalPrice">0</span> руб.</span>
             </div>
         </div>
-    </div>
-    
-    <div class="presets-wrapper">
-        <div class="preset-btn" onclick="setPreset(100)">100 ₽</div>
-        <div class="preset-btn" onclick="setPreset(300)">300 ₽</div>
-        <div class="preset-btn" onclick="setPreset(500)">500 ₽</div>
-        <div class="preset-btn" onclick="setPreset(1000)">1000 ₽</div>
-    </div>
-    <div class="error-msg" id="amountError">Минимальная сумма зачисления — 100 рублей</div>
 
-    <div class="form-group" style="margin-top: 15px;">
-        <div class="label-flex"><label>Промокод:</label></div>
-        <div class="promo-group">
-            <input type="text" id="promoInput" placeholder="Купон">
-            <div class="promo-btn" onclick="checkPromo()">ОК</div>
-        </div>
-        <div class="promo-status" id="promoStatusMessage"></div>
+        <div class="gp-submit-btn" onclick="window.gp_submitForm()">Оплатить в Telegram</div>
     </div>
 
-    <div class="result">
-        <div class="result-row">
-            <span>Регион пополнения:</span>
-            <span style="color: #66c0f4; font-weight: 600;">Россия (РФ)</span>
+    <div class="gp-faq-container">
+        <div class="gp-faq-title">Частые вопросы</div>
+        <div class="gp-faq-item">
+            <div class="gp-faq-q" onclick="window.gp_toggleFaq(this)">Что делать, если ошибся логином? <span>▼</span></div>
+            <div class="gp-faq-a">Если указанного логина не существует, платеж не пройдет. Если вы ввели чужой рабочий логин — средства уйдут туда. Будьте внимательны!</div>
         </div>
-        <div class="result-row">
-            <span>Придет в Steam:</span>
-            <span id="steamAmountDisplay" style="color: #fff; font-weight: 600;">0 руб.</span>
-        </div>
-        <div class="result-row saving-row" id="savingRow">
-            <span>Ваша экономия по купону:</span>
-            <span id="savingDisplay">0 руб.</span>
-        </div>
-        <div class="result-row total">
-            <span>Итого к оплате:</span>
-            <span><span id="totalPrice">0</span> руб.</span>
+        <div class="gp-faq-item">
+            <div class="gp-faq-q" onclick="window.gp_toggleFaq(this)">Какая комиссия? <span>▼</span></div>
+            <div class="gp-faq-a">Базовая наценка провайдера составляет около 10% + 2% комиссия сервиса. Вы можете снизить её, применив промокод.</div>
         </div>
     </div>
 
-    <div class="submit-btn" onclick="submitForm()">Оплатить в Telegram</div>
-</div>
+    <footer class="gp-footer">
+        &copy; 2026 GreenPer Team.
+    </footer>
 
-<div class="faq-container">
-    <div class="faq-title">Частые вопросы</div>
-    <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Что делать, если ошибся логином? <span>▼</span></div>
-        <div class="faq-a">Если указанного логина не существует, платеж не пройдет. Если вы ввели чужой рабочий логин — средства уйдут туда. Будьте внимательны!</div>
-    </div>
-    <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Какая комиссия? <span>▼</span></div>
-        <div class="faq-a">Базовая наценка провайдера составляет около 10% + 2% комиссия сервиса. Вы можете снизить её, применив промокод.</div>
+    <div class="gp-modal" id="gp_helpModal" onclick="window.gp_closeModal()">
+        <div class="gp-modal-content" onclick="event.stopPropagation()">
+            <span class="gp-modal-close" onclick="window.gp_closeModal()">&times;</span>
+            <h3>Где найти логин?</h3>
+            <p><strong>Логин</strong> — это имя, которое вы вводите при входе в систему Steam. Игровой ник указывать нельзя!<br><br>Его можно найти в верхнем правом углу клиента Steam рядом с вашим аватаром.</p>
+        </div>
     </div>
 </div>
-
-<div class="modal" id="helpModal" onclick="closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <h3>Где найти логин?</h3>
-        <p><strong>Логин</strong> — это имя, которое вы вводите при входе в систему Steam. Игровой ник указывать нельзя!<br><br>Его можно найти в верхнем правом углу клиента Steam рядом с вашим аватаром.</p>
-    </div>
-</div>
-
-<footer>
-    &copy; 2026 GreenPer Team.
-</footer>
 
 <script>
-    // Глобальные переменные настроек
-    const TELEGRAM_TARGET = "Quac23h"; 
-    const PROVIDER_RATE = 22 / 20; 
-    let defaultMargin = 1.02;
-    let currentMargin = 1.02; 
-    let activePromo = "Нет";  
+    // Заворачиваем логику в глобальный объект window для 100% срабатывания из HTML
+    (function() {
+        const TELEGRAM_TARGET = "Quac23h"; 
+        const PROVIDER_RATE = 22 / 20; 
+        let defaultMargin = 1.02;
+        let currentMargin = 1.02; 
+        let activePromo = "Нет";  
 
-    const PROMO_CODES = {
-        "GREENPER100": { margin: 1.00, text: "Комиссия сервиса 0%" },
-        "START2026": { margin: 1.01, text: "Комиссия снижена до 1%" }
-    };
+        const PROMO_CODES = {
+            "GREENPER100": { margin: 1.00, text: "Комиссия сервиса 0%" },
+            "START2026": { margin: 1.01, text: "Комиссия снижена до 1%" }
+        };
 
-    // Ссылки на элементы (доступны сразу, так как скрипт в самом низу body)
-    const amountInput = document.getElementById('amount');
-    const payInput = document.getElementById('payAmount');
-    const totalPriceSpan = document.getElementById('totalPrice');
-    const steamAmountDisplay = document.getElementById('steamAmountDisplay');
-    const amountError = document.getElementById('amountError');
-    const savingRow = document.getElementById('savingRow');
-    const savingDisplay = document.getElementById('savingDisplay');
-    const steamLogin = document.getElementById('steamLogin');
-    const clearLoginBtn = document.getElementById('clearLogin');
-    const promoInput = document.getElementById('promoInput');
-    const promoStatusMessage = document.getElementById('promoStatusMessage');
+        // Функции калькулятора
+        window.gp_calcFromSteam = function() {
+            const amountInput = document.getElementById('gp_amount');
+            const payInput = document.getElementById('gp_payAmount');
+            const amountError = document.getElementById('gp_amountError');
+            const totalPriceSpan = document.getElementById('gp_totalPrice');
+            const steamAmountDisplay = document.getElementById('gp_steamAmountDisplay');
+            const savingRow = document.getElementById('gp_savingRow');
+            const savingDisplay = document.getElementById('gp_savingDisplay');
 
-    // Функция пересчета (от Steam суммы)
-    function calcFromSteam() {
-        const steamAmount = parseFloat(amountInput.value) || 0;
-        
-        if (steamAmount >= 100) {
-            amountError.style.display = 'none';
-            const finalPrice = Math.ceil((steamAmount * PROVIDER_RATE) * currentMargin);
-            const standardPrice = Math.ceil((steamAmount * PROVIDER_RATE) * defaultMargin);
+            const steamAmount = parseFloat(amountInput.value) || 0;
             
-            payInput.value = finalPrice;
-            totalPriceSpan.textContent = finalPrice;
-            steamAmountDisplay.textContent = steamAmount + ' руб.';
-            
-            if (activePromo !== "Нет" && standardPrice > finalPrice) {
-                savingRow.style.display = 'flex';
-                savingDisplay.textContent = (standardPrice - finalPrice) + ' руб.';
+            if (steamAmount >= 100) {
+                amountError.style.display = 'none';
+                const finalPrice = Math.ceil((steamAmount * PROVIDER_RATE) * currentMargin);
+                const standardPrice = Math.ceil((steamAmount * PROVIDER_RATE) * defaultMargin);
+                
+                payInput.value = finalPrice;
+                totalPriceSpan.textContent = finalPrice;
+                steamAmountDisplay.textContent = steamAmount + ' руб.';
+                
+                if (activePromo !== "Нет" && standardPrice > finalPrice) {
+                    savingRow.style.display = 'flex';
+                    savingDisplay.textContent = (standardPrice - finalPrice) + ' руб.';
+                } else {
+                    savingRow.style.display = 'none';
+                }
             } else {
+                payInput.value = '';
+                totalPriceSpan.textContent = '0';
+                steamAmountDisplay.textContent = '0 руб.';
                 savingRow.style.display = 'none';
+                amountError.style.display = amountInput.value !== '' ? 'block' : 'none';
             }
-        } else {
-            payInput.value = '';
-            totalPriceSpan.textContent = '0';
-            steamAmountDisplay.textContent = '0 руб.';
-            savingRow.style.display = 'none';
-            amountError.style.display = amountInput.value !== '' ? 'block' : 'none';
-        }
-    }
+        };
 
-    // Функция пересчета (от суммы Оплаты)
-    function calcFromPay() {
-        const payAmount = parseFloat(payInput.value) || 0;
-        const estimatedSteam = Math.floor((payAmount / currentMargin) / PROVIDER_RATE);
-        
-        if (estimatedSteam >= 100) {
-            amountError.style.display = 'none';
-            amountInput.value = estimatedSteam;
-            totalPriceSpan.textContent = payAmount;
-            steamAmountDisplay.textContent = estimatedSteam + ' руб.';
+        window.gp_calcFromPay = function() {
+            const amountInput = document.getElementById('gp_amount');
+            const payInput = document.getElementById('gp_payAmount');
+            const amountError = document.getElementById('gp_amountError');
+            const totalPriceSpan = document.getElementById('gp_totalPrice');
+            const steamAmountDisplay = document.getElementById('gp_steamAmountDisplay');
+            const savingRow = document.getElementById('gp_savingRow');
+            const savingDisplay = document.getElementById('gp_savingDisplay');
+
+            const payAmount = parseFloat(payInput.value) || 0;
+            const estimatedSteam = Math.floor((payAmount / currentMargin) / PROVIDER_RATE);
             
-            const standardPrice = Math.ceil((estimatedSteam * PROVIDER_RATE) * defaultMargin);
-            if (activePromo !== "Нет" && standardPrice > payAmount) {
-                savingRow.style.display = 'flex';
-                savingDisplay.textContent = (standardPrice - payAmount) + ' руб.';
+            if (estimatedSteam >= 100) {
+                amountError.style.display = 'none';
+                amountInput.value = estimatedSteam;
+                totalPriceSpan.textContent = payAmount;
+                steamAmountDisplay.textContent = estimatedSteam + ' руб.';
+                
+                const standardPrice = Math.ceil((estimatedSteam * PROVIDER_RATE) * defaultMargin);
+                if (activePromo !== "Нет" && standardPrice > payAmount) {
+                    savingRow.style.display = 'flex';
+                    savingDisplay.textContent = (standardPrice - payAmount) + ' руб.';
+                } else {
+                    savingRow.style.display = 'none';
+                }
             } else {
+                amountInput.value = '';
+                totalPriceSpan.textContent = '0';
+                steamAmountDisplay.textContent = '0 руб.';
                 savingRow.style.display = 'none';
+                amountError.style.display = payInput.value !== '' ? 'block' : 'none';
             }
-        } else {
-            amountInput.value = '';
-            totalPriceSpan.textContent = '0';
-            steamAmountDisplay.textContent = '0 руб.';
-            savingRow.style.display = 'none';
-            amountError.style.display = payInput.value !== '' ? 'block' : 'none';
-        }
-    }
+        };
 
-    // Установка пресета
-    function setPreset(val) {
-        amountInput.value = val;
-        calcFromSteam();
-    }
+        window.gp_setPreset = function(val) {
+            document.getElementById('gp_amount').value = val;
+            window.gp_calcFromSteam();
+        };
 
-    // Логин: показать/скрыть крестик
-    function checkLoginInput() {
-        clearLoginBtn.style.display = steamLogin.value.length > 0 ? 'block' : 'none';
-    }
+        // Логин
+        window.gp_checkLogin = function() {
+            const loginVal = document.getElementById('gp_steamLogin').value;
+            document.getElementById('gp_clearLogin').style.display = loginVal.length > 0 ? 'block' : 'none';
+        };
 
-    // Логин: очистить поле
-    function clearLogin() {
-        steamLogin.value = '';
-        clearLoginBtn.style.display = 'none';
-    }
+        window.gp_clearLoginField = function() {
+            document.getElementById('gp_steamLogin').value = '';
+            document.getElementById('gp_clearLogin').style.display = 'none';
+        };
 
-    // Промокод
-    function checkPromo() {
-        const enteredCode = promoInput.value.trim().toUpperCase();
-        if (!enteredCode) return;
+        // Промокод
+        window.gp_checkPromo = function() {
+            const enteredCode = document.getElementById('gp_promoInput').value.trim().toUpperCase();
+            const promoStatusMessage = document.getElementById('gp_promoStatusMessage');
+            if (!enteredCode) return;
 
-        if (PROMO_CODES[enteredCode]) {
-            currentMargin = PROMO_CODES[enteredCode].margin;
-            activePromo = enteredCode;
-            promoStatusMessage.style.display = "block";
-            promoStatusMessage.style.color = "#00ff88";
-            promoStatusMessage.textContent = PROMO_CODES[enteredCode].text;
-            calcFromSteam(); // Пересчитываем цены
-        } else {
-            promoStatusMessage.style.display = "block";
-            promoStatusMessage.style.color = "#ff4d4d";
-            promoStatusMessage.textContent = "Неверный код.";
-        }
-    }
+            if (PROMO_CODES[enteredCode]) {
+                currentMargin = PROMO_CODES[enteredCode].margin;
+                activePromo = enteredCode;
+                promoStatusMessage.style.display = "block";
+                promoStatusMessage.style.color = "#00ff88";
+                promoStatusMessage.textContent = PROMO_CODES[enteredCode].text;
+                window.gp_calcFromSteam();
+            } else {
+                promoStatusMessage.style.display = "block";
+                promoStatusMessage.style.color = "#ff4d4d";
+                promoStatusMessage.textContent = "Неверный код.";
+            }
+        };
 
-    // FAQ аккордеон
-    function toggleFaq(element) {
-        const answer = element.nextElementSibling;
-        const arrow = element.querySelector('span');
-        if (answer.style.display === 'block') {
-            answer.style.display = 'none';
-            arrow.textContent = '▼';
-        } else {
-            answer.style.display = 'block';
-            arrow.textContent = '▲';
-        }
-    }
+        // Аккордеон FAQ
+        window.gp_toggleFaq = function(element) {
+            const answer = element.nextElementSibling;
+            const arrow = element.querySelector('span');
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                arrow.textContent = '▼';
+            } else {
+                answer.style.display = 'block';
+                arrow.textContent = '▲';
+            }
+        };
 
-    // Управление модалкой
-    function openModal() { document.getElementById('helpModal').style.display = 'flex'; }
-    function closeModal() { document.getElementById('helpModal').style.display = 'none'; }
+        // Модалка
+        window.gp_openModal = function() { document.getElementById('gp_helpModal').classList.add('active'); };
+        window.gp_closeModal = function() { document.getElementById('gp_helpModal').classList.remove('active'); };
 
-    // Финальная отправка
-    function submitForm() {
-        const login = steamLogin.value.trim();
-        const amount = parseFloat(amountInput.value) || 0;
-        const total = totalPriceSpan.textContent;
-        const loginError = document.getElementById('loginError');
-        
-        if (!login) { loginError.style.display = 'block'; return; } 
-        else { loginError.style.display = 'none'; }
-        
-        if (amount < 100) { amountError.style.display = 'block'; return; }
+        // Отправка
+        window.gp_submitForm = function() {
+            const login = document.getElementById('gp_steamLogin').value.trim();
+            const amount = parseFloat(document.getElementById('gp_amount').value) || 0;
+            const total = document.getElementById('gp_totalPrice').textContent;
+            const loginError = document.getElementById('gp_loginError');
+            const amountError = document.getElementById('gp_amountError');
+            
+            if (!login) { loginError.style.display = 'block'; return; } 
+            else { loginError.style.display = 'none'; }
+            
+            if (amount < 100) { amountError.style.display = 'block'; return; }
 
-        const messageText = `Привет! Хочу пополнить Steam.\nЛогин: ${login}\nСумма: ${amount} руб.\nПромокод: ${activePromo}\nК оплате: ${total}
+            const messageText = `Привет! Хочу пополнить Steam.\nЛогин: ${login}\nСумма: ${amount} руб.\nПромокод: ${activePromo}\nК оплате: ${total} руб.`;
+            window.location.href = `https://telegram.me/${TELEGRAM_TARGET}?text=${encodeURIComponent(messageText)}`;
+        };
+    })();
+</script>
+</body>
+</html>
