@@ -227,7 +227,6 @@
     </div>
 </header>
 
-<!-- БЛОК ГАРАНТИЙ И ПРЕИМУЩЕСТВ -->
 <div class="features-grid">
     <div class="feature-card">
         <div class="feature-icon">🛡️</div>
@@ -254,7 +253,6 @@
         Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
     </div>
     
-    <!-- ПОЛЕ: ЛОГИН -->
     <div class="form-group">
         <div class="label-flex">
             <label>Логин Steam:</label>
@@ -268,7 +266,6 @@
         <div class="error-msg" id="loginError">Укажите логин Steam</div>
     </div>
 
-    <!-- ДВУХСТОРОННИЙ КАЛЬКУЛЯТОР -->
     <div class="calc-row">
         <div class="form-group">
             <div class="label-flex"><label>Получите (₽):</label></div>
@@ -294,7 +291,6 @@
     </div>
     <div class="error-msg" id="amountError">Минимальная сумма зачисления — 100 рублей</div>
 
-    <!-- ПРОМОКОД -->
     <div class="form-group" style="margin-top: 15px;">
         <div class="label-flex"><label>Промокод:</label></div>
         <div class="promo-group">
@@ -304,7 +300,6 @@
         <div class="promo-status" id="promoStatusMessage"></div>
     </div>
 
-    <!-- ИТОГИ -->
     <div class="result">
         <div class="result-row">
             <span>Регион пополнения:</span>
@@ -327,7 +322,6 @@
     <div class="submit-btn" onclick="redirectToTelegram()">Оплатить в Telegram</div>
 </div>
 
-<!-- FAQ (БЛОК ВОПРОСОВ) -->
 <div class="faq-container">
     <div class="faq-title">Частые вопросы</div>
     <div class="faq-item">
@@ -340,7 +334,6 @@
     </div>
 </div>
 
-<!-- МОДАЛКА -->
 <div class="modal" id="helpModal" onclick="toggleModal(false)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="toggleModal(false)">&times;</span>
@@ -373,17 +366,7 @@
     const savingRow = document.getElementById('savingRow');
     const savingDisplay = document.getElementById('savingDisplay');
 
-    function toggleClearBtn(inputId, btnId) {
-        const input = document.getElementById(inputId);
-        const btn = document.getElementById(btnId);
-        btn.style.display = input.value.length > 0 ? 'block' : 'none';
-    }
-    
-    function clearField(inputId, btnId) {
-        document.getElementById(inputId).value = '';
-        document.getElementById(btnId).style.display = 'none';
-    }
-
+    // Функция 1: Расчет от того, сколько хотим ПОЛУЧИТЬ в Steam
     function calcFromSteam() {
         const steamAmount = parseFloat(amountInput.value) || 0;
         
@@ -407,14 +390,11 @@
             totalPriceSpan.textContent = '0';
             steamAmountDisplay.textContent = '0 руб.';
             savingRow.style.display = 'none';
-            if (amountInput.value !== '') {
-                amountError.style.display = 'block';
-            } else {
-                amountError.style.display = 'none';
-            }
+            amountError.style.display = amountInput.value !== '' ? 'block' : 'none';
         }
     }
 
+    // Функция 2: Расчет от того, сколько человек ОПЛАЧИВАЕТ
     function calcFromPay() {
         const payAmount = parseFloat(payInput.value) || 0;
         const estimatedSteam = Math.floor((payAmount / currentMargin) / PROVIDER_RATE);
@@ -437,17 +417,25 @@
             totalPriceSpan.textContent = '0';
             steamAmountDisplay.textContent = '0 руб.';
             savingRow.style.display = 'none';
-            if (payInput.value !== '') {
-                amountError.style.display = 'block';
-            } else {
-                amountError.style.display = 'none';
-            }
+            amountError.style.display = payInput.value !== '' ? 'block' : 'none';
         }
     }
 
+    // Кнопки быстрой вставки сумм
     function setPresetAmount(val) {
         amountInput.value = val;
-        calcFromSteam();
+        calcFromSteam(); // Принудительный мгновенный пересчет
+    }
+
+    function toggleClearBtn(inputId, btnId) {
+        const input = document.getElementById(inputId);
+        const btn = document.getElementById(btnId);
+        btn.style.display = input.value.length > 0 ? 'block' : 'none';
+    }
+    
+    function clearField(inputId, btnId) {
+        document.getElementById(inputId).value = '';
+        document.getElementById(btnId).style.display = 'none';
     }
 
     function toggleModal(show) {
@@ -493,4 +481,7 @@
         const total = totalPriceSpan.textContent;
         const loginError = document.getElementById('loginError');
         
-        if (!logi
+        if (!login) { loginError.style.display = 'block'; return; } 
+        else { loginError.style.display = 'none'; }
+        
+        if (amount < 100) { amountError.style.display = 'block'; return; }            
