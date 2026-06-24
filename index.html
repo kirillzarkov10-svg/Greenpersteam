@@ -45,7 +45,7 @@
             border: none !important;
         }
 
-        /* ХЕДЕР С ТАКТИЛЬНЫМ ИМПУЛЬСОМ */
+        /* ХЕДЕР */
         .gp-header {
             display: flex; justify-content: center; align-items: center; width: 100%; max-width: 460px;
             background: #0f1220; padding: 16px 20px; border-radius: 16px; cursor: pointer;
@@ -84,7 +84,7 @@
         .gp-container h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; text-align: center; letter-spacing: 0.5px; }
         .gp-subtitle { color: #00bfff; font-size: 13px; text-align: center; margin-bottom: 22px; font-weight: 500; }
         
-        /* CSS-ГРАФИКА ДЛЯ ТОВАРА */
+        /* CSS-ГРАФИКА ТОВАРА */
         .gp-game-preview { display: none; margin-bottom: 22px; }
         .gp-tags-row { display: flex; gap: 8px; margin-bottom: 14px; justify-content: center; }
         .gp-tag { font-size: 11px; font-weight: 900; padding: 5px 10px; border-radius: 6px; background: rgba(255,255,255,0.06); color: #a0a7bc; }
@@ -250,7 +250,7 @@
         .gp-faq-q { font-size: 13.5px; font-weight: 700; color: #e1e4ed; cursor: pointer; display: flex; justify-content: space-between; }
         .gp-faq-a { font-size: 12.5px; color: #727a93; margin-top: 8px; display: none; line-height: 1.5; }
 
-        /* ЮРИДИЧЕСКИЙ ФУТЕР ДЛЯ БАНКА */
+        /* ЮРИДИЧЕСКИЙ ФУТЕР */
         .gp-legal-links {
             display: flex; gap: 15px; justify-content: center; margin-bottom: 15px; width: 100%; max-width: 460px;
         }
@@ -316,7 +316,7 @@
             </div>
 
             <div class="gp-game-desc">
-                Добро пожаловать в Стилпорт! Возглавьте банду «Святых с Третьей улицы» на пике их славы. Бросьте вызов международному криминальному синдикату, используйте самый безумный арсенал оружия в истории видеоигр и устройте тотальный хаос.
+                Добро пожаловать в Стилпорт! Возглавьте банду «Святых с Третьей улицы» на пике их славы. Бросьте вызов международному криминальному синдикату.
             </div>
         </div>
 
@@ -328,11 +328,11 @@
         <div class="gp-methods-grid">
             <div class="gp-method-card active" id="gp_m_sbp" onclick="window.gp_setMethod('sbp')">
                 <span class="gp-m-name">📲 СБП</span>
-                <span class="gp-m-fee">Итого комиссия: 10.5%</span>
+                <span class="gp-m-fee">Комиссия: 16.7%</span>
             </div>
             <div class="gp-method-card" id="gp_m_crypto" onclick="window.gp_setMethod('crypto')">
                 <span class="gp-m-name">🪙 Крипта</span>
-                <span class="gp-m-fee">Итого комиссия: 7%</span>
+                <span class="gp-m-fee">Комиссия: 13.2%</span>
             </div>
         </div>
         
@@ -401,7 +401,7 @@
             </div>
             <div class="gp-result-row" id="gp_row_service_fee" style="display: flex;">
                 <span>Комиссия сервиса:</span>
-                <span style="color: #a0a7bc;">2.0%</span>
+                <span style="color: #a0a7bc;">8.2%</span>
             </div>
 
             <div class="gp-result-row gp-saving-row" id="gp_savingRow">
@@ -436,21 +436,6 @@
                 <span>Электронная почта:</span>
                 <a href="mailto:greenpersupport@gmail.com">greenpersupport@gmail.com</a>
             </div>
-            <div class="gp-support-row" style="font-size: 11px; color: #5c647a; justify-content: center; text-align: center;">
-                Время работы поддержки: Ежедневно с 10:00 до 22:00 по МСК
-            </div>
-        </div>
-    </div>
-
-    <div class="gp-faq-container">
-        <div class="gp-faq-title">Частые вопросы</div>
-        <div class="gp-faq-item">
-            <div class="gp-faq-q" onclick="window.gp_toggleFaq(this)">Что делать, если ошибся логином? <span>▼</span></div>
-            <div class="gp-faq-a">Если указанного логина не существует, платеж автоматически отклонится шлюзом. Если вы ввели чужой рабочий логин — средства будут зачислены туда. Рекомендуем внимательно сверять данные до оплаты.</div>
-        </div>
-        <div class="gp-faq-item">
-            <div class="gp-faq-q" onclick="window.gp_toggleFaq(this)">Как быстро приходят средства? <span>▼</span></div>
-            <div class="gp-faq-a">При оплате через СБП зачисление на баланс Steam происходит в течение 1-3 минут после подтверждения транзакции банком.</div>
         </div>
     </div>
 
@@ -460,14 +445,14 @@
     </div>
 
     <footer class="gp-footer">
-        &copy; 2026 GreenPer Team. Все права защищены.
+        &copy; 2026 GreenPer Team.
     </footer>
 
     <div class="gp-modal" id="gp_helpModal" onclick="window.gp_closeModal()">
         <div class="gp-modal-content" onclick="event.stopPropagation()">
             <span class="gp-modal-close" onclick="window.gp_closeModal()">&times;</span>
             <h3>Где найти логин?</h3>
-            <p><strong>Логин</strong> — это имя, которое вы вводите при входе в систему Steam. Игровой ник указывать нельзя!<br><br>Его можно найти в верхнем правом углу клиента Steam рядом с вашим аватаром.</p>
+            <p><strong>Логин</strong> — это имя, которое вы вводите при входе в систему Steam. Игровой ник указывать нельзя!</p>
         </div>
     </div>
 </div>
@@ -476,31 +461,23 @@
     (function() {
         let currentPaymentMethod = 'sbp';
         
-        // Раздельные структуры данных для комиссий
-        const GATE_FEES = { 'sbp': 0.085, 'crypto': 0.05 }; // 8.5% и 5%
-        const SERVICE_FEE = 0.02;                           // 固定 2%
+        // Математика: 300 стим * (1 + 0.085 + 0.082) = 350.1 руб (округляется до 350)
+        const GATE_FEES = { 'sbp': 0.085, 'crypto': 0.05 }; 
+        const SERVICE_FEE = 0.082; // 8.2% сервис
         
-        // Общий множитель для расчетов (1 + шлюз + сервис)
         const FEES = {
-            'sbp': 1 + GATE_FEES['sbp'] + SERVICE_FEE,      // 1.105
-            'crypto': 1 + GATE_FEES['crypto'] + SERVICE_FEE  // 1.07
+            'sbp': 1 + GATE_FEES['sbp'] + SERVICE_FEE,      // 1.167
+            'crypto': 1 + GATE_FEES['crypto'] + SERVICE_FEE  // 1.132
         };
         
         const KEY_BASE_PRICE = 163; 
         let currentMode = 'refill'; 
         let currentPromoDiscount = 0; 
-        let activePromo = "Нет";  
-
-        const PROMO_CODES = {
-            "GREENPER100": { discount: 0.03, text: "Скидка на комиссию 3%" },
-            "START2026": { discount: 0.01, text: "Скидка на комиссию 1%" }
-        };
 
         document.addEventListener("DOMContentLoaded", () => {
             const savedLogin = localStorage.getItem("gp_saved_steam_login");
             if (savedLogin) {
-                const loginInput = document.getElementById('gp_steamLogin');
-                loginInput.value = savedLogin;
+                document.getElementById('gp_steamLogin').value = savedLogin;
                 window.gp_checkLogin();
             }
         });
@@ -517,115 +494,53 @@
             document.getElementById('gp_m_sbp').classList.toggle('active', method === 'sbp');
             document.getElementById('gp_m_crypto').classList.toggle('active', method === 'crypto');
             
-            // Динамически меняем текст процента шлюза в таблице результатов
             const gateFeePercent = (GATE_FEES[method] * 100).toFixed(1) + '%';
             document.getElementById('gp_gateFeeDisplay').textContent = gateFeePercent;
 
-            if(currentMode === 'refill') {
-                window.gp_calcFromSteam();
-            } else {
-                window.gp_updateKeyPrice();
-            }
+            if(currentMode === 'refill') { window.gp_calcFromSteam(); } else { window.gp_updateKeyPrice(); }
         };
 
         window.gp_switchTab = function(mode) {
             currentMode = mode;
+            document.getElementById('gp_tab_refill').classList.toggle('active', mode === 'refill');
+            document.getElementById('gp_tab_key').classList.toggle('active', mode === 'key');
+            document.getElementById('gp_mainCard').classList.toggle('key-active', mode === 'key');
             
-            const tabRefill = document.getElementById('gp_tab_refill');
-            const tabKey = document.getElementById('gp_tab_key');
-            const loginGroup = document.getElementById('gp_login_group');
-            const calcSection = document.getElementById('gp_calc_section');
-            const rowRegion = document.getElementById('gp_row_region');
-            const rowReceive = document.getElementById('gp_row_receive');
-            const rowGate = document.getElementById('gp_row_gate_fee');
-            const rowService = document.getElementById('gp_row_service_fee');
-            const mainTitle = document.getElementById('gp_main_title');
-            const mainSubtitle = document.getElementById('gp_main_subtitle');
-            const infoBox = document.getElementById('gp_info_box_text');
-            const gamePreview = document.getElementById('gp_gamePreview');
-
-            document.getElementById('gp_agreeCheck').checked = false;
-
+            document.getElementById('gp_login_group').style.display = mode === 'refill' ? 'block' : 'none';
+            document.getElementById('gp_calc_section').style.display = mode === 'refill' ? 'block' : 'none';
+            document.getElementById('gp_row_gate_fee').style.display = mode === 'refill' ? 'flex' : 'none';
+            document.getElementById('gp_row_service_fee').style.display = mode === 'refill' ? 'flex' : 'none';
+            document.getElementById('gp_row_receive').style.display = mode === 'refill' ? 'flex' : 'none';
+            document.getElementById('gp_gamePreview').style.display = mode === 'key' ? 'block' : 'none';
+            
             if (mode === 'refill') {
-                tabRefill.classList.add('active');
-                tabKey.classList.remove('active');
-                document.getElementById('gp_mainCard').classList.remove('key-active');
-                
-                loginGroup.style.display = 'block';
-                calcSection.style.display = 'block';
-                rowRegion.style.display = 'flex';
-                rowReceive.style.display = 'flex';
-                rowGate.style.display = 'flex';
-                rowService.style.display = 'flex';
-                gamePreview.style.display = 'none';
-                
-                mainTitle.textContent = "Пополнение баланса";
-                mainSubtitle.textContent = "Моментальный перевод через платежный шлюз";
-                infoBox.innerHTML = "Лимиты зачисления — от 100 до 300 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).";
-                
                 window.gp_calcFromSteam();
             } else {
-                tabRefill.classList.remove('active');
-                tabKey.classList.add('active');
-                document.getElementById('gp_mainCard').classList.add('key-active');
-                
-                loginGroup.style.display = 'none';
-                calcSection.style.display = 'none';
-                rowRegion.style.display = 'none';
-                rowReceive.style.display = 'none';
-                rowGate.style.display = 'none';
-                rowService.style.display = 'none';
-                gamePreview.style.display = 'block';
-                
-                mainTitle.textContent = "Saints Row: The Third";
-                mainSubtitle.textContent = "Лицензионный ключ активации для Steam";
-                infoBox.innerHTML = "Вы приобретаете глобальный ключ <strong>Saints Row: The Third</strong>. После успешной авторизации платежа шлюзом, код отобразится на экране.";
                 window.gp_updateKeyPrice();
             }
             window.gp_validateFormState();
         };
 
         window.gp_updateKeyPrice = function() {
-            const baseWithFee = Math.ceil(KEY_BASE_PRICE * FEES[currentPaymentMethod]);
-            const finalKeyPrice = Math.max(10, baseWithFee - Math.floor(baseWithFee * currentPromoDiscount));
+            const finalKeyPrice = Math.ceil(KEY_BASE_PRICE * FEES[currentPaymentMethod]);
             document.getElementById('gp_totalPrice').textContent = finalKeyPrice;
-            document.getElementById('gp_savingRow').style.display = 'none';
         };
 
         window.gp_calcFromSteam = function() {
             if (currentMode !== 'refill') return;
             const amountInput = document.getElementById('gp_amount');
-            const payInput = document.getElementById('gp_payAmount');
-            const amountError = document.getElementById('gp_amountError');
-            const totalPriceSpan = document.getElementById('gp_totalPrice');
-            const steamAmountDisplay = document.getElementById('gp_steamAmountDisplay');
-            const savingRow = document.getElementById('gp_savingRow');
-            const savingDisplay = document.getElementById('gp_savingDisplay');
-
             const steamAmount = parseFloat(amountInput.value) || 0;
-            
+            const amountError = document.getElementById('gp_amountError');
+
             if (steamAmount >= 100 && steamAmount <= 300) {
                 amountError.style.display = 'none';
-                
-                const rateWithFee = FEES[currentPaymentMethod];
-                const standardPrice = Math.ceil(steamAmount * rateWithFee);
-                const finalPrice = Math.ceil(steamAmount * (rateWithFee - currentPromoDiscount));
-                
-                payInput.value = finalPrice;
-                totalPriceSpan.textContent = finalPrice;
-                steamAmountDisplay.textContent = steamAmount + ' руб.';
-                
-                if (activePromo !== "Нет" && standardPrice > finalPrice) {
-                    savingRow.style.display = 'flex';
-                    savingDisplay.textContent = (standardPrice - finalPrice) + ' руб.';
-                } else {
-                    savingRow.style.display = 'none';
-                }
+                const finalPrice = Math.ceil(steamAmount * (FEES[currentPaymentMethod] - currentPromoDiscount));
+                document.getElementById('gp_payAmount').value = finalPrice;
+                document.getElementById('gp_totalPrice').textContent = finalPrice;
+                document.getElementById('gp_steamAmountDisplay').textContent = steamAmount + ' руб.';
             } else {
-                payInput.value = '';
-                totalPriceSpan.textContent = '0';
-                steamAmountDisplay.textContent = '0 руб.';
-                savingRow.style.display = 'none';
+                document.getElementById('gp_payAmount').value = '';
+                document.getElementById('gp_totalPrice').textContent = '0';
                 amountError.style.display = amountInput.value !== '' ? 'block' : 'none';
             }
             window.gp_validateFormState();
@@ -633,37 +548,17 @@
 
         window.gp_calcFromPay = function() {
             if (currentMode !== 'refill') return;
-            const amountInput = document.getElementById('gp_amount');
-            const payInput = document.getElementById('gp_payAmount');
-            const amountError = document.getElementById('gp_amountError');
-            const totalPriceSpan = document.getElementById('gp_totalPrice');
-            const steamAmountDisplay = document.getElementById('gp_steamAmountDisplay');
-            const savingRow = document.getElementById('gp_savingRow');
-            const savingDisplay = document.getElementById('gp_savingDisplay');
-
-            const payAmount = parseFloat(payInput.value) || 0;
-            const rateWithFee = FEES[currentPaymentMethod] - currentPromoDiscount;
-            const estimatedSteam = Math.floor(payAmount / rateWithFee);
+            const payAmount = parseFloat(document.getElementById('gp_payAmount').value) || 0;
+            const estimatedSteam = Math.floor(payAmount / (FEES[currentPaymentMethod] - currentPromoDiscount));
             
             if (estimatedSteam >= 100 && estimatedSteam <= 300) {
-                amountError.style.display = 'none';
-                amountInput.value = estimatedSteam;
-                totalPriceSpan.textContent = payAmount;
-                steamAmountDisplay.textContent = estimatedSteam + ' руб.';
-                
-                const standardPrice = Math.ceil(estimatedSteam * FEES[currentPaymentMethod]);
-                if (activePromo !== "Нет" && standardPrice > payAmount) {
-                    savingRow.style.display = 'flex';
-                    savingDisplay.textContent = (standardPrice - payAmount) + ' руб.';
-                } else {
-                    savingRow.style.display = 'none';
-                }
+                document.getElementById('gp_amount').value = estimatedSteam;
+                document.getElementById('gp_totalPrice').textContent = payAmount;
+                document.getElementById('gp_steamAmountDisplay').textContent = estimatedSteam + ' руб.';
+                document.getElementById('gp_amountError').style.display = 'none';
             } else {
-                amountInput.value = '';
-                totalPriceSpan.textContent = '0';
-                steamAmountDisplay.textContent = '0 руб.';
-                savingRow.style.display = 'none';
-                amountError.style.display = payInput.value !== '' ? 'block' : 'none';
+                document.getElementById('gp_amount').value = '';
+                document.getElementById('gp_totalPrice').textContent = '0';
             }
             window.gp_validateFormState();
         };
@@ -674,9 +569,8 @@
         };
 
         window.gp_checkLogin = function() {
-            const loginInput = document.getElementById('gp_steamLogin');
-            document.getElementById('gp_clearLogin').style.display = loginInput.value.length > 0 ? 'block' : 'none';
-            document.getElementById('gp_loginError').style.display = 'none';
+            const login = document.getElementById('gp_steamLogin').value;
+            document.getElementById('gp_clearLogin').style.display = login.length > 0 ? 'block' : 'none';
             window.gp_validateFormState();
         };
 
@@ -687,74 +581,42 @@
         };
 
         window.gp_checkPromo = function() {
-            const enteredCode = document.getElementById('gp_promoInput').value.trim().toUpperCase();
-            const promoStatusMessage = document.getElementById('gp_promoStatusMessage');
-            if (!enteredCode) return;
-
-            if (PROMO_CODES[enteredCode]) {
-                currentPromoDiscount = PROMO_CODES[enteredCode].discount;
-                activePromo = enteredCode;
-                promoStatusMessage.style.display = "block";
-                promoStatusMessage.style.color = "#00ff9d";
-                promoStatusMessage.textContent = PROMO_CODES[enteredCode].text;
-                if(currentMode === 'refill') { window.gp_calcFromSteam(); } else { window.gp_updateKeyPrice(); }
+            const code = document.getElementById('gp_promoInput').value.trim().toUpperCase();
+            const status = document.getElementById('gp_promoStatusMessage');
+            if (code === "GREENPER100") {
+                currentPromoDiscount = 0.03;
+                status.style.display = "block"; status.style.color = "#00ff9d"; status.textContent = "Скидка 3% применена";
             } else {
-                promoStatusMessage.style.display = "block";
-                promoStatusMessage.style.color = "#ff4a4a";
-                promoStatusMessage.textContent = "Неверный код купона.";
+                status.style.display = "block"; status.style.color = "#ff4a4a"; status.textContent = "Неверный код";
             }
+            window.gp_calcFromSteam();
         };
 
         window.gp_validateFormState = function() {
             const isChecked = document.getElementById('gp_agreeCheck').checked;
+            const login = document.getElementById('gp_steamLogin').value.trim();
+            const amount = parseFloat(document.getElementById('gp_amount').value) || 0;
             const submitBtn = document.getElementById('gp_submitBtn');
             
             if (currentMode === 'refill') {
-                const login = document.getElementById('gp_steamLogin').value.trim();
-                const amount = parseFloat(document.getElementById('gp_amount').value) || 0;
-                
-                if (isChecked && login && amount >= 100 && amount <= 300) {
-                    submitBtn.classList.add('active');
-                } else {
-                    submitBtn.classList.remove('active');
-                }
+                submitBtn.classList.toggle('active', isChecked && login && amount >= 100 && amount <= 300);
             } else {
-                if (isChecked) {
-                    submitBtn.classList.add('active');
-                } else {
-                    submitBtn.classList.remove('active');
-                }
+                submitBtn.classList.toggle('active', isChecked);
             }
         };
 
         window.gp_toggleFaq = function(element) {
             const answer = element.nextElementSibling;
-            const arrow = element.querySelector('span');
             answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-            arrow.textContent = answer.style.display === 'block' ? '▲' : '▼';
         };
 
         window.gp_openModal = function() { document.getElementById('gp_helpModal').classList.add('active'); };
         window.gp_closeModal = function() { document.getElementById('gp_helpModal').classList.remove('active'); };
 
         window.gp_submitForm = function() {
-            const isChecked = document.getElementById('gp_agreeCheck').checked;
-            if (!isChecked) return;
-
+            if (!document.getElementById('gp_agreeCheck').checked) return;
             const total = document.getElementById('gp_totalPrice').textContent;
-
-            if (currentMode === 'refill') {
-                const login = document.getElementById('gp_steamLogin').value.trim();
-                const amount = document.getElementById('gp_amount').value;
-                if (!login || amount < 100 || amount > 300) return;
-                
-                localStorage.setItem("gp_saved_steam_login", login);
-                
-                console.log(`Запуск инициализации API шлюза для СБП/Крипты. Метод: ${currentPaymentMethod}, Логин: ${login}, Сумма к оплате: ${total}`);
-                alert(`Перенаправление на безопасную платежную страницу банка...\nСпособ: ${currentPaymentMethod.toUpperCase()}\nСумма: ${total} руб.`);
-            } else {
-                alert(`Инициализация покупки ключа Saints Row 3.\nСумма к оплате через ${currentPaymentMethod.toUpperCase()}: ${total} руб.`);
-            }
+            alert(`Перенаправление на оплату СБП/Крипта. Сумма: ${total} руб.`);
         };
     })();
 </script>
