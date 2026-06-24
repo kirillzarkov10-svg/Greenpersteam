@@ -23,7 +23,6 @@
             min-height: 100vh;
         }
         
-        /* Хедер */
         header {
             display: flex;
             justify-content: space-between;
@@ -45,7 +44,6 @@
         }
         header span { color: #1a9fff; }
         
-        /* Статус оператора */
         .status-online {
             display: flex;
             align-items: center;
@@ -70,7 +68,18 @@
             100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
         }
 
-        /* Контейнер */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+            width: 100%; max-width: 460px; margin-bottom: 20px;
+        }
+        .feature-card {
+            background: rgba(23, 26, 33, 0.5); border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 12px; padding: 12px 8px; text-align: center;
+        }
+        .feature-icon { font-size: 20px; margin-bottom: 4px; }
+        .feature-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+        .feature-desc { font-size: 10px; color: #8f98a0; line-height: 1.2; }
+
         .container {
             background: #171a21;
             padding: 25px 20px;
@@ -127,25 +136,22 @@
         }
         input:focus { border-color: #1a9fff; background: #242e3d; }
         
-        /* Кнопка очистки поля */
         .clear-btn {
             position: absolute; right: 12px; color: #56697a; cursor: pointer;
-            font-size: 16px; user-select: none; display: none; z-index: 5;
+            font-size: 16px; display: none; z-index: 5; padding: 5px;
         }
         .clear-btn:hover { color: #fff; }
 
-        /* Двухсторонний калькулятор */
         .calc-row { display: flex; gap: 10px; }
         .calc-row .form-group { flex: 1; margin-bottom: 0; }
         
         .presets-wrapper { display: flex; gap: 6px; margin-top: 8px; }
         .preset-btn {
-            flex: 1; padding: 8px 2px; background: rgba(42, 71, 94, 0.2);
+            flex: 1; padding: 10px 2px; background: rgba(42, 71, 94, 0.2);
             border: 1px solid rgba(102, 192, 244, 0.2); border-radius: 6px;
             color: #66c0f4; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer;
-            user-select: none;
         }
-        .preset-btn:hover { background: rgba(102, 192, 244, 0.3); color: #fff; }
+        .preset-btn:hover, .preset-btn:active { background: rgba(102, 192, 244, 0.3); color: #fff; }
 
         .promo-group { display: flex; gap: 8px; width: 100%; }
         .promo-group input { padding-left: 12px; }
@@ -153,12 +159,10 @@
             padding: 0 15px; background: #2a475e; border-radius: 8px;
             color: #fff; font-weight: 600; font-size: 13px; cursor: pointer;
             display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.1);
-            user-select: none;
         }
         .promo-status { font-size: 12px; margin-top: 5px; display: none; }
         .error-msg { color: #ff4d4d; font-size: 12px; margin-top: 5px; display: none; }
         
-        /* Блок итогов и Экономии */
         .result { background: rgba(0, 0, 0, 0.25); padding: 15px; border-radius: 8px; margin-top: 15px; }
         .result-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px; color: #8f98a0; }
         .result-row.saving-row { display: none; color: #00ff88; font-weight: 600; }
@@ -172,24 +176,10 @@
             width: 100%; padding: 15px; background: linear-gradient(90deg, #00ff88 0%, #00bfff 100%);
             border-radius: 8px; color: #0a0e17; font-size: 15px; font-weight: 800;
             cursor: pointer; margin-top: 15px; text-transform: uppercase; text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15); user-select: none;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15);
         }
         .submit-btn:active { transform: scale(0.98); }
         
-        /* Блок наших преимуществ */
-        .features-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-            width: 100%; max-width: 460px; margin-bottom: 20px;
-        }
-        .feature-card {
-            background: rgba(23, 26, 33, 0.5); border: 1px solid rgba(255,255,255,0.03);
-            border-radius: 12px; padding: 12px 8px; text-align: center;
-        }
-        .feature-icon { font-size: 20px; margin-bottom: 4px; }
-        .feature-title { font-size: 12px; font-weight: bold; color: #fff; margin-bottom: 2px; }
-        .feature-desc { font-size: 10px; color: #8f98a0; line-height: 1.2; }
-
-        /* FAQ блок */
         .faq-container {
             width: 100%; max-width: 460px; background: #171a21;
             border-radius: 14px; padding: 15px; border: 1px solid rgba(255, 255, 255, 0.05);
@@ -198,10 +188,9 @@
         .faq-title { font-size: 14px; color: #66c0f4; font-weight: 700; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 10px 0; }
         .faq-item:last-child { border-bottom: none; }
-        .faq-q { font-size: 13px; font-weight: 600; color: #fff; cursor: pointer; display: flex; justify-content: space-between; user-select: none; }
+        .faq-q { font-size: 13px; font-weight: 600; color: #fff; cursor: pointer; display: flex; justify-content: space-between; }
         .faq-a { font-size: 12px; color: #8f98a0; margin-top: 6px; display: none; line-height: 1.4; }
 
-        /* Модалка */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(5, 8, 13, 0.85); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 15px;
@@ -210,7 +199,7 @@
             background: #171a21; border: 1px solid rgba(26, 159, 255, 0.3);
             padding: 20px; border-radius: 12px; max-width: 360px; width: 100%; position: relative;
         }
-        .modal-close { position: absolute; top: 10px; right: 12px; font-size: 22px; color: #56697a; cursor: pointer; }
+        .modal-close { position: absolute; top: 10px; right: 12px; font-size: 22px; color: #56697a; cursor: pointer; padding: 5px; }
         .modal h3 { color: #66c0f4; margin-bottom: 10px; font-size: 16px; }
         .modal p { font-size: 13px; color: #c7d5e0; line-height: 1.4; }
         
@@ -256,12 +245,12 @@
     <div class="form-group">
         <div class="label-flex">
             <label>Логин Steam:</label>
-            <span class="help-link" onclick="toggleModal(true)">Где логин?</span>
+            <span class="help-link" id="helpLink">Где логин?</span>
         </div>
         <div class="input-wrapper">
             <span class="input-prefix">👤</span>
-            <input type="text" id="steamLogin" placeholder="Например: gaben123" oninput="toggleClearBtn('steamLogin', 'clearLogin')">
-            <span class="clear-btn" id="clearLogin" onclick="clearField('steamLogin', 'clearLogin')">✕</span>
+            <input type="text" id="steamLogin" placeholder="Например: gaben123">
+            <span class="clear-btn" id="clearLogin">✕</span>
         </div>
         <div class="error-msg" id="loginError">Укажите логин Steam</div>
     </div>
@@ -271,23 +260,23 @@
             <div class="label-flex"><label>Получите (₽):</label></div>
             <div class="input-wrapper">
                 <span class="input-prefix">➘</span>
-                <input type="number" id="amount" placeholder="Получу" inputmode="numeric" oninput="calcFromSteam()">
+                <input type="number" id="amount" placeholder="Получу" inputmode="numeric">
             </div>
         </div>
         <div class="form-group">
             <div class="label-flex"><label>Оплатите (₽):</label></div>
             <div class="input-wrapper">
                 <span class="input-prefix">➚</span>
-                <input type="number" id="payAmount" placeholder="Оплачу" inputmode="numeric" oninput="calcFromPay()">
+                <input type="number" id="payAmount" placeholder="Оплачу" inputmode="numeric">
             </div>
         </div>
     </div>
     
     <div class="presets-wrapper">
-        <div class="preset-btn" onclick="setPresetAmount(100)">100 ₽</div>
-        <div class="preset-btn" onclick="setPresetAmount(300)">300 ₽</div>
-        <div class="preset-btn" onclick="setPresetAmount(500)">500 ₽</div>
-        <div class="preset-btn" onclick="setPresetAmount(1000)">1000 ₽</div>
+        <div class="preset-btn" data-val="100">100 ₽</div>
+        <div class="preset-btn" data-val="300">300 ₽</div>
+        <div class="preset-btn" data-val="500">500 ₽</div>
+        <div class="preset-btn" data-val="1000">1000 ₽</div>
     </div>
     <div class="error-msg" id="amountError">Минимальная сумма зачисления — 100 рублей</div>
 
@@ -295,7 +284,7 @@
         <div class="label-flex"><label>Промокод:</label></div>
         <div class="promo-group">
             <input type="text" id="promoInput" placeholder="Купон">
-            <div class="promo-btn" onclick="checkPromo()">ОК</div>
+            <div class="promo-btn" id="promoBtn">ОК</div>
         </div>
         <div class="promo-status" id="promoStatusMessage"></div>
     </div>
@@ -319,24 +308,24 @@
         </div>
     </div>
 
-    <div class="submit-btn" onclick="redirectToTelegram()">Оплатить в Telegram</div>
+    <div class="submit-btn" id="submitBtn">Оплатить в Telegram</div>
 </div>
 
 <div class="faq-container">
     <div class="faq-title">Частые вопросы</div>
     <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Что делать, если ошибся логином? <span>▼</span></div>
+        <div class="faq-q">Что делать, если ошибся логином? <span>▼</span></div>
         <div class="faq-a">Если указанного логина не существует, платеж не пройдет. Если вы ввели чужой рабочий логин — средства уйдут туда. Будьте внимательны!</div>
     </div>
     <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Какая комиссия? <span>▼</span></div>
+        <div class="faq-q">Какая комиссия? <span>▼</span></div>
         <div class="faq-a">Базовая наценка провайдера составляет около 10% + 2% комиссия сервиса. Вы можете снизить её, применив промокод.</div>
     </div>
 </div>
 
-<div class="modal" id="helpModal" onclick="toggleModal(false)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="modal-close" onclick="toggleModal(false)">&times;</span>
+<div class="modal" id="helpModal">
+    <div class="modal-content" id="modalContent">
+        <span class="modal-close" id="modalClose">&times;</span>
         <h3>Где найти логин?</h3>
         <p><strong>Логин</strong> — это имя, которое вы вводите при входе в систему Steam. Игровой ник указывать нельзя!<br><br>Его можно найти в верхнем правом углу клиента Steam рядом с вашим аватаром.</p>
     </div>
@@ -347,6 +336,7 @@
 </footer>
 
 <script>
+document.addEventListener("DOMContentLoaded", function() {
     const TELEGRAM_TARGET = "Quac23h"; 
     const PROVIDER_RATE = 22 / 20; 
     let defaultMargin = 1.02;
@@ -358,6 +348,7 @@
         "START2026": { margin: 1.01, text: "Комиссия снижена до 1%" }
     };
 
+    // Элементы
     const amountInput = document.getElementById('amount');
     const payInput = document.getElementById('payAmount');
     const totalPriceSpan = document.getElementById('totalPrice');
@@ -365,8 +356,10 @@
     const amountError = document.getElementById('amountError');
     const savingRow = document.getElementById('savingRow');
     const savingDisplay = document.getElementById('savingDisplay');
+    const steamLogin = document.getElementById('steamLogin');
+    const clearLoginBtn = document.getElementById('clearLogin');
 
-    // Функция 1: Расчет от того, сколько хотим ПОЛУЧИТЬ в Steam
+    // Калькулятор из Steam
     function calcFromSteam() {
         const steamAmount = parseFloat(amountInput.value) || 0;
         
@@ -394,7 +387,7 @@
         }
     }
 
-    // Функция 2: Расчет от того, сколько человек ОПЛАЧИВАЕТ
+    // Калькулятор из Оплаты
     function calcFromPay() {
         const payAmount = parseFloat(payInput.value) || 0;
         const estimatedSteam = Math.floor((payAmount / currentMargin) / PROVIDER_RATE);
@@ -421,40 +414,29 @@
         }
     }
 
-    // Кнопки быстрой вставки сумм
-    function setPresetAmount(val) {
-        amountInput.value = val;
-        calcFromSteam(); // Принудительный мгновенный пересчет
-    }
+    // Слушатели ввода калькулятора
+    amountInput.addEventListener('input', calcFromSteam);
+    payInput.addEventListener('input', calcFromPay);
 
-    function toggleClearBtn(inputId, btnId) {
-        const input = document.getElementById(inputId);
-        const btn = document.getElementById(btnId);
-        btn.style.display = input.value.length > 0 ? 'block' : 'none';
-    }
-    
-    function clearField(inputId, btnId) {
-        document.getElementById(inputId).value = '';
-        document.getElementById(btnId).style.display = 'none';
-    }
+    // Пресеты
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            amountInput.value = this.getAttribute('data-val');
+            calcFromSteam();
+        });
+    });
 
-    function toggleModal(show) {
-        document.getElementById('helpModal').style.display = show ? 'flex' : 'none';
-    }
+    // Очистка логина
+    steamLogin.addEventListener('input', function() {
+        clearLoginBtn.style.display = this.value.length > 0 ? 'block' : 'none';
+    });
+    clearLoginBtn.addEventListener('click', function() {
+        steamLogin.value = '';
+        this.style.display = 'none';
+    });
 
-    function toggleFaq(element) {
-        const answer = element.nextElementSibling;
-        const arrow = element.querySelector('span');
-        if (answer.style.display === 'block') {
-            answer.style.display = 'none';
-            arrow.textContent = '▼';
-        } else {
-            answer.style.display = 'block';
-            arrow.textContent = '▲';
-        }
-    }
-
-    function checkPromo() {
+    // Промокод
+    document.getElementById('promoBtn').addEventListener('click', function() {
         const promoInput = document.getElementById('promoInput');
         const promoStatusMessage = document.getElementById('promoStatusMessage');
         const enteredCode = promoInput.value.trim().toUpperCase();
@@ -467,21 +449,41 @@
             promoStatusMessage.style.display = "block";
             promoStatusMessage.style.color = "#00ff88";
             promoStatusMessage.textContent = PROMO_CODES[enteredCode].text;
-            calcFromSteam();
+            calcFromSteam(); // Пересчитываем с новой скидкой
         } else {
             promoStatusMessage.style.display = "block";
             promoStatusMessage.style.color = "#ff4d4d";
             promoStatusMessage.textContent = "Неверный код.";
         }
-    }
+    });
 
-    function redirectToTelegram() {
-        const login = document.getElementById('steamLogin').value.trim();
+    // FAQ
+    document.querySelectorAll('.faq-q').forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const arrow = this.querySelector('span');
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                arrow.textContent = '▼';
+            } else {
+                answer.style.display = 'block';
+                arrow.textContent = '▲';
+            }
+        });
+    });
+
+    // Модалка "Где логин?"
+    const modal = document.getElementById('helpModal');
+    document.getElementById('helpLink').addEventListener('click', () => modal.style.display = 'flex');
+    document.getElementById('modalClose').addEventListener('click', () => modal.style.display = 'none');
+    modal.addEventListener('click', () => modal.style.display = 'none');
+    document.getElementById('modalContent').addEventListener('click', (e) => e.stopPropagation());
+
+    // Отправка в ТГ
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        const login = steamLogin.value.trim();
         const amount = parseFloat(amountInput.value) || 0;
         const total = totalPriceSpan.textContent;
         const loginError = document.getElementById('loginError');
         
-        if (!login) { loginError.style.display = 'block'; return; } 
-        else { loginError.style.display = 'none'; }
-        
-        if (amount < 100) { amountError.style.display = 'block'; return; }            
+        if (!login) { loginError.style.disp
