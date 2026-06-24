@@ -114,7 +114,7 @@
         }
         
         .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-        .input-prefix { position: absolute; left: 14px; color: #56697a; font-size: 15px; font-weight: bold; pointer-events: none;}
+        .input-prefix { position: absolute; left: 14px; color: #56697a; font-size: 15px; font-weight: bold; pointer-events: none; }
         input {
             width: 100%;
             padding: 12px 35px 12px 35px;
@@ -130,7 +130,7 @@
         /* Кнопка очистки поля */
         .clear-btn {
             position: absolute; right: 12px; color: #56697a; cursor: pointer;
-            font-size: 16px; user-select: none; display: none;
+            font-size: 16px; user-select: none; display: none; z-index: 5;
         }
         .clear-btn:hover { color: #fff; }
 
@@ -143,6 +143,7 @@
             flex: 1; padding: 8px 2px; background: rgba(42, 71, 94, 0.2);
             border: 1px solid rgba(102, 192, 244, 0.2); border-radius: 6px;
             color: #66c0f4; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer;
+            user-select: none;
         }
         .preset-btn:hover { background: rgba(102, 192, 244, 0.3); color: #fff; }
 
@@ -152,6 +153,7 @@
             padding: 0 15px; background: #2a475e; border-radius: 8px;
             color: #fff; font-weight: 600; font-size: 13px; cursor: pointer;
             display: flex; align-items: center; border: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
         }
         .promo-status { font-size: 12px; margin-top: 5px; display: none; }
         .error-msg { color: #ff4d4d; font-size: 12px; margin-top: 5px; display: none; }
@@ -170,7 +172,7 @@
             width: 100%; padding: 15px; background: linear-gradient(90deg, #00ff88 0%, #00bfff 100%);
             border-radius: 8px; color: #0a0e17; font-size: 15px; font-weight: 800;
             cursor: pointer; margin-top: 15px; text-transform: uppercase; text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.15); user-select: none;
         }
         .submit-btn:active { transform: scale(0.98); }
         
@@ -196,7 +198,7 @@
         .faq-title { font-size: 14px; color: #66c0f4; font-weight: 700; text-transform: uppercase; text-align: center; margin-bottom: 10px; }
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 10px 0; }
         .faq-item:last-child { border-bottom: none; }
-        .faq-q { font-size: 13px; font-weight: 600; color: #fff; cursor: pointer; display: flex; justify-content: space-between; }
+        .faq-q { font-size: 13px; font-weight: 600; color: #fff; cursor: pointer; display: flex; justify-content: space-between; user-select: none; }
         .faq-a { font-size: 12px; color: #8f98a0; margin-top: 6px; display: none; line-height: 1.4; }
 
         /* Модалка */
@@ -225,6 +227,7 @@
     </div>
 </header>
 
+<!-- БЛОК ГАРАНТИЙ И ПРЕИМУЩЕСТВ -->
 <div class="features-grid">
     <div class="feature-card">
         <div class="feature-icon">🛡️</div>
@@ -251,6 +254,7 @@
         Минимальная сумма — 100 руб. Внимательно проверяйте <strong>Логин</strong> (не никнейм).
     </div>
     
+    <!-- ПОЛЕ: ЛОГИН -->
     <div class="form-group">
         <div class="label-flex">
             <label>Логин Steam:</label>
@@ -264,6 +268,7 @@
         <div class="error-msg" id="loginError">Укажите логин Steam</div>
     </div>
 
+    <!-- ДВУХСТОРОННИЙ КАЛЬКУЛЯТОР -->
     <div class="calc-row">
         <div class="form-group">
             <div class="label-flex"><label>Получите (₽):</label></div>
@@ -289,6 +294,7 @@
     </div>
     <div class="error-msg" id="amountError">Минимальная сумма зачисления — 100 рублей</div>
 
+    <!-- ПРОМОКОД -->
     <div class="form-group" style="margin-top: 15px;">
         <div class="label-flex"><label>Промокод:</label></div>
         <div class="promo-group">
@@ -298,6 +304,7 @@
         <div class="promo-status" id="promoStatusMessage"></div>
     </div>
 
+    <!-- ИТОГИ -->
     <div class="result">
         <div class="result-row">
             <span>Регион пополнения:</span>
@@ -320,6 +327,7 @@
     <div class="submit-btn" onclick="redirectToTelegram()">Оплатить в Telegram</div>
 </div>
 
+<!-- FAQ (БЛОК ВОПРОСОВ) -->
 <div class="faq-container">
     <div class="faq-title">Частые вопросы</div>
     <div class="faq-item">
@@ -332,6 +340,7 @@
     </div>
 </div>
 
+<!-- МОДАЛКА -->
 <div class="modal" id="helpModal" onclick="toggleModal(false)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="toggleModal(false)">&times;</span>
@@ -364,18 +373,17 @@
     const savingRow = document.getElementById('savingRow');
     const savingDisplay = document.getElementById('savingDisplay');
 
-    // Кнопки быстрой очистки полей
     function toggleClearBtn(inputId, btnId) {
         const input = document.getElementById(inputId);
         const btn = document.getElementById(btnId);
         btn.style.display = input.value.length > 0 ? 'block' : 'none';
     }
+    
     function clearField(inputId, btnId) {
         document.getElementById(inputId).value = '';
         document.getElementById(btnId).style.display = 'none';
     }
 
-    // Расчет ЕСЛИ вводят сумму ПОЛУЧЕНИЯ в Steam
     function calcFromSteam() {
         const steamAmount = parseFloat(amountInput.value) || 0;
         
@@ -388,7 +396,6 @@
             totalPriceSpan.textContent = finalPrice;
             steamAmountDisplay.textContent = steamAmount + ' руб.';
             
-            // Расчет экономии
             if (activePromo !== "Нет" && standardPrice > finalPrice) {
                 savingRow.style.display = 'flex';
                 savingDisplay.textContent = (standardPrice - finalPrice) + ' руб.';
@@ -400,11 +407,14 @@
             totalPriceSpan.textContent = '0';
             steamAmountDisplay.textContent = '0 руб.';
             savingRow.style.display = 'none';
-            amountError.style.display = amountInput.value !== '' ? 'block' : 'none';
+            if (amountInput.value !== '') {
+                amountError.style.display = 'block';
+            } else {
+                amountError.style.display = 'none';
+            }
         }
     }
 
-    // Расчет ЕСЛИ вводят сумму ОПЛАТЫ
     function calcFromPay() {
         const payAmount = parseFloat(payInput.value) || 0;
         const estimatedSteam = Math.floor((payAmount / currentMargin) / PROVIDER_RATE);
@@ -427,7 +437,11 @@
             totalPriceSpan.textContent = '0';
             steamAmountDisplay.textContent = '0 руб.';
             savingRow.style.display = 'none';
-            amountError.style.display = payInput.value !== '' ? 'block' : 'none';
+            if (payInput.value !== '') {
+                amountError.style.display = 'block';
+            } else {
+                amountError.style.display = 'none';
+            }
         }
     }
 
@@ -479,10 +493,4 @@
         const total = totalPriceSpan.textContent;
         const loginError = document.getElementById('loginError');
         
-        if (!login) { loginError.style.display = 'block'; return; } 
-        else { loginError.style.display = 'none'; }
-        
-        if (amount < 100) { amountError.style.display = 'block'; return; }
-
-        const messageText = `Привет! Хочу пополнить Steam.\nЛогин: ${login}\nСумма: ${amount} руб.\nПромокод: ${activePromo}\nК оплате: ${total} руб.`;
-       
+        if (!logi
